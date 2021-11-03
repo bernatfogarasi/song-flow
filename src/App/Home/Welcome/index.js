@@ -18,7 +18,7 @@ const Title = styled.div`
 const Welcome = () => {
   return (
     <Wrapper>
-      Welcome to <Title>SongSubmit</Title>!
+      Welcome to <Title>Songflow</Title>!
     </Wrapper>
   );
 };
