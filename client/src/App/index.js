@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import GlobalStyle from "../style/globalStyle";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Join from "./Join";
 import Create from "./Create";
 import Room from "./Room";
+import Login from "./Login";
+import Register from "./Register";
 
 const Wrapper = styled.div`
   background: #111;
@@ -21,6 +23,9 @@ function App() {
           <Route component={Join} exact path="/join" />
           <Route component={Create} exact path="/create" />
           <Route component={Room} path="/room" />
+          <Route component={Login} exact path="/login" />
+          <Route component={Register} exact path="/register" />
+          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
         </Switch>
       </BrowserRouter>
     </Wrapper>
