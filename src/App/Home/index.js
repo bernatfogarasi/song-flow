@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Logo from "../../components/Logo";
+import TopBar from "../../components/TopBar";
 import Navigation from "./Navigation";
 import Welcome from "./Welcome";
 
@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 const Home = () => {
   return (
     <Wrapper>
-      <Logo />
+      <TopBar />
+      <TopBar />
       <Welcome />
       <Navigation />
     </Wrapper>

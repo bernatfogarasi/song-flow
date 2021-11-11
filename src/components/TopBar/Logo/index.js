@@ -1,17 +1,14 @@
 import styled from "styled-components";
-import logo from "../../assets/icons/logo3.png";
+import logo from "../../../assets/icons/logo3.png";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled(Link)`
   position: fixed;
-  font-family: Gluten;
-  margin: 20px;
+  font-family: MontserratMedium;
+  margin: 10px;
   font-size: 20px;
   display: flex;
   align-items: center;
-  border: 1px solid #333;
-  border-radius: 40px;
-  padding: 10px;
   color: #ddd;
   top: 0px;
   left: 0px;
@@ -33,7 +30,7 @@ const Logo = () => {
   return (
     <Wrapper to="">
       <Icon src={logo} alt="" />
-      <Text>Songflow</Text>
+      <Text>TeamListener</Text>
     </Wrapper>
   );
 };

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Form from "./Form";
-import Logo from "../../components/Logo";
+import TopBar from "../../components/TopBar";
 
 const Wrapper = styled.div``;
 
 const Register = () => {
   return (
     <Wrapper>
-      <Logo />
+      <TopBar />
       <Form />
     </Wrapper>
   );

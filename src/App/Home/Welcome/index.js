@@ -11,14 +11,15 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   display: inline-block;
-  font-family: Gluten;
+  font-family: MontserratSemibold;
   font-size: 40px;
+  margin-right: 10px;
 `;
 
 const Welcome = () => {
   return (
     <Wrapper>
-      Welcome to <Title>Songflow</Title>!
+      Welcome to <Title>TeamListener</Title>!
     </Wrapper>
   );
 };

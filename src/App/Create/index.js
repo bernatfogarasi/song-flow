@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
-import Logo from "../../components/Logo";
+import TopBar from "../../components/TopBar";
 import { v4 as uuid } from "uuid";
 import { useEffect, useState } from "react";
 
@@ -27,15 +27,15 @@ const MusicSiteName = styled.div`
   font-weight: bold;
 `;
 
-const LoginYoutubeMusicButton = styled(LoginButton)`
-  background: #f00;
-`;
+// const LoginYoutubeMusicButton = styled(LoginButton)`
+//   background: #f00;
+// `;
 
-const LoginAppleMusicButton = styled(LoginButton)``;
+// const LoginAppleMusicButton = styled(LoginButton)``;
 
-const LoginSoundCloudButton = styled(LoginButton)`
-  background: #ff5500;
-`;
+// const LoginSoundCloudButton = styled(LoginButton)`
+//   background: #ff5500;
+// `;
 
 const NoLoginLink = styled(Link)`
   margin-top: 20px;
@@ -65,7 +65,7 @@ const Create = () => {
 
   return (
     <Wrapper>
-      <Logo />
+      <TopBar />
       <LoginSpotifyButton>
         Login with <MusicSiteName>Spotify</MusicSiteName>
       </LoginSpotifyButton>

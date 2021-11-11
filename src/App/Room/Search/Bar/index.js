@@ -38,14 +38,14 @@ const Line = styled.hr`
   transform: translate(14px, 12px) rotate(45deg);
 `;
 
-const Bar = () => {
+const Bar = ({ onChange }) => {
   return (
     <Wrapper>
       <Icon>
         <Circle />
         <Line />
       </Icon>
-      <Input type="text" />
+      <Input type="text" onChange={onChange} />
     </Wrapper>
   );
 };
