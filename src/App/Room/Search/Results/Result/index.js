@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import spotify from "../../../../../assets/icons/spotify.png";
 import youtube from "../../../../../assets/icons/youtube.png";
-import OpenInBrowserIcon from "../../../../../components/OpenInBrowserIcon";
 
 const icons = { spotify, youtube };
 
@@ -71,7 +70,7 @@ const Result = ({ data }) => {
           <ChannelTitle>{data.channel.title}</ChannelTitle>
         </SecondRow>
       </Details>
-      <a href={data.url} target="_blank">
+      <a href={data.url} target="_blank" rel="noreferrer">
         <SiteIcon src={icons[data.site]} alt="" />
       </a>
       {/* {JSON.stringify(data)} */}

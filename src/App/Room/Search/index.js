@@ -22,16 +22,20 @@ const Search = () => {
     setSearchText(event.target.value);
   };
 
-  useEffect(() => {
-    if (requestTimeout) clearTimeout(requestTimeout);
-    setRequestTimeout(
-      setTimeout(() => {
-        if (searchText !== requestText) {
-          setRequestText(searchText);
-        }
-      }, 400)
-    );
-  }, [searchText]);
+  useEffect(
+    () => {
+      if (requestTimeout) clearTimeout(requestTimeout);
+      setRequestTimeout(
+        setTimeout(() => {
+          if (searchText !== requestText) {
+            setRequestText(searchText);
+          }
+        }, 400)
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchText]
+  );
 
   useEffect(() => {
     console.log(`search: ${searchText}`);

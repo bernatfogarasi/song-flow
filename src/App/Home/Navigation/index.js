@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Button from "./Button";
+// import Button from "./Button";
 
 const Wrapper = styled.div`
   margin-top: 10%;
@@ -9,13 +9,13 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const JoinRoomButton = styled(Button)`
-  background: #fecf37;
-`;
+// const JoinRoomButton = styled(Button)`
+//   background: #fecf37;
+// `;
 
-const CreateRoomButton = styled(Button)`
-  background: white;
-`;
+// const CreateRoomButton = styled(Button)`
+//   background: white;
+// `;
 
 const CreateRoomLink = styled(Link)`
   margin-top: 4%;

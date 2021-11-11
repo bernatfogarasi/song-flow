@@ -31,7 +31,7 @@ const Input = styled.input`
   color: white;
 `;
 
-const HostInput = styled(Input)``;
+// const HostInput = styled(Input)``;
 
 const SubmitButton = styled(Button)`
   background: white;

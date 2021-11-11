@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import TopBar from "../../components/TopBar";
-import { v4 as uuid } from "uuid";
 import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
