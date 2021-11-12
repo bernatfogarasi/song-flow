@@ -22,6 +22,15 @@ const Search = () => {
     setSearchText(event.target.value);
   };
 
+  const serverUrl = (directory) => {
+    const hostname = window.location.hostname;
+    const serverOrigin =
+      hostname !== "localhost"
+        ? "http://localhost:4000"
+        : "http://api.teamlistener.com";
+    return serverOrigin + directory;
+  };
+
   useEffect(
     () => {
       if (requestTimeout) clearTimeout(requestTimeout);
@@ -39,13 +48,16 @@ const Search = () => {
 
   useEffect(() => {
     console.log(`search: ${searchText}`);
+  }, [searchText]);
+
+  useEffect(() => {
     console.log(`request: ${requestText}`);
-  }, [searchText, requestText]);
+  }, [requestText]);
 
   useEffect(() => {
     if (requestText === "") setResults([]);
     if (!requestText) return;
-    fetch("http://localhost:4000/search/youtube", {
+    fetch(serverUrl("/search/youtube"), {
       method: "post",
       headers: {
         Accept: "application/json, text/plain, */*",

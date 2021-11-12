@@ -21,7 +21,9 @@ const Wrapper = styled.div`
 
 const Results = ({ data }) => {
   return (
-    <Wrapper>{data && data.map((result) => <Result data={result} />)}</Wrapper>
+    <Wrapper>
+      {data && data.map((result) => <Result key={result.url} data={result} />)}
+    </Wrapper>
   );
 };
 
