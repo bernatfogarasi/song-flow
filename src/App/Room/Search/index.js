@@ -25,7 +25,7 @@ const Search = () => {
   const serverUrl = (directory) => {
     const hostname = window.location.hostname;
     const serverOrigin =
-      hostname !== "localhost"
+      hostname === "localhost"
         ? "http://localhost:4000"
         : "http://api.teamlistener.com";
     return serverOrigin + directory;
