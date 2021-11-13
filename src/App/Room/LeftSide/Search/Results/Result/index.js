@@ -1,13 +1,27 @@
 import styled from "styled-components";
-import spotify from "../../../../../assets/icons/spotify.png";
-import youtube from "../../../../../assets/icons/youtube.png";
+import spotify from "../../../../../../assets/icons/spotify.png";
+import youtube from "../../../../../../assets/icons/youtube.png";
 
 const icons = { spotify, youtube };
 
 const Wrapper = styled.div`
+  cursor: pointer;
+  .video-thumbnail-overlay {
+    opacity: 0%;
+  }
+  :hover {
+    .details {
+      opacity: 50%;
+    }
+
+    .video-thumbnail-overlay {
+      opacity: 50%;
+    }
+  }
   margin: 10px;
   display: flex;
   align-items: flex-start;
+  position: relative;
 `;
 
 const Details = styled.div`
@@ -33,7 +47,7 @@ const SecondRow = styled.div`
 `;
 
 const SiteIcon = styled.img`
-  width: 30px;
+  width: 20px;
 `;
 
 const VideoTitle = styled.div`
@@ -50,6 +64,31 @@ const VideoThumbnail = styled.img`
   border-radius: 3px;
 `;
 
+const CrossLine = styled.div`
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+`;
+
+const CrossLineVertical = styled(CrossLine)`
+  width: 8px;
+  height: 40px;
+`;
+
+const CrossLineHorizontal = styled(CrossLine)`
+  width: 40px;
+  height: 8px;
+`;
+
+const VideoThumbnailOverlay = styled.div`
+  position: absolute;
+  width: 102px;
+  height: 59px;
+  background: black;
+`;
+
 const ChannelTitle = styled.div`
   font-family: Montserrat;
   font-size: 14px;
@@ -60,7 +99,11 @@ const Result = ({ data }) => {
   return (
     <Wrapper>
       <VideoThumbnail src={data.thumbnail} alt="" />
-      <Details>
+      <VideoThumbnailOverlay className="video-thumbnail-overlay">
+        <CrossLineVertical />
+        <CrossLineHorizontal />
+      </VideoThumbnailOverlay>
+      <Details className="details">
         <FirstRow>
           {data.length}
           <VideoTitle>{data.title}</VideoTitle>

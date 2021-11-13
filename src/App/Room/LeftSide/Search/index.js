@@ -5,7 +5,8 @@ import Results from "./Results";
 
 const Wrapper = styled.div`
   background: #1e1e1e;
-  height: calc(100vh - 120px);
+  height: 100%;
+
   width: 50vw;
   border-right: 1px solid #333;
   display: flex;
@@ -46,13 +47,13 @@ const Search = () => {
     [searchText]
   );
 
-  useEffect(() => {
-    console.log(`search: ${searchText}`);
-  }, [searchText]);
+  // useEffect(() => {
+  //   console.log(`search: ${searchText}`);
+  // }, [searchText]);
 
-  useEffect(() => {
-    console.log(`request: ${requestText}`);
-  }, [requestText]);
+  // useEffect(() => {
+  //   console.log(`request: ${requestText}`);
+  // }, [requestText]);
 
   useEffect(() => {
     if (requestText === "") setResults([]);

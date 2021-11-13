@@ -1,14 +1,20 @@
 import styled from "styled-components";
+import LeftSide from "./LeftSide";
+import RightSide from "./RightSide";
 import Player from "./Player";
-import Search from "./Search";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+`;
 
 const Room = () => {
   return (
     <Wrapper>
-      <Search />
+      <LeftSide />
       <Player />
+      <RightSide />
     </Wrapper>
   );
 };

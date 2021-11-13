@@ -8,11 +8,11 @@ const Wrapper = styled.div`
   overflow: scroll;
   overflow-x: hidden;
   ::-webkit-scrollbar {
-    width: 20px;
+    width: 10px;
   }
   ::-webkit-scrollbar-thumb {
     background: #333;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #444;
