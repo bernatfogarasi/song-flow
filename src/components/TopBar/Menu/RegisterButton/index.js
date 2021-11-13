@@ -5,8 +5,8 @@ const Wrapper = styled.div`
   background: grey;
 `;
 
-const LoginButton = () => {
-  return <Wrapper>Log in</Wrapper>;
+const RegisterButton = () => {
+  return <Wrapper>Register</Wrapper>;
 };
 
-export default LoginButton;
+export default RegisterButton;

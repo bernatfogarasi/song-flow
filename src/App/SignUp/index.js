@@ -4,7 +4,7 @@ import TopBar from "../../components/TopBar";
 
 const Wrapper = styled.div``;
 
-const Register = () => {
+const SignUp = () => {
   return (
     <Wrapper>
       <TopBar />
@@ -13,4 +13,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

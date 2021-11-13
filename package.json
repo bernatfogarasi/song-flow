@@ -2,7 +2,6 @@
   "name": "team-listener-client",
   "version": "0.1.0",
   "dependencies": {
-    "@rottitime/react-hook-message-event": "^1.0.8",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

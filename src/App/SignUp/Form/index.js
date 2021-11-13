@@ -50,7 +50,7 @@ const Form = () => {
         <Label>Password</Label>
         <Input type="text" required />
       </Item>
-      <SubmitButton>Register</SubmitButton>
+      <SubmitButton>SignUp</SubmitButton>
     </Wrapper>
   );
 };
