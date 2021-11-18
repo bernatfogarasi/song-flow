@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import openInBrowser from "../../assets/icons/open_in_browser.png";
+import openInBrowser from "assets/icons/open_in_browser.png";
 
 const Wrapper = styled.img`
   width: 18px;

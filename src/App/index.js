@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import GlobalStyle from "../style/globalStyle";
+import GlobalStyle from "style/globalStyle";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Home from "./Home";
-import Join from "./Join";
-import Create from "./Create";
-import Room from "./Room";
-import SignUp from "./SignUp";
-import SignUpConfirmation from "./SignUpConfirmation";
+import Home from "./Root";
+import Join from "./Join/Root";
+import Create from "./Create/Root";
+import Room from "./Room/Root";
+import SignUp from "./SignUp/Root";
+import SignUpConfirmation from "./SignUp/Confirmation/Root";
+import SignUpConfirmationEmailAlreadyConfirmed from "./SignUp/Confirmation/EmailAlreadyConfirmed/Root";
+import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
+import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
 
 const Wrapper = styled.div`
   background: #111;
@@ -28,6 +31,23 @@ function App() {
             component={SignUpConfirmation}
             exact
             path="/signup/confirmation"
+          />
+          <Route
+            component={SignUpConfirmationTokenNotFound}
+            exact
+            path="/signup/confirmation/token-not-found"
+          />
+
+          <Route
+            component={SignUpConfirmationEmailAlreadyConfirmed}
+            exact
+            path="/signup/confirmation/email-already-confirmed"
+          />
+
+          <Route
+            component={SignUpConfirmationSuccess}
+            exact
+            path="/signup/confirmation/success"
           />
           <Route render={() => <Redirect to={{ pathname: "/" }} />} />
         </Switch>
