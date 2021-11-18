@@ -55,7 +55,7 @@ const Message = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 50%;
+  width: 55%;
 `;
 
 const SignUpConfirmation = () => {
@@ -75,7 +75,7 @@ const SignUpConfirmation = () => {
           </p>
           <p>
             In order to complete the sign-up process, please click the
-            confirmation link.
+            confirmation link in your email.
           </p>
         </Text>
       </Message>

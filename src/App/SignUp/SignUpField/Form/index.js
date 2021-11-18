@@ -1,85 +1,69 @@
 import styled from "styled-components";
+import { useState } from "react";
+
 import Field from "./Field";
 import Button from "./Button";
-import { useEffect, useState } from "react";
-
 import InputRequirement from "../../../../components/InputRequirement";
 
 const Wrapper = styled.form``;
 
 const Form = () => {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       name: email,
-  //       email: "fogarasi.asdf123@gmail.com",
-  //       password: "1231234",
-  //     }),
-  //   };
-  //   fetch("http://localhost:4000/user/register").then();
-  // };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    // const formData = new FormData(event.target);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        email,
+        password,
+      }),
+    };
+    // console.log(requestOptions);
 
-  // const onUsernameChange = (event) => {
-  //   setUsername(event.target.value);
-  // };
+    const host =
+      window.location.hostname === "localhost"
+        ? "localhost:4000"
+        : "api.teamlistener.com";
+    fetch(`http://${host}/user/register`, requestOptions)
+      .then((response) => response.json())
+      .then((json) => json.message)
+      .then((message) => {
+        console.log(message);
+        return message === "success"
+          ? (window.location.href = "/signup/confirmation")
+          : console.log(message);
+      })
+      .catch((error) => console.log(error));
+  };
 
-  // const onEmailChange = (event) => {
-  //   setEmail(event.target.value);
-  // };
+  const onUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
 
-  // const onPasswordChange = (event) => {
-  //   setPassword(event.target.value);
-  // };
+  const onEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-  // const onSubmitClicked = () => {
-  //   return;
-  // };
-
-  // const validateUsername = () => {
-  //   if (username) return true;
-  // };
-  // const validateEmail = () => {
-  //   if (email && email.length >= 6) return true;
-  // };
-  // const validatePassword = () => {
-  //   if (password && password.length >= 10) return true;
-  // };
-
-  // useEffect(() => {
-  //   console.log(username);
-  //   validateUsername();
-  // }, [username]);
-
-  // useEffect(() => {
-  //   console.log(email);
-  // }, [email]);
-
-  // useEffect(() => {
-  //   console.log(password);
-  // }, [password]);
+  const onPasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   return (
-    <Wrapper
-    // action="http://localhost:4000/user/register"
-    // method="POST"
-    // onSubmit={onSubmit}
-    >
+    <Wrapper onSubmit={onSubmit}>
       <Field
         label="Username"
         name="username"
         maxLength="20"
         pattern="^[A-Za-z][A-Za-z0-9_]{2,19}$"
         required
-
-        // value={username}
-        // onChange={onUsernameChange}
+        value={username}
+        onChange={onUsernameChange}
       >
         <InputRequirement>
           Between 3 and 20 characters in length.
@@ -95,8 +79,8 @@ const Form = () => {
         minLength="6"
         pattern="^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$"
         required
-        // value={email}
-        // onChange={onEmailChange}
+        value={email}
+        onChange={onEmailChange}
       />
       <Field
         label="Password"
@@ -105,8 +89,8 @@ const Form = () => {
         pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$"
         required
         type="password"
-        // onChange={onPasswordChange}
-        // value={password}
+        onChange={onPasswordChange}
+        value={password}
       >
         <InputRequirement>More than 10 characters long.</InputRequirement>
         <InputRequirement>

@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import logo from "../../../assets/icons/logo3.png";
+import logo from "../../../assets/icons/logo_white.png";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled(Link)`
-  font-family: MontserratMedium;
-  margin: 10px;
-  font-size: 16px;
+  font-family: MontserratSemibold;
+  margin: 20px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   color: #ddd;
@@ -15,7 +15,6 @@ const Wrapper = styled(Link)`
 
 const Icon = styled.img`
   width: 40px;
-  filter: invert(100%);
 `;
 
 const Text = styled.div`

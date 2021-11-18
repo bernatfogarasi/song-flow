@@ -75,10 +75,12 @@ const Field = ({
   label,
   minLength,
   maxLength,
+  onChange,
   pattern,
   required,
   title,
   type,
+  value,
 }) => {
   return (
     <Wrapper>
@@ -93,8 +95,10 @@ const Field = ({
         required={required}
         minLength={minLength}
         maxLength={maxLength}
+        onChange={onChange}
         pattern={pattern}
         title={title}
+        value={value}
       />
     </Wrapper>
   );
