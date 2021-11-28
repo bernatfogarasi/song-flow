@@ -70,7 +70,8 @@ const Info = styled.div`
   }
 `;
 
-const Field = ({
+const InputField = ({
+  autoComplete,
   children,
   label,
   minLength,
@@ -92,6 +93,7 @@ const Field = ({
       )}
       <Input
         type={type}
+        autoComplete={autoComplete}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
@@ -104,4 +106,4 @@ const Field = ({
   );
 };
 
-export default Field;
+export default InputField;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TopBar from "components/TopBar";
 import SignUp from "./SignUpField";
 import Welcome from "./Welcome";
-import Login from "./Login";
+import OrLogin from "./OrLogin";
 // import video from "assets/ignore/dancing1.mp4";
 
 const Wrapper = styled.div`
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 //   width: 100px;
 // `;
 
-const Home = () => {
+const Root = () => {
   return (
     <Wrapper>
       {/* <Video autoplay muted loop>
@@ -23,9 +23,9 @@ const Home = () => {
       <TopBar logo />
       <Welcome />
       <SignUp />
-      <Login />
+      <OrLogin />
     </Wrapper>
   );
 };
 
-export default Home;
+export default Root;

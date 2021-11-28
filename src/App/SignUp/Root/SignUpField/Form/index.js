@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
-
-import Field from "./Field";
-import Button from "./Button";
+import SubmitButton from "components/SubmitButton";
 import InputRequirement from "components/InputRequirement";
+import InputField from "components/InputField";
 
 const Wrapper = styled.form``;
 
@@ -14,7 +13,6 @@ const Form = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    // const formData = new FormData(event.target);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -24,7 +22,6 @@ const Form = () => {
         password,
       }),
     };
-    // console.log(requestOptions);
 
     const host =
       window.location.hostname === "localhost"
@@ -32,12 +29,11 @@ const Form = () => {
         : "api.teamlistener.com";
     fetch(`http://${host}/user/register`, requestOptions)
       .then((response) => response.json())
-      .then((json) => json.message)
-      .then((message) => {
-        console.log(message);
-        return message === "success"
+      .then((json) => {
+        console.log(json);
+        return json.message === "success"
           ? (window.location.href = "/signup/confirmation")
-          : console.log(message);
+          : null;
       })
       .catch((error) => console.log(error));
   };
@@ -56,9 +52,9 @@ const Form = () => {
 
   return (
     <Wrapper onSubmit={onSubmit}>
-      <Field
+      <InputField
+        autoComplete="nickname"
         label="Username"
-        name="username"
         maxLength="20"
         pattern="^[A-Za-z][A-Za-z0-9_]{2,19}$"
         required
@@ -72,19 +68,19 @@ const Form = () => {
           Contains only letters, numbers or underscores.
         </InputRequirement>
         <InputRequirement>Starts with a letter.</InputRequirement>
-      </Field>
-      <Field
+      </InputField>
+      <InputField
+        autoComplete="email"
         label="Email"
-        name="email"
         minLength="6"
         pattern="^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$"
         required
         value={email}
         onChange={onEmailChange}
       />
-      <Field
+      <InputField
+        autoComplete="password"
         label="Password"
-        name="password"
         minLength="10"
         pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$"
         required
@@ -100,12 +96,8 @@ const Form = () => {
           <br /> - number
           <br /> - special character
         </InputRequirement>
-      </Field>
-      <Button
-      // onClick={onSubmitClicked}
-      >
-        Sign up
-      </Button>
+      </InputField>
+      <SubmitButton>Sign up</SubmitButton>
     </Wrapper>
   );
 };

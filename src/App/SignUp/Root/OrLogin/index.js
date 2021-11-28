@@ -16,7 +16,7 @@ const Text = styled.div`
 
 const NoAccountText = styled(Text)``;
 
-const Login = () => {
+const OrLogin = () => {
   return (
     <Wrapper>
       <NoAccountText>
@@ -26,4 +26,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default OrLogin;

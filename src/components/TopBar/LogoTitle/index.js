@@ -9,8 +9,10 @@ const Wrapper = styled(Link)`
   display: flex;
   align-items: center;
   color: #ddd;
-
   text-decoration: none;
+  :active {
+    filter: brightness(70%);
+  }
 `;
 
 const Icon = styled.img`
@@ -21,11 +23,11 @@ const Text = styled.div`
   margin: 0 10px;
 `;
 
-const Logo = () => {
+const Logo = ({ title }) => {
   return (
     <Wrapper to="">
       <Icon src={logo} alt="" />
-      <Text>TeamListener</Text>
+      {title && <Text>TeamListener</Text>}
     </Wrapper>
   );
 };

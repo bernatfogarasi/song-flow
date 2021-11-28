@@ -40,10 +40,10 @@ const ForgotPassword = styled.a`
   color: white;
 `;
 
-const LoginField = () => {
+const LoginField = ({ onLogin }) => {
   return (
     <Wrapper on>
-      <Form />
+      <Form onLogin={onLogin} />
       <ForgotPassword href="/signup">Forgot password?</ForgotPassword>
       <Or>
         <OrLine />

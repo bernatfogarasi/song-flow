@@ -11,6 +11,9 @@ const Wrapper = styled.a`
   :hover {
     transform: scale(1.2);
   }
+  :active {
+    filter: brightness(70%);
+  }
 `;
 
 const Link = (props) => {

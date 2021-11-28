@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   font-family: MontserratSemibold;
   font-size: 18px;
   background: #f3ca20;
-  width: calc(100% - 80px);
+  width: calc(100% - 20px);
   text-align: center;
   color: black;
   border: 1px solid #333;
@@ -20,8 +20,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const Button = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+const SubmitButton = ({ children }) => {
+  return <Wrapper type="submit">{children}</Wrapper>;
 };
 
-export default Button;
+export default SubmitButton;

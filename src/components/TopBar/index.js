@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Logo from "./Logo";
+import LogoTitle from "./LogoTitle";
 import Menu from "./Menu";
 
 const Wrapper = styled.div`
@@ -11,10 +11,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const TopBar = ({ logo, menu }) => {
+const TopBar = ({ logo, title, menu }) => {
   return (
     <Wrapper>
-      {logo && <Logo />}
+      {logo && <LogoTitle title={title} />}
       {menu && <Menu />}
     </Wrapper>
   );
