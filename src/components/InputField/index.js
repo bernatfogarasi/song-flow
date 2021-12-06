@@ -72,12 +72,14 @@ const Info = styled.div`
 
 const InputField = ({
   autoComplete,
+  autoFocus,
   children,
   label,
   minLength,
   maxLength,
   onChange,
   pattern,
+  ref,
   required,
   title,
   type,
@@ -92,6 +94,7 @@ const InputField = ({
         </InfoIcon>
       )}
       <Input
+        autoFocus={autoFocus}
         type={type}
         autoComplete={autoComplete}
         required={required}
@@ -99,6 +102,7 @@ const InputField = ({
         maxLength={maxLength}
         onChange={onChange}
         pattern={pattern}
+        ref={ref}
         title={title}
         value={value}
       />

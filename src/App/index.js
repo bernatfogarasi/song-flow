@@ -11,6 +11,8 @@ import SignUpConfirmationEmailAlreadyConfirmed from "./SignUp/Confirmation/Email
 import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
 import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
 import { useEffect } from "react";
+import useSession from "hooks/useSession";
+import { SessionContext } from "context";
 
 const Wrapper = styled.div`
   background: #111;
@@ -19,56 +21,44 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
-  useEffect(() => {
-    const requestOptions = { credentials: "include" };
-    const host =
-      window.location.hostname === "localhost"
-        ? "localhost:4000"
-        : "api.teamlistener.com";
-    fetch(`http://${host}/check`)
-      .then((response) => response.json())
-      .then((json) => {
-        json.message === "success"
-          ? console.log("server is up")
-          : console.log("server is down");
-      })
-      .catch((error) => console.log(error));
-  });
+  const { data } = useSession();
   return (
     <Wrapper>
       <GlobalStyle />
-      <BrowserRouter>
-        <Switch>
-          <Route component={Root} exact path="/" />
-          <Route component={Join} exact path="/join" />
-          <Route component={Create} exact path="/create" />
-          <Route component={Room} path="/room" />
-          <Route component={SignUp} exact path="/signup" />
-          <Route
-            component={SignUpConfirmation}
-            exact
-            path="/signup/confirmation"
-          />
-          <Route
-            component={SignUpConfirmationTokenNotFound}
-            exact
-            path="/signup/confirmation/token-not-found"
-          />
+      <SessionContext.Provider value={data}>
+        <BrowserRouter>
+          <Switch>
+            <Route component={Root} exact path="/" />
+            <Route component={Join} exact path="/join" />
+            <Route component={Create} exact path="/create" />
+            <Route component={Room} path="/room" />
+            <Route component={SignUp} exact path="/signup" />
+            <Route
+              component={SignUpConfirmation}
+              exact
+              path="/signup/confirmation"
+            />
+            <Route
+              component={SignUpConfirmationTokenNotFound}
+              exact
+              path="/signup/confirmation/token-not-found"
+            />
 
-          <Route
-            component={SignUpConfirmationEmailAlreadyConfirmed}
-            exact
-            path="/signup/confirmation/email-already-confirmed"
-          />
+            <Route
+              component={SignUpConfirmationEmailAlreadyConfirmed}
+              exact
+              path="/signup/confirmation/email-already-confirmed"
+            />
 
-          <Route
-            component={SignUpConfirmationSuccess}
-            exact
-            path="/signup/confirmation/success"
-          />
-          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
-        </Switch>
-      </BrowserRouter>
+            <Route
+              component={SignUpConfirmationSuccess}
+              exact
+              path="/signup/confirmation/success"
+            />
+            <Route render={() => <Redirect to={{ pathname: "/" }} />} />
+          </Switch>
+        </BrowserRouter>
+      </SessionContext.Provider>
     </Wrapper>
   );
 };

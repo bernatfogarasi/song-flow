@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 
 const Wrapper = styled(Link)`
   font-family: MontserratSemibold;
-  margin: 20px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
   font-size: 18px;
   display: flex;
   align-items: center;
   color: #ddd;
   text-decoration: none;
+  transition: 0.2s;
   :active {
     filter: brightness(70%);
+  }
+  :hover {
+    transform: scale(1.1);
   }
 `;
 

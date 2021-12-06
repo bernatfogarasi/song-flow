@@ -12,8 +12,8 @@ const useServerRequest = (
   const [error, setError] = useState();
   const [count, setCount] = useState(0);
 
-  const rerun = () => {
-    setCount((count) => count++);
+  const run = () => {
+    setCount(count + 1);
   };
 
   const host =
@@ -22,6 +22,9 @@ const useServerRequest = (
       : "http://api.teamlistener.com";
 
   useEffect(async () => {
+    if (!count) return;
+    if (count == 0) return;
+    console.log("RUNNED");
     try {
       const response = await fetch(`${host}${directory}`, options);
       const json = await response.json();
@@ -33,7 +36,7 @@ const useServerRequest = (
     }
   }, [count]);
 
-  return { json, message, status, error, rerun };
+  return { json, message, status, error, run };
 };
 
 export default useServerRequest;

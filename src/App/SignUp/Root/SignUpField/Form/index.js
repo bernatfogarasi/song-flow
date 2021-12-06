@@ -11,7 +11,7 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const requestOptions = {
       method: "POST",
@@ -54,6 +54,7 @@ const Form = () => {
     <Wrapper onSubmit={onSubmit}>
       <InputField
         autoComplete="nickname"
+        autoFocus={email.length > 3}
         label="Username"
         maxLength="20"
         pattern="^[A-Za-z][A-Za-z0-9_]{2,19}$"

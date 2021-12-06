@@ -13,15 +13,22 @@ const Wrapper = styled.button`
   margin: 10px;
   margin-top: 20px;
   cursor: pointer;
+  transition: 0.2s;
   :hover {
+    transform: scale(1.05);
   }
   :active {
     background: #816909;
   }
 `;
 
-const SubmitButton = ({ children }) => {
-  return <Wrapper type="submit">{children}</Wrapper>;
+const SubmitButton = ({ label, children }) => {
+  return (
+    <Wrapper type="submit">
+      {label}
+      {children}
+    </Wrapper>
+  );
 };
 
 export default SubmitButton;
