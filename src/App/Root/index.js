@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import useSession from "hooks/useSession";
+import { useContext, useEffect, useState } from "react";
 // import video from "assets/ignore/dancing1.mp4";
 import Login from "./Login";
 import Home from "./Home";
 import LoadingScreen from "components/LoadingScreen";
+import { SessionContext } from "context";
 
 // const Video = styled.video`
 //   position: absolute;
@@ -12,28 +11,26 @@ import LoadingScreen from "components/LoadingScreen";
 // `;
 
 const Root = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const { data, rerun: getData } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  const { session, refreshSession } = useContext(SessionContext);
+
+  const onLogin = () => {
+    setIsLoggedIn(true);
+    refreshSession();
+  };
 
   useEffect(() => {
-    console.log(data);
-    if (data) setIsLoggedIn(true);
-  }, [data]);
+    if (session) setIsLoggedIn(true);
+  }, [session]);
 
-  const onLogin = (data) => {
-    setIsLoggedIn(true);
-    getData();
-  };
-  {
-    /* <Video autoplay muted loop>
+  /* <Video autoplay muted loop>
     <source src={video} type="video/mp4" />
   </Video> */
-  }
 
   return isLoggedIn ? (
-    <Home data={data} />
+    <Home />
   ) : isLoggedIn === false ? (
-    <Login />
+    <Login onLogin={onLogin} />
   ) : (
     <LoadingScreen />
   );

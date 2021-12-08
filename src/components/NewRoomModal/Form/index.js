@@ -1,18 +1,29 @@
 import styled from "styled-components";
-import { serverRequest } from "functions/serverRequest";
+import { serverRequest } from "functions/requests";
 import InputField from "components/InputField";
 import SubmitButton from "components/SubmitButton";
-import { useEffect, useState } from "react";
-import useFocus from "hooks/useFocus";
+import { useContext, useState } from "react";
+import { SessionContext } from "context";
+import LoaderCircleRaw from "components/LoaderCircle";
 
 const Wrapper = styled.form``;
 
+const LoaderCircle = styled(LoaderCircleRaw)`
+  width: 14px;
+  height: 14px;
+  border: 4px solid;
+  margin: auto;
+  border-color: black transparent;
+`;
+
 const Form = ({ onClose }) => {
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { refreshSession } = useContext(SessionContext);
 
   const onSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
-    onClose();
     const json = await serverRequest("/room/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -21,13 +32,12 @@ const Form = ({ onClose }) => {
         name: name,
       }),
     });
-    console.log(json);
+    refreshSession();
     setName("");
+    setLoading(false);
+    onClose();
+    console.log(json);
   };
-
-  useEffect(() => {
-    console.log(name);
-  }, [name]);
 
   return (
     <Wrapper onSubmit={onSubmit}>
@@ -37,7 +47,13 @@ const Form = ({ onClose }) => {
         onChange={(event) => setName(event.target.value)}
         value={name}
       />
-      <SubmitButton label="Create room" />
+      {loading ? (
+        <SubmitButton label="" disabled>
+          <LoaderCircle />
+        </SubmitButton>
+      ) : (
+        <SubmitButton label="Create room" />
+      )}
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Card from "components/Card";
-import Link from "components/Link";
+import Link from "components/LinkRefer";
 
 const Wrapper = styled(Card)`
   margin: auto;

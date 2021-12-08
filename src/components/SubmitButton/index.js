@@ -22,9 +22,9 @@ const Wrapper = styled.button`
   }
 `;
 
-const SubmitButton = ({ label, children }) => {
+const SubmitButton = ({ children, disabled, label }) => {
   return (
-    <Wrapper type="submit">
+    <Wrapper type="submit" disabled={disabled}>
       {label}
       {children}
     </Wrapper>

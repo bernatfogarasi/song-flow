@@ -3,10 +3,16 @@ import useServerRequest from "./useServerRequest";
 
 const useSession = () => {
   const { json, error, run } = useServerRequest("/user/session");
+
   useEffect(() => {
     run();
   }, []);
-  return { data: json?.data, error, run };
+
+  useEffect(() => {
+    if (json) console.log(json);
+  }, [json]);
+
+  return { session: json?.data, error, refreshSession: run };
 };
 
 export default useSession;

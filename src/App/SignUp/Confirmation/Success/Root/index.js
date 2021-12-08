@@ -1,5 +1,5 @@
 import Feedback from "components/Feedback";
-import Link from "components/Link";
+import Link from "components/LinkRefer";
 
 const Success = () => {
   return (

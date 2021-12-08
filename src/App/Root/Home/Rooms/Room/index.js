@@ -1,17 +1,20 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   width: 300px;
-  border: 1px solid#333;
-  margin: 10px;
+  border: 1px solid #333;
   border-radius: 4px;
+  color: white;
+  text-decoration: none;
+
   :hover {
     background: #202020;
     transform: scale(1.05);
     transition: 0.2s;
     div.arrow {
-      transition: transform 0.2s;
-      transform: translateX(40px);
+      /* transition: transform 0.2s;
+      transform: translateX(40px); */
     }
   }
   transition: 0.2s;
@@ -37,10 +40,10 @@ const Rank = styled.div`
 
 const Star = styled(Rank)``;
 
-const ranks = {
-  admin: { color: "yellow", text: "★", element: Star },
-  member: { color: "grey", text: "", element: Star },
-};
+// const ranks = {
+//   admin: { color: "yellow", text: "★", element: Star },
+//   member: { color: "grey", text: "", element: Star },
+// };
 
 const Participants = styled.div`
   display: flex;
@@ -90,11 +93,10 @@ const ArrowShaft = styled(ArrowLine)`
   transform: translateY(-50%);
 `;
 
-const Room = ({ name, rank }) => {
+const Room = ({ name, url }) => {
   return (
-    <Wrapper>
+    <Wrapper to={url}>
       <Line>
-        {" "}
         <Title>{name}</Title>
         {/* <Rank color={ranks[rank].color}>{ranks[rank].text}</Rank> */}
         {/* {ranks[rank].element} */}

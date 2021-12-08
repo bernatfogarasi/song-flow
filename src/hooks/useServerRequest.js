@@ -16,24 +16,24 @@ const useServerRequest = (
     setCount(count + 1);
   };
 
-  const host =
-    window.location.hostname === "localhost"
-      ? "http://localhost:4000"
-      : "http://api.teamlistener.com";
-
-  useEffect(async () => {
+  useEffect(() => {
     if (!count) return;
-    if (count == 0) return;
-    console.log("RUNNED");
-    try {
-      const response = await fetch(`${host}${directory}`, options);
-      const json = await response.json();
-      setJson(json);
-      setMessage(json.message);
-      setStatus(response.status);
-    } catch (error) {
-      setError(error);
-    }
+    const host =
+      window.location.hostname === "localhost"
+        ? "http://localhost:4000"
+        : "http://api.teamlistener.com";
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${host}${directory}`, options);
+        const json = await response.json();
+        setJson(json);
+        setMessage(json.message);
+        setStatus(response.status);
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchData();
   }, [count]);
 
   return { json, message, status, error, run };

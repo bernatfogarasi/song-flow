@@ -10,7 +10,6 @@ import SignUpConfirmation from "./SignUp/Confirmation/Root";
 import SignUpConfirmationEmailAlreadyConfirmed from "./SignUp/Confirmation/EmailAlreadyConfirmed/Root";
 import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
 import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
-import { useEffect } from "react";
 import useSession from "hooks/useSession";
 import { SessionContext } from "context";
 
@@ -21,11 +20,11 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
-  const { data } = useSession();
+  const { session, refreshSession } = useSession();
   return (
     <Wrapper>
       <GlobalStyle />
-      <SessionContext.Provider value={data}>
+      <SessionContext.Provider value={{ session, refreshSession }}>
         <BrowserRouter>
           <Switch>
             <Route component={Root} exact path="/" />

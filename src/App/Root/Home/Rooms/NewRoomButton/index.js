@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   :hover {
     transform: scale(1.2);
     border: 2px solid #fff;
-    div.line {
+    div {
       background: #fff;
     }
   }
