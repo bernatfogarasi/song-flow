@@ -6,11 +6,7 @@ const Wrapper = styled.div`
 `;
 
 const RightSide = () => {
-  return (
-    <Wrapper>
-      <Video />
-    </Wrapper>
-  );
+  return <Wrapper>{/* <Video /> */}</Wrapper>;
 };
 
 export default RightSide;

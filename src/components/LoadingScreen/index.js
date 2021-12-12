@@ -10,10 +10,10 @@ const LoaderCircleCentered = styled(LoaderCircle)`
   left: calc(50% - 24px);
 `;
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ logo, search, menu }) => {
   return (
     <Wrapper>
-      <TopBar logo />
+      <TopBar logo={logo} search={search} menu={menu} />
       <LoaderCircleCentered />
     </Wrapper>
   );

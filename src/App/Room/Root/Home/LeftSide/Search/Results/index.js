@@ -10,9 +10,9 @@ const Wrapper = styled.div`
   ::-webkit-scrollbar {
     width: 10px;
   }
-  ::-webkit-scrollbar-thumb {
+  :hover::-webkit-scrollbar-thumb {
+    border-radius: 5px;
     background: #333;
-    /* border-radius: 10px; */
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #444;

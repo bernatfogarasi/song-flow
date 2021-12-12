@@ -3,6 +3,7 @@ import { useState } from "react";
 import SubmitButton from "components/SubmitButton";
 import InputRequirement from "components/InputRequirement";
 import InputField from "components/InputField";
+import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.form``;
 
@@ -13,7 +14,7 @@ const Form = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const requestOptions = {
+    const json = serverRequest("/user/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -21,21 +22,9 @@ const Form = () => {
         email,
         password,
       }),
-    };
-
-    const host =
-      window.location.hostname === "localhost"
-        ? "localhost:4000"
-        : "api.teamlistener.com";
-    fetch(`http://${host}/user/register`, requestOptions)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        return json.message === "success"
-          ? (window.location.href = "/signup/confirmation")
-          : null;
-      })
-      .catch((error) => console.log(error));
+    });
+    if (json.message !== "success") return;
+    window.location.href = "/signup/confirmation";
   };
 
   const onUsernameChange = (event) => {

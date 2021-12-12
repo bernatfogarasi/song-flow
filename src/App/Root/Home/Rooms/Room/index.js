@@ -1,12 +1,19 @@
+import { shuffle } from "functions/math";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled(Link)`
-  width: 300px;
+  width: 50vw;
+  min-width: 200px;
+  height: 40vh;
   border: 1px solid #333;
   border-radius: 4px;
   color: white;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px;
 
   :hover {
     background: #202020;
@@ -22,7 +29,6 @@ const Wrapper = styled(Link)`
 `;
 
 const Line = styled.div`
-  margin: 10px;
   /* border: 1px solid #333; */
   display: flex;
   align-items: center;
@@ -46,18 +52,55 @@ const Star = styled(Rank)``;
 // };
 
 const Participants = styled.div`
-  display: flex;
-  align-items: center;
-  /* font-size: 20px; */
+  /* display: flex;
+  align-items: center; */
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+  gap: 5px;
+  /* background: red; */
+  height: 140px;
 `;
 
 const Participant = styled.div`
   border-radius: 50%;
-  height: 20px;
+  height: 30px;
   aspect-ratio: 1;
-  margin-right: 2px;
   border: 1px solid #333;
 `;
+
+const Genres = styled.div`
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+`;
+
+const Genre = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const GenreRank = styled.div`
+  width: 20px;
+`;
+
+const GenreName = styled.div`
+  color: #777;
+`;
+
+const genres = [
+  "blues",
+  "country",
+  "easy listening",
+  "electronic",
+  "contemporary folk",
+  "hip hop",
+  "jazz",
+  "pop",
+  "r&b and soul",
+  "rock",
+];
 
 const Arrow = styled.div`
   position: relative;
@@ -101,21 +144,33 @@ const Room = ({ name, url }) => {
         {/* <Rank color={ranks[rank].color}>{ranks[rank].text}</Rank> */}
         {/* {ranks[rank].element} */}
         <Star />
-      </Line>
-      <Line>
-        <Participants>
-          {Array((name.length % 3) + 1)
-            .fill(0)
-            .map((value, index) => (
-              <Participant key={index} />
-            ))}
-        </Participants>
         <Arrow className="arrow">
           <ArrowLine />
           <ArrowHeapTop />
           <ArrowHeapBottom />
           <ArrowShaft />
         </Arrow>
+      </Line>
+      <Line>
+        <Participants>
+          {Array((name.length % 10) + 1)
+            .fill(0)
+            .map((value, index) => (
+              <Participant key={index} />
+            ))}
+        </Participants>
+      </Line>
+      <Line>
+        <Genres>
+          {shuffle(genres)
+            .slice(0, Math.ceil(Math.random() * 3))
+            .map((genre, index) => (
+              <Genre key={index}>
+                <GenreRank>{["I", "II", "III"][index]}.</GenreRank>
+                <GenreName>{genre}</GenreName>
+              </Genre>
+            ))}
+        </Genres>
       </Line>
     </Wrapper>
   );

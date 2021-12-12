@@ -1,22 +1,18 @@
+import LoadingScreen from "components/LoadingScreen";
+import { SessionContext } from "context";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import LeftSide from "./LeftSide";
-import RightSide from "./RightSide";
-import Player from "./Player";
+import Home from "./Home";
+import LoginOrSignUp from "./LoginOrSignUp";
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-`;
+const Wrapper = styled.div``;
 
 const Room = () => {
-  return (
-    <Wrapper>
-      <LeftSide />
-      <Player />
-      <RightSide />
-    </Wrapper>
-  );
+  const { session, refreshSession, error } = useContext(SessionContext);
+
+  useEffect(() => {}, [session]);
+
+  return session ? <Home /> : error ? <LoginOrSignUp /> : <LoadingScreen />;
 };
 
 export default Room;

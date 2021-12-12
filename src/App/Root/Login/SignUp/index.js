@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Card from "components/Card";
-import Link from "components/LinkRefer";
+import LinkRefer from "components/LinkRefer";
 
 const Wrapper = styled(Card)`
   margin: auto;
@@ -20,7 +20,7 @@ const SignUp = () => {
   return (
     <Wrapper>
       <NoAccountText>
-        Don't have an account? <Link href="/signup">Sign up</Link>
+        Don't have an account? <LinkRefer to="/signup">Sign up</LinkRefer>
       </NoAccountText>
     </Wrapper>
   );

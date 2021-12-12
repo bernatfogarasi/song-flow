@@ -8,11 +8,11 @@ const Wrapper = styled.div`
   display: flex;
   top: 0px;
   left: 0px;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  gap: 10px;
+  padding: 20px;
+  gap: 20px;
 `;
 
 const Center = styled.div`

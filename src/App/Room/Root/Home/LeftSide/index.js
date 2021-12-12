@@ -3,7 +3,7 @@ import Search from "./Search";
 
 const Wrapper = styled.div`
   width: 50%;
-  height: calc(100% - 120px);
+  height: 85vh;
 `;
 
 const LeftSide = () => {

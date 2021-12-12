@@ -46,6 +46,7 @@ const Form = ({ onClose }) => {
         label="Room name"
         onChange={(event) => setName(event.target.value)}
         value={name}
+        required
       />
       {loading ? (
         <SubmitButton label="" disabled>

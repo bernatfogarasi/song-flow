@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 const Wrapper = styled(Link)`
   font-family: MontserratSemibold;
-  margin: 10px;
-  padding: 10px;
   border-radius: 20px;
   font-size: 18px;
   display: flex;

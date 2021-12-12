@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import GlobalStyle from "style/globalStyle";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  withRouter,
+} from "react-router-dom";
 import Root from "./Root";
 import Join from "./Join/Root";
 import Create from "./Create/Root";
@@ -12,6 +19,7 @@ import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
 import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
 import useSession from "hooks/useSession";
 import { SessionContext } from "context";
+import { AnimatePresence } from "framer-motion";
 
 const Wrapper = styled.div`
   background: #111;
@@ -20,13 +28,14 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
-  const { session, refreshSession } = useSession();
+  const { session, refreshSession, error } = useSession();
+  const location = useLocation();
   return (
     <Wrapper>
       <GlobalStyle />
-      <SessionContext.Provider value={{ session, refreshSession }}>
-        <BrowserRouter>
-          <Switch>
+      <SessionContext.Provider value={{ session, refreshSession, error }}>
+        <AnimatePresence>
+          <Switch location={window.location} key={window.location.pathname}>
             <Route component={Root} exact path="/" />
             <Route component={Join} exact path="/join" />
             <Route component={Create} exact path="/create" />
@@ -42,13 +51,11 @@ const App = () => {
               exact
               path="/signup/confirmation/token-not-found"
             />
-
             <Route
               component={SignUpConfirmationEmailAlreadyConfirmed}
               exact
               path="/signup/confirmation/email-already-confirmed"
             />
-
             <Route
               component={SignUpConfirmationSuccess}
               exact
@@ -56,10 +63,10 @@ const App = () => {
             />
             <Route render={() => <Redirect to={{ pathname: "/" }} />} />
           </Switch>
-        </BrowserRouter>
+        </AnimatePresence>
       </SessionContext.Provider>
     </Wrapper>
   );
 };
 
-export default App;
+export default withRouter(App);

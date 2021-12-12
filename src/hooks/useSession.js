@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useServerRequest from "./useServerRequest";
 
 const useSession = () => {
   const { json, error, run } = useServerRequest("/user/session");
-
+  // const [loading, setLoading] = useState(true);
   useEffect(() => {
     run();
   }, []);
 
   useEffect(() => {
-    if (json) console.log(json);
-  }, [json]);
+    // console.log(error);
+  }, [error]);
 
   return { session: json?.data, error, refreshSession: run };
 };

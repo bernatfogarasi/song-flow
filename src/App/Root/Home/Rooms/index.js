@@ -8,29 +8,30 @@ import { SessionContext } from "context";
 const Wrapper = styled.div`
   /* border: 1px solid #333; */
   border-radius: 4px;
-  width: 332px;
+  /* width: 332px; */
 `;
 
 const RoomsHeader = styled.div`
-  margin: 0px 15px 20px 10px;
+  width: 90vw;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 const RoomList = styled.div`
+  cursor: grab;
+  overflow: auto;
   display: flex;
-  flex-direction: column;
-  padding: 2px 10px;
+  padding: 10px;
   gap: 10px;
-  height: 50vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  margin: auto;
+  width: 90vw;
   scrollbar-width: thin;
   scrollbar-color: blue orange;
   transition: 0.2s;
   ::-webkit-scrollbar {
-    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-thumb {
     background: inherit;

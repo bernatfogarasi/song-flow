@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import SubmitButton from "components/SubmitButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputField from "components/InputField";
+import { useLocation } from "react-router";
+import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.form``;
 
-const Form = ({ onLogin }) => {
+const Form = ({ onLogin, ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const location = useLocation();
+  const path = new URLSearchParams(location.search).get("path");
 
   const onSubmit = (event) => {
-    console.log("onSubmit called");
     event.preventDefault();
-    const requestOptions = {
+    const json = serverRequest("/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,18 +23,9 @@ const Form = ({ onLogin }) => {
         password,
       }),
       credentials: "include",
-    };
-    const host =
-      window.location.hostname === "localhost"
-        ? "localhost:4000"
-        : "api.teamlistener.com";
-    fetch(`http://${host}/user/login`, requestOptions)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.message !== "success") console.log(json.message);
-        onLogin();
-      })
-      .catch((error) => console.log(error));
+    });
+    if (json.message !== "success") return;
+    path ? (window.location.href = path) : onLogin();
   };
 
   const onEmailChange = (event) => {

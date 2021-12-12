@@ -11,25 +11,19 @@ import { SessionContext } from "context";
 // `;
 
 const Root = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState();
-  const { session, refreshSession } = useContext(SessionContext);
+  const { session, refreshSession, error } = useContext(SessionContext);
 
   const onLogin = () => {
-    setIsLoggedIn(true);
     refreshSession();
   };
-
-  useEffect(() => {
-    if (session) setIsLoggedIn(true);
-  }, [session]);
 
   /* <Video autoplay muted loop>
     <source src={video} type="video/mp4" />
   </Video> */
 
-  return isLoggedIn ? (
+  return session ? (
     <Home />
-  ) : isLoggedIn === false ? (
+  ) : error ? (
     <Login onLogin={onLogin} />
   ) : (
     <LoadingScreen />

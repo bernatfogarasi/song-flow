@@ -13,9 +13,9 @@ const Window = styled.div`
   border-radius: 4px;
   z-index: 1;
   opacity: 0;
-  animation: fade-in 0.2s forwards;
+  animation: fade-in-window 0.2s forwards;
   animation-delay: 0.2s;
-  @keyframes fade-in {
+  @keyframes fade-in-window {
     0% {
       opacity: 0;
     }
@@ -26,6 +26,7 @@ const Window = styled.div`
 `;
 
 const Overlay = styled.div`
+  z-index: 0;
   position: absolute;
   height: 100vh;
   width: 100vw;
@@ -41,7 +42,7 @@ const Overlay = styled.div`
       opacity: 0;
     }
     100% {
-      opacity: 1;
+      opacity: 0.8;
     }
   }
 `;

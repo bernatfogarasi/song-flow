@@ -4,9 +4,7 @@ import LoginField from "./LoginField";
 import Welcome from "./Welcome";
 import SignUp from "./SignUp";
 
-const Wrapper = styled.div`
-  padding-top: 10vh;
-`;
+const Wrapper = styled.div``;
 
 const Login = ({ onLogin }) => {
   return (

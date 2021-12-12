@@ -7,10 +7,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: fit-content;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 20px;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
 `;
 
 const PersonalInfo = ({ username }) => {
