@@ -5,7 +5,7 @@ import Player from "./Player";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { serverHost } from "functions/requests";
+import { serverHostSocket } from "functions/requests";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
 const shortId = window.location.pathname.split("/").pop();
 
-const socket = io(`${serverHost}?shortId=${shortId}`, {
+const socket = io(`${serverHostSocket}?shortId=${shortId}`, {
   transports: ["websocket"],
 });
 

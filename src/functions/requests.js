@@ -3,6 +3,11 @@ const serverHost =
     ? "http://localhost:4000"
     : "http://api.teamlistener.com";
 
+const serverHostSocket =
+  window.location.hostname === "localhost"
+    ? "ws://localhost:4000"
+    : "ws://api.teamlistener.com";
+
 const serverRequest = async (
   directory,
   options = { credentials: "include" }
@@ -12,4 +17,4 @@ const serverRequest = async (
   return json;
 };
 
-export { serverHost, serverRequest };
+export { serverHost, serverHostSocket, serverRequest };
