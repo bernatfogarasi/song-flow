@@ -27,8 +27,10 @@ const useServerRequest = (
         setJson(json);
         setMessage(json.message);
         setStatus(response.status);
-        if (response.status !== 200) setError(json);
-        else setError(undefined);
+        if (response.status !== 200) {
+          setError(json);
+          console.log(json);
+        } else setError(undefined);
       } catch (error) {
         console.log(error);
       }

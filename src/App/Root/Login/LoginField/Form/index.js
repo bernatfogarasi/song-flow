@@ -13,9 +13,9 @@ const Form = ({ onLogin, ...props }) => {
   const location = useLocation();
   const path = new URLSearchParams(location.search).get("path");
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    const json = serverRequest("/user/login", {
+    const json = await serverRequest("/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,7 +25,8 @@ const Form = ({ onLogin, ...props }) => {
       credentials: "include",
     });
     if (json.message !== "success") return;
-    path ? (window.location.href = path) : onLogin();
+    if (path) window.location.href = path;
+    else onLogin();
   };
 
   const onEmailChange = (event) => {
