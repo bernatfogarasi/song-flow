@@ -4,14 +4,15 @@ import Menu from "./Menu";
 import Search from "./Search";
 
 const Wrapper = styled.div`
-  position: sticky;
+  /* position: sticky; */
   display: flex;
   top: 0px;
   left: 0px;
-  width: calc(100% - 40px);
+  width: calc(100% - 30px);
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  height: 70px;
+  padding: 0px 15px;
   gap: 20px;
 `;
 

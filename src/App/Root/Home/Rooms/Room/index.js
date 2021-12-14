@@ -103,14 +103,16 @@ const genres = [
 ];
 
 const Arrow = styled.div`
-  position: relative;
+  z-index: 0;
   width: 20px;
   aspect-ratio: 1;
   /* border: 1px solid #fff; */
   transition: 0.2s;
+  position: relative;
 `;
 
 const ArrowLine = styled.div`
+  z-index: 0;
   position: absolute;
   background: #fff;
   height: 2px;
@@ -145,7 +147,6 @@ const Room = ({ name, url }) => {
         {/* {ranks[rank].element} */}
         <Star />
         <Arrow className="arrow">
-          <ArrowLine />
           <ArrowHeapTop />
           <ArrowHeapBottom />
           <ArrowShaft />

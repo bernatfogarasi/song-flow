@@ -4,20 +4,24 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Results from "./Results";
 import useFocus from "hooks/useFocus";
+import Modal from "components/Modal";
+import Category from "./Category";
 
 const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   max-width: 400px;
   position: relative;
-
-  ${({ isFocused }) => isFocused && `transform: scale(1.1);`}
+  /* ${({ isFocused }) => isFocused && `transform: scale(1.1);`} */
   transition: 0.2s;
+  gap: 10px;
 `;
 
 const Input = styled.input`
   border-radius: 4px;
   font-size: 16px;
-  border: 1px solid #333;
+  border: none;
   background: #fff;
   padding: 10px;
   padding-right: 40px;
@@ -30,6 +34,27 @@ const Icon = styled(SearchIcon)`
   right: 5px;
   top: 50%;
   transform: translateY(-50%) scale(0.9);
+`;
+
+const Overlay = styled.div`
+  z-index: 1;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0px;
+  left: 0px;
+  background: #111;
+  right: 0;
+  bottom: 0;
+`;
+
+const OverlayChild = styled.div`
+  position: relative;
+  z-index: 1000;
+  /* transform: rotate(1deg); */
+  height: 100vh;
+  width: 100vw;
+  background: red;
 `;
 
 const Search = () => {
@@ -93,15 +118,17 @@ const Search = () => {
 
   return (
     <Wrapper isFocused={isFocused}>
+      {/* <Category /> */}
       <Input
         ref={focusRef}
         value={text}
         onChange={onTextChange}
         onFocus={onOpen}
-        onBlur={onClose}
+        // onBlur={onClose}
         // onFocus={onFocus}
         // onBlur={onBlur}
       />
+
       <Icon
         color="black"
         showClose={text !== ""}

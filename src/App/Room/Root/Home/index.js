@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import LeftSide from "./LeftSide";
-import RightSide from "./RightSide";
-import Player from "./Player";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { serverHostSocket } from "functions/requests";
+import DesktopLayout from "./DesktopLayout";
+import { RoomContext } from "context";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,31 +11,38 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const shortId = window.location.pathname.split("/").pop();
+const Home = ({ shortId }) => {
+  const [socket, setSocket] = useState();
+  const [next, setNext] = useState();
 
-const socket = io(`${serverHostSocket}?shortId=${shortId}`, {
-  transports: ["websocket"],
-});
-
-const Home = () => {
   useEffect(() => {
-    socket.on("message", (message) => console.log(message));
-
-    socket.emit("connection");
-
-    socket.on("members", (members) => console.log);
+    setSocket(
+      io(`${serverHostSocket}?shortId=${shortId}`, {
+        transports: ["websocket"],
+      })
+    );
   }, []);
 
-  const onRequest = () => {
-    socket.emit("request", shortId);
+  useEffect(() => {
+    if (!socket) return;
+    socket.on("message", (message) => console.log(message));
+
+    socket.on("next", (data) => setNext(data));
+
+    return () => {
+      socket.close();
+    };
+  }, [socket]);
+
+  const onNext = (data) => {
+    socket.emit("request-next", data);
   };
+
   return (
     <Wrapper>
-      <motion.div exit={{ opacity: 1 }}>
-        <LeftSide />
-        <Player />
-        <RightSide />
-      </motion.div>
+      <RoomContext.Provider value={{ next, onNext }}>
+        <DesktopLayout onNext={onNext} />
+      </RoomContext.Provider>
     </Wrapper>
   );
 };

@@ -1,31 +1,37 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin: 10px auto;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   position: relative;
   display: flex;
   align-items: center;
   height: fit-content;
+  position: relative;
 `;
 
 const Input = styled.input`
-  border-radius: 20px;
+  border-radius: 4px;
   border: 0px;
-  padding: 10px 20px 10px 50px;
+  padding: 5px 50px 5px 5px;
   font-size: 20px;
-  width: 30vw;
+  width: 100%;
+  background: #1a1a1a;
+  color: white;
 `;
 
 const Icon = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  transform: translate(10px, -4px);
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  pointer-events: none;
+  transform: translateY(-14px);
 `;
 
 const Circle = styled.div`
   position: absolute;
-  border: 2px solid black;
+  border: 2px solid #aaa;
   height: 16px;
   width: 16px;
   border-radius: 16px;
@@ -34,7 +40,7 @@ const Circle = styled.div`
 const Line = styled.hr`
   position: absolute;
   width: 12px;
-  border: 1px solid black;
+  border: 1px solid #aaa;
   transform: translate(14px, 12px) rotate(45deg);
 `;
 

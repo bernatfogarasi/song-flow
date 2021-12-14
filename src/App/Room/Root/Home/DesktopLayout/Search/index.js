@@ -5,15 +5,15 @@ import Bar from "./Bar";
 import Results from "./Results";
 
 const Wrapper = styled.div`
-  background: #111;
-  height: 100%;
-  width: 50vw;
-  border-right: 1px solid #333;
   display: flex;
   flex-direction: column;
+  width: 50%;
+  align-items: center;
+  justify-content: top;
+  gap: 10px;
 `;
 
-const Search = () => {
+const Search = ({ className }) => {
   const [text, setText] = useState("");
   const [requestText, setRequestText] = useState("");
   const [requestTimeout, setRequestTimeout] = useState(null);
@@ -56,7 +56,7 @@ const Search = () => {
   }, [requestText]);
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Bar onChange={handleChange} />
       <Results data={results} />
     </Wrapper>

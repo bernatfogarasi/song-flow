@@ -2,11 +2,16 @@ import styled from "styled-components";
 import Result from "./Result";
 
 const Wrapper = styled.div`
-  width: 100%;
+  background: #111;
   display: flex;
   flex-direction: column;
   overflow: scroll;
   overflow-x: hidden;
+  padding-right: 5px;
+  gap: 15px;
+  border-radius: 4px;
+  width: calc(100% - 5px);
+
   ::-webkit-scrollbar {
     width: 10px;
   }

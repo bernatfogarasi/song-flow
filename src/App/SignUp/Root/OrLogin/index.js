@@ -20,7 +20,7 @@ const OrLogin = () => {
   return (
     <Wrapper>
       <NoAccountText>
-        Already have an account? <Link href="/">Log in</Link>
+        Already have an account? <Link to="/">Log in</Link>
       </NoAccountText>
     </Wrapper>
   );

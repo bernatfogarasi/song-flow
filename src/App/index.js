@@ -19,7 +19,6 @@ import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
 import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
 import useSession from "hooks/useSession";
 import { SessionContext } from "context";
-import { AnimatePresence } from "framer-motion";
 
 const Wrapper = styled.div`
   background: #111;
@@ -34,36 +33,34 @@ const App = () => {
     <Wrapper>
       <GlobalStyle />
       <SessionContext.Provider value={{ session, refreshSession, error }}>
-        <AnimatePresence>
-          <Switch location={window.location} key={window.location.pathname}>
-            <Route component={Root} exact path="/" />
-            <Route component={Join} exact path="/join" />
-            <Route component={Create} exact path="/create" />
-            <Route component={Room} path="/room" />
-            <Route component={SignUp} exact path="/signup" />
-            <Route
-              component={SignUpConfirmation}
-              exact
-              path="/signup/confirmation"
-            />
-            <Route
-              component={SignUpConfirmationTokenNotFound}
-              exact
-              path="/signup/confirmation/token-not-found"
-            />
-            <Route
-              component={SignUpConfirmationEmailAlreadyConfirmed}
-              exact
-              path="/signup/confirmation/email-already-confirmed"
-            />
-            <Route
-              component={SignUpConfirmationSuccess}
-              exact
-              path="/signup/confirmation/success"
-            />
-            <Route render={() => <Redirect to={{ pathname: "/" }} />} />
-          </Switch>
-        </AnimatePresence>
+        <Switch location={window.location} key={window.location.pathname}>
+          <Route component={Root} exact path="/" />
+          <Route component={Join} exact path="/join" />
+          <Route component={Create} exact path="/create" />
+          <Route component={Room} path="/room" />
+          <Route component={SignUp} exact path="/signup" />
+          <Route
+            component={SignUpConfirmation}
+            exact
+            path="/signup/confirmation"
+          />
+          <Route
+            component={SignUpConfirmationTokenNotFound}
+            exact
+            path="/signup/confirmation/token-not-found"
+          />
+          <Route
+            component={SignUpConfirmationEmailAlreadyConfirmed}
+            exact
+            path="/signup/confirmation/email-already-confirmed"
+          />
+          <Route
+            component={SignUpConfirmationSuccess}
+            exact
+            path="/signup/confirmation/success"
+          />
+          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
+        </Switch>
       </SessionContext.Provider>
     </Wrapper>
   );

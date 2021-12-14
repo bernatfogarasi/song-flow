@@ -6,9 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { SessionContext } from "context";
 
 const Wrapper = styled.div`
-  /* border: 1px solid #333; */
   border-radius: 4px;
-  /* width: 332px; */
 `;
 
 const RoomsHeader = styled.div`
@@ -23,7 +21,7 @@ const RoomList = styled.div`
   cursor: grab;
   overflow: auto;
   display: flex;
-  padding: 10px;
+  padding: 15px;
   gap: 10px;
   margin: auto;
   width: 90vw;

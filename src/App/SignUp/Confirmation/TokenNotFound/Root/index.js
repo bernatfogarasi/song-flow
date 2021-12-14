@@ -6,7 +6,7 @@ const TokenNotFound = () => {
     <Feedback title="Confirmation token not found">
       <p>The email confirmation token you provided did not match any user.</p>
       <p>
-        Please <Link href="/signup">sign up</Link>.
+        Please <Link to="/signup">sign up</Link>.
       </p>
     </Feedback>
   );

@@ -5,9 +5,7 @@ import Welcome from "./Welcome";
 import OrLogin from "./OrLogin";
 // import video from "assets/ignore/dancing1.mp4";
 
-const Wrapper = styled.div`
-  padding-top: 10vh;
-`;
+const Wrapper = styled.div``;
 
 // const Video = styled.video`
 //   position: absolute;

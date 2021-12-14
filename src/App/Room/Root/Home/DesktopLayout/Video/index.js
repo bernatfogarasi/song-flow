@@ -5,10 +5,10 @@ import YouTube from "./YouTube";
 const Wrapper = styled.div`
   background: blue;
   width: calc(100% - 2px);
-  margin: auto;
+  margin: 0 auto;
   height: 40%;
   overflow: hidden;
-  border: 1px solid #333;
+  /* border: 1px solid #333; */
   position: relative;
 
   aspect-ratio: 16/9;
@@ -45,10 +45,8 @@ const Overlay = styled.div`
   height: 100%;
   background: black;
   &.playing {
-    animation: fade-out 2s forwards;
-    :hover {
-      opacity: 50%;
-    }
+    animation: fade-out 0.2s forwards;
+    animation-delay: 0.2s;
   }
   &.paused {
     animation: fade-in 0s forwards;
@@ -85,20 +83,16 @@ const Overlay = styled.div`
 //   /* pointer-events: none; */
 // `;
 
-const Video = () => {
+const Video = ({ videoId }) => {
   const [playing, setPlaying] = useState(false);
 
   const onClick = () => {
     setPlaying(!playing);
   };
 
-  useEffect(() => {
-    console.log(`playing: ${playing}`);
-  }, [playing]);
-
   return (
     <Wrapper onClick={onClick}>
-      <YouTube videoId="mMfxI3r_LyA" playing={playing} />
+      <YouTube videoId={videoId} playing={playing} />
       <Overlay className={playing ? "playing" : "paused"}>
         {playing ? <PauseIcon /> : <PlayIcon />}
       </Overlay>

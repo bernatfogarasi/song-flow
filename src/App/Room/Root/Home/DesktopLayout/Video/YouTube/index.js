@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import YouTubeApi from "react-youtube";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { RoomContext } from "context";
 
 const Wrapper = styled(YouTubeApi)`
   position: absolute;
@@ -20,6 +21,7 @@ const Wrapper = styled(YouTubeApi)`
 
 const YouTube = ({ videoId, playing }) => {
   const [player, setPlayer] = useState(null);
+  const { next } = useContext(RoomContext);
 
   const options = {
     playerVars: {
@@ -46,11 +48,10 @@ const YouTube = ({ videoId, playing }) => {
 
   return (
     <Wrapper
-      videoId={"aGSKrC7dGcY"}
+      videoId={next && next.id}
       opts={options}
       onReady={(event) => {
         setPlayer(event.target);
-        console.log("ready");
       }}
     ></Wrapper>
   );
