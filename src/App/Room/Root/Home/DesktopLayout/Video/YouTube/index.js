@@ -19,9 +19,9 @@ const Wrapper = styled(YouTubeApi)`
 //   top: -100%;
 // `;
 
-const YouTube = ({ videoId, playing }) => {
+const YouTube = ({ playing, setPlaying }) => {
   const [player, setPlayer] = useState(null);
-  const { next } = useContext(RoomContext);
+  const { current } = useContext(RoomContext);
 
   const options = {
     playerVars: {
@@ -46,13 +46,19 @@ const YouTube = ({ videoId, playing }) => {
     playing ? play() : pause();
   }, [playing, player]);
 
+  useEffect(() => {
+    console.log(current);
+  }, [current]);
+
   return (
     <Wrapper
-      videoId={next && next.id}
+      videoId={current && current.id}
       opts={options}
       onReady={(event) => {
         setPlayer(event.target);
+        setPlaying(true);
       }}
+      onPlay={() => setPlaying(true)}
     ></Wrapper>
   );
 };

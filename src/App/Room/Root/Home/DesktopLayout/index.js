@@ -1,9 +1,9 @@
 import TopBar from "components/TopBar";
 import styled from "styled-components";
 import Search from "./Search";
-import spotify from "assets/icons/spotify.png";
-import youtube from "assets/icons/youtube.png";
+
 import VideoRaw from "./Video";
+import Queue from "./Queue";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,6 +25,16 @@ const Content = styled.div`
 `;
 
 const Members = styled.div`
+  position: relative;
+  ::before {
+    content: "";
+    height: 60px;
+    width: 100%;
+    background: red;
+    position: absolute;
+    top: -59px;
+    background: linear-gradient(transparent, #111);
+  }
   display: flex;
   margin: 0 auto;
   max-width: 1800px;
@@ -75,49 +85,6 @@ const MemberInactive = styled(MemberActivity)`
   background: #111;
 `;
 
-const Queue = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const QueueItem = styled.div`
-  :hover {
-    background: #333;
-  }
-  transition: 0.2s;
-  cursor: pointer;
-  display: flex;
-  width: calc(100% - 22px);
-  background: #1c1c1c;
-  padding: 10px;
-  border-radius: 4px;
-  gap: 20px;
-  font-size: 14px;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const QueueItemCurrent = styled(QueueItem)`
-  background: #444;
-`;
-
-const QueueItemTitle = styled.div`
-  flex: 20%;
-`;
-
-const QueueItemAuthor = styled.div`
-  flex: 40%;
-  color: #999;
-`;
-
-const QueueItemSource = styled.img`
-  width: 20px;
-`;
-
-const QueueItemCancelButton = styled.div``;
-
 const Video = styled(VideoRaw)`
   width: 100%;
   max-width: 500px;
@@ -137,19 +104,12 @@ const Controls = styled.div`
 `;
 
 const members = [
-  { name: "asdf", active: false },
-  { name: "asdf", active: true },
-  { name: "asdf", active: false },
-  { name: "asdf", active: true },
-  { name: "asdf", active: true },
-  { name: "asdf", active: true },
-];
-
-const queue = [
-  { title: "Someday", author: "One Republic" },
-  { title: "Easy On Me", author: "Adele" },
-  { title: "Suicide Season", author: "Bring Me The Horizon" },
-  { title: "Your Song", author: "Rita Ora" },
+  { name: "asdf", active: false, date: 1 },
+  { name: "asdf", active: true, date: 2 },
+  { name: "asdf", active: false, date: 3 },
+  { name: "asdf", active: true, date: 4 },
+  { name: "asdf", active: true, date: 5 },
+  { name: "asdf", active: true, date: 6 },
 ];
 
 const DesktopLayout = ({ className }) => {
@@ -158,24 +118,16 @@ const DesktopLayout = ({ className }) => {
       <TopBar logo menu />
       <Content>
         <Search />
-        <Queue>
-          <Video videoId="HKU96i_Qh8Y" />
-          {queue.map(({ title, author }) => (
-            <QueueItem key={title + author}>
-              <QueueItemTitle>{title}</QueueItemTitle>
-              <QueueItemAuthor>{author}</QueueItemAuthor>
-              <QueueItemSource src={youtube} />
-            </QueueItem>
-          ))}
-        </Queue>
+        <Queue />
+        <Video />
       </Content>
       <Members>
         {members
           .sort((x, y) => {
             return x.active === y.active ? 0 : x.active ? -1 : 1;
           })
-          .map(({ name, active }) => (
-            <Member>
+          .map(({ date, name, active }) => (
+            <Member key={date}>
               <MemberProfile>
                 {active ? <MemberActive /> : <MemberInactive />}
               </MemberProfile>

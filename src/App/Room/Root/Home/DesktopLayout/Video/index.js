@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { RoomContext } from "context";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import YouTube from "./YouTube";
 
@@ -83,16 +84,15 @@ const Overlay = styled.div`
 //   /* pointer-events: none; */
 // `;
 
-const Video = ({ videoId }) => {
+const Video = ({ id }) => {
   const [playing, setPlaying] = useState(false);
-
   const onClick = () => {
     setPlaying(!playing);
   };
 
   return (
     <Wrapper onClick={onClick}>
-      <YouTube videoId={videoId} playing={playing} />
+      <YouTube playing={playing} setPlaying={setPlaying} />
       <Overlay className={playing ? "playing" : "paused"}>
         {playing ? <PauseIcon /> : <PlayIcon />}
       </Overlay>

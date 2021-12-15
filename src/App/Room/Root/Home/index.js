@@ -14,6 +14,10 @@ const Wrapper = styled.div`
 const Home = ({ shortId }) => {
   const [socket, setSocket] = useState();
   const [next, setNext] = useState();
+  const [drag, setDrag] = useState();
+  const [dragElement, setDragElement] = useState();
+  const [queue, setQueue] = useState();
+  const [current, setCurrent] = useState();
 
   useEffect(() => {
     setSocket(
@@ -29,6 +33,12 @@ const Home = ({ shortId }) => {
 
     socket.on("next", (data) => setNext(data));
 
+    socket.on("queue", (data) => {
+      setQueue(data);
+    });
+
+    socket.on("current", (data) => setCurrent(data));
+
     return () => {
       socket.close();
     };
@@ -38,9 +48,31 @@ const Home = ({ shortId }) => {
     socket.emit("request-next", data);
   };
 
+  const onQueue = (data, from, to) => {
+    console.log("queue");
+    socket.emit("request-queue", data, from, to);
+  };
+
+  const onCurrent = (data) => {
+    socket.emit("request-current", data);
+  };
+
   return (
     <Wrapper>
-      <RoomContext.Provider value={{ next, onNext }}>
+      <RoomContext.Provider
+        value={{
+          next,
+          onNext,
+          queue,
+          onQueue,
+          current,
+          onCurrent,
+          drag,
+          setDrag,
+          dragElement,
+          setDragElement,
+        }}
+      >
         <DesktopLayout onNext={onNext} />
       </RoomContext.Provider>
     </Wrapper>

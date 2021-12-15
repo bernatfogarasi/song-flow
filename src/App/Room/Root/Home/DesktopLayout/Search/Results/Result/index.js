@@ -2,7 +2,7 @@ import styled from "styled-components";
 import spotify from "assets/icons/spotify.png";
 import youtube from "assets/icons/youtube.png";
 import { RoomContext } from "context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const icons = { spotify, youtube };
 
@@ -11,12 +11,12 @@ const Wrapper = styled.div`
   cursor: move;
 
   :hover {
-    background: #333;
+    background: #222;
   }
   transition: 0.2s;
   display: flex;
   align-items: center;
-  background: #1c1c1c;
+  /* background: #1c1c1c; */
   border-radius: 4px;
 `;
 
@@ -25,6 +25,7 @@ const Thumbnail = styled.img`
   margin: auto 0;
   border-radius: 3px;
   max-width: 150px;
+  pointer-events: none;
 `;
 
 const Details = styled.div`
@@ -33,6 +34,7 @@ const Details = styled.div`
   flex-direction: column;
   font-size: 14px;
   overflow: hidden;
+  pointer-events: none;
 `;
 
 const Title = styled.div`
@@ -57,35 +59,39 @@ const SiteIcon = styled.img`
 `;
 
 const Result = ({ data }) => {
-  const { onNext } = useContext(RoomContext);
+  const { onNext, drag, setDrag } = useContext(RoomContext);
 
-  // let dragElement;
-
-  // const onMouseDown = (event) => {
-  //   console.log(event.target);
-  //   dragElement = event.target;
-  //   const rect = dragElement.getBoundingClientRect();
-  // };
-
-  const onClick = () => {
-    onNext(data);
+  const onDragStart = (event) => {
+    // event.target.style.opacity = "0";
+    setDrag(true);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ ...data, from: undefined })
+    );
   };
 
-  // const onDrag = (event) => {
-  //   event.preventDefault();
-  //   console.log("drag");
-  // };
+  const onDrag = (event) => {};
+
+  const onDragEnd = (event) => {
+    setDrag(false);
+  };
 
   return (
-    <Wrapper onClick={onClick}>
-      {/* <Wrapper onMouseDown={onMouseDown}> */}
-      <Thumbnail src={data.thumbnail} alt="" />
+    <Wrapper
+      onContextMenu={(event) => event.preventDefault()}
+      key={data.thumbnailUrl}
+      draggable
+      onDrag={onDrag}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
+      <Thumbnail src={data.thumbnailUrl} alt="" />
       <Details>
         <Title title={data.title}>{data.title}</Title>
-        <Author>{data.channel.title}</Author>
-        {/* <a href={data.url} target="_blank" rel="noreferrer"> */}
-        {/* </a> */}
+        <Author>{data.author}</Author>
       </Details>
+
       {/* <SiteIcon src={icons[data.site]} alt="" /> */}
     </Wrapper>
   );
