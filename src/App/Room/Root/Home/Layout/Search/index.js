@@ -1,25 +1,54 @@
+import { RoomContext } from "context";
 import { serverRequest } from "functions/requests";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Bar from "./Bar";
-import Results from "./Results";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 50%;
   align-items: center;
-  justify-content: top;
-  gap: 10px;
+  position: relative;
+`;
+
+const Input = styled.input`
+  border-radius: 4px;
+  border: 0px;
+  padding: 5px 50px 5px 5px;
+  font-size: 30px;
+  width: 100%;
+  background: #1a1a1a;
+  color: white;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  pointer-events: none;
+  transform: translateY(-14px);
+`;
+
+const Circle = styled.div`
+  position: absolute;
+  border: 2px solid #aaa;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+`;
+
+const Line = styled.hr`
+  position: absolute;
+  width: 12px;
+  border: 1px solid #aaa;
+  transform: translate(14px, 12px) rotate(45deg);
 `;
 
 const Search = ({ className }) => {
   const [text, setText] = useState("");
   const [requestText, setRequestText] = useState("");
   const [requestTimeout, setRequestTimeout] = useState(null);
-  const [results, setResults] = useState([]);
+  const { setResults } = useContext(RoomContext);
 
-  const handleChange = (event) => {
+  const onChange = (event) => {
     setText(event.target.value);
   };
 
@@ -57,8 +86,11 @@ const Search = ({ className }) => {
 
   return (
     <Wrapper className={className}>
-      <Bar onChange={handleChange} />
-      <Results data={results} />
+      <Icon>
+        <Circle />
+        <Line />
+      </Icon>
+      <Input type="text" onChange={onChange} />
     </Wrapper>
   );
 };

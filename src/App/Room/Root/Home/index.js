@@ -2,14 +2,10 @@ import styled from "styled-components";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import { serverHostSocket } from "functions/requests";
-import DesktopLayout from "./DesktopLayout";
+import Layout from "./Layout";
 import { RoomContext } from "context";
 
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-`;
+const Wrapper = styled.div``;
 
 const Home = ({ shortId }) => {
   const [socket, setSocket] = useState();
@@ -18,6 +14,7 @@ const Home = ({ shortId }) => {
   const [dragElement, setDragElement] = useState();
   const [queue, setQueue] = useState();
   const [current, setCurrent] = useState();
+  const [results, setResults] = useState();
 
   useEffect(() => {
     setSocket(
@@ -71,9 +68,11 @@ const Home = ({ shortId }) => {
           setDrag,
           dragElement,
           setDragElement,
+          results,
+          setResults,
         }}
       >
-        <DesktopLayout onNext={onNext} />
+        <Layout />
       </RoomContext.Provider>
     </Wrapper>
   );

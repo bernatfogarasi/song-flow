@@ -5,7 +5,6 @@ import Item from "./Item";
 
 const Wrapper = styled.div`
   user-select: none;
-  width: 50%;
   display: flex;
   flex-direction: column;
 `;

@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   height: 70px;
   padding: 0px 15px;
   gap: 20px;
+  flex: 0 1 auto;
 `;
 
 const Center = styled.div`

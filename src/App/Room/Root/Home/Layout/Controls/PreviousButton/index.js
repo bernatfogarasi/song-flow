@@ -23,9 +23,9 @@ const Rectangle = styled.div`
   margin-right: 1px;
 `;
 
-const PreviousButton = () => {
+const PreviousButton = ({ className }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Rectangle />
       <Triangle />
     </Wrapper>

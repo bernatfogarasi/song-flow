@@ -1,19 +1,14 @@
 import { RoomContext } from "context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import YouTube from "./YouTube";
 
 const Wrapper = styled.div`
-  background: blue;
-  width: calc(100% - 2px);
-  margin: 0 auto;
-  height: 40%;
   overflow: hidden;
-  /* border: 1px solid #333; */
   position: relative;
-
   aspect-ratio: 16/9;
   /* pointer-events: none; */
+  /* border-radius: 4px; */
 `;
 
 const Icon = styled.div`
@@ -44,13 +39,20 @@ const Overlay = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: black;
+  background-image: url(${({ url }) => url});
+  background-size: contain;
   &.playing {
     animation: fade-out 0.2s forwards;
     animation-delay: 0.2s;
   }
   &.paused {
     animation: fade-in 0s forwards;
+    ::before {
+      content: "";
+      background: black;
+      position: absolute;
+      opacity: 1;
+    }
   }
   @keyframes fade-in {
     0% {
@@ -84,16 +86,21 @@ const Overlay = styled.div`
 //   /* pointer-events: none; */
 // `;
 
-const Video = ({ id }) => {
+const Video = ({ className, id }) => {
   const [playing, setPlaying] = useState(false);
+  const { current } = useContext(RoomContext);
+
   const onClick = () => {
     setPlaying(!playing);
   };
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper className={className} onClick={onClick}>
       <YouTube playing={playing} setPlaying={setPlaying} />
-      <Overlay className={playing ? "playing" : "paused"}>
+      <Overlay
+        className={playing ? "playing" : "paused"}
+        url={current?.thumbnailUrl}
+      >
         {playing ? <PauseIcon /> : <PlayIcon />}
       </Overlay>
     </Wrapper>

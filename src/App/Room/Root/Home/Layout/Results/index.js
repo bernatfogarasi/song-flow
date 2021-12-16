@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import Result from "./Result";
+import { useContext } from "react";
+import { RoomContext } from "context";
 
 const Wrapper = styled.div`
-  background: #111;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
-  padding-right: 5px;
+
   gap: 15px;
   border-radius: 4px;
-  width: calc(100% - 5px);
-
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -24,10 +23,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const Results = ({ data }) => {
+const Results = ({ className }) => {
+  const { results } = useContext(RoomContext);
   return (
-    <Wrapper>
-      {data && data.map((result) => <Result key={result.url} data={result} />)}
+    <Wrapper className={className}>
+      {results &&
+        results.map((result) => <Result key={result.url} data={result} />)}
     </Wrapper>
   );
 };

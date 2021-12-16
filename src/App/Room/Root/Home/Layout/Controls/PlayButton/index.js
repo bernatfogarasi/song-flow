@@ -21,9 +21,9 @@ const Triangle = styled.div`
   transform: translateX(2px) scaleX(1.6);
 `;
 
-const PlayButton = () => {
+const PlayButton = ({ className }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Triangle />
     </Wrapper>
   );
