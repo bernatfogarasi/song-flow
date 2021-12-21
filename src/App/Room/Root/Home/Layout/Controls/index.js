@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   grid-template-rows: 1fr 1fr;
   gap: 10px;
   bottom: 0px;
-  margin: -20px 0;
+  margin-bottom: -20px;
   border-radius: 20px 20px 0 0;
   padding: 10px;
   border-top: 1px solid #333;

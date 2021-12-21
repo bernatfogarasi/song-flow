@@ -7,6 +7,20 @@ const Wrapper = styled.div`
   user-select: none;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 10px;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  :hover::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #333;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #444;
+  }
 `;
 
 const Queue = ({ className }) => {
@@ -50,7 +64,7 @@ const Queue = ({ className }) => {
     >
       {queue &&
         queue.map((data, index) => (
-          <Item key={data.id} data={data} index={index}></Item>
+          <Item key={data._id} data={data} index={index}></Item>
         ))}
     </Wrapper>
   );

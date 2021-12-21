@@ -86,17 +86,16 @@ const Overlay = styled.div`
 //   /* pointer-events: none; */
 // `;
 
-const Video = ({ className, id }) => {
-  const [playing, setPlaying] = useState(false);
-  const { current } = useContext(RoomContext);
+const Video = ({ className }) => {
+  const { current, playing, onPlaying } = useContext(RoomContext);
 
   const onClick = () => {
-    setPlaying(!playing);
+    onPlaying(!playing);
   };
 
   return (
     <Wrapper className={className} onClick={onClick}>
-      <YouTube playing={playing} setPlaying={setPlaying} />
+      <YouTube playing={playing} />
       <Overlay
         className={playing ? "playing" : "paused"}
         url={current?.thumbnailUrl}

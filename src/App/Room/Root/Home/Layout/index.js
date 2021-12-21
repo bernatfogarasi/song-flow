@@ -6,7 +6,8 @@ import QueueRaw from "./Queue";
 import ResultsRaw from "./Results";
 import Page from "components/Page";
 import ControlsRaw from "./Controls";
-import Current from "./Current";
+import CurrentRaw from "./Current";
+import InfoRaw from "./Info";
 
 const Wrapper = styled.div`
   gap: 20px;
@@ -20,14 +21,14 @@ const Wrapper = styled.div`
     grid-template-columns: auto 1fr 1fr;
   }
   @media (min-width: 1400px) {
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto auto;
     grid-template-columns: auto 1fr 1fr 2fr;
   }
 `;
 
 const Members = styled(MembersRaw)`
   @media (max-width: 1400px) {
-    grid-row: 1 / 4;
+    grid-row: 1 / 6;
     grid-column: 1;
   }
   @media (min-width: 1400px) {
@@ -41,18 +42,29 @@ const Video = styled(VideoRaw)`
     /* overflow: auto;
     resize: horizontal;
     resize: initial; */
-    grid-row: 1;
+    grid-row: 1 / 3;
     grid-column: 2;
   }
   @media (min-width: 1400px) {
-    grid-row: 1 / 3;
+    grid-row: 1 / 4;
+    grid-column: 4;
+  }
+`;
+
+const Info = styled(InfoRaw)`
+  @media (max-width: 1400px) {
+    /* grid-row: 4;
+    grid-column: 2; */
+  }
+  @media (min-width: 1400px) {
+    grid-row: 4;
     grid-column: 4;
   }
 `;
 
 const Search = styled(SearchRaw)`
   @media (max-width: 1400px) {
-    grid-row: 2;
+    grid-row: 3;
     grid-column: 2;
   }
   @media (min-width: 1400px) {
@@ -63,33 +75,44 @@ const Search = styled(SearchRaw)`
 
 const Results = styled(ResultsRaw)`
   @media (max-width: 1400px) {
-    grid-row: 3;
+    grid-row: 4;
     grid-column: 2;
   }
   @media (min-width: 1400px) {
-    grid-row: 2 / 4;
+    grid-row: 2 / 6;
     grid-column: 2;
+  }
+`;
+
+const Current = styled(CurrentRaw)`
+  @media (max-width: 1400px) {
+    grid-row: 1;
+    grid-column: 3;
+  }
+  @media (min-width: 1400px) {
+    grid-row: 1 / 3;
+    grid-column: 3;
   }
 `;
 
 const Queue = styled(QueueRaw)`
   @media (max-width: 1400px) {
-    grid-row: 1 / 4;
+    grid-row: 2 / 5;
     grid-column: 3;
   }
   @media (min-width: 1400px) {
-    grid-row: 1 / 4;
+    grid-row: 3 / 6;
     grid-column: 3;
   }
 `;
 
 const Controls = styled(ControlsRaw)`
   @media (max-width: 1400px) {
-    grid-row: 4;
+    grid-row: 5;
     grid-column: 1 / 4;
   }
   @media (min-width: 1400px) {
-    grid-row: 3;
+    grid-row: 5;
     grid-column: 4;
   }
 `;
@@ -101,9 +124,10 @@ const Layout = ({ className }) => {
         <Members />
         <Search />
         <Results />
-        {/* <Current /> */}
+        <Current />
         <Queue />
         <Video />
+        <Info />
         <Controls />
       </Wrapper>
     </Page>

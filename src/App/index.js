@@ -29,8 +29,12 @@ const Wrapper = styled.div`
 const App = () => {
   const { session, refreshSession, error } = useSession();
   const location = useLocation();
+  const onContextMenu = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onContextMenu={onContextMenu}>
       <GlobalStyle />
       <SessionContext.Provider value={{ session, refreshSession, error }}>
         <Switch location={window.location} key={window.location.pathname}>

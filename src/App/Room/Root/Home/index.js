@@ -9,12 +9,12 @@ const Wrapper = styled.div``;
 
 const Home = ({ shortId }) => {
   const [socket, setSocket] = useState();
-  const [next, setNext] = useState();
   const [drag, setDrag] = useState();
   const [dragElement, setDragElement] = useState();
   const [queue, setQueue] = useState();
   const [current, setCurrent] = useState();
   const [results, setResults] = useState();
+  const [playing, setPlaying] = useState();
 
   useEffect(() => {
     setSocket(
@@ -28,42 +28,53 @@ const Home = ({ shortId }) => {
     if (!socket) return;
     socket.on("message", (message) => console.log(message));
 
-    socket.on("next", (data) => setNext(data));
-
     socket.on("queue", (data) => {
       setQueue(data);
+      console.log(data);
     });
 
-    socket.on("current", (data) => setCurrent(data));
+    socket.on("current", (data) => {
+      setCurrent(data);
+      console.log(data);
+    });
+
+    socket.on("playing", (state) => {
+      setPlaying(state);
+    });
 
     return () => {
       socket.close();
     };
   }, [socket]);
 
-  const onNext = (data) => {
-    socket.emit("request-next", data);
-  };
-
   const onQueue = (data, from, to) => {
     console.log("queue");
     socket.emit("request-queue", data, from, to);
   };
 
-  const onCurrent = (data) => {
-    socket.emit("request-current", data);
+  const onCurrent = (data, from) => {
+    socket.emit("request-current", data, from);
+  };
+
+  const onPlaying = (state) => {
+    socket.emit("request-playing", state);
+  };
+
+  const onRemove = (index) => {
+    socket.emit("request-remove", index);
   };
 
   return (
     <Wrapper>
       <RoomContext.Provider
         value={{
-          next,
-          onNext,
           queue,
           onQueue,
           current,
           onCurrent,
+          playing,
+          onPlaying,
+          onRemove,
           drag,
           setDrag,
           dragElement,

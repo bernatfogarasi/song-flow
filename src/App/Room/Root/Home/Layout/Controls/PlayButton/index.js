@@ -1,3 +1,5 @@
+import { RoomContext } from "context";
+import { useContext } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -10,6 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   cursor: pointer;
   margin: 0 25px;
+  gap: 4px;
 `;
 
 const Triangle = styled.div`
@@ -21,10 +24,29 @@ const Triangle = styled.div`
   transform: translateX(2px) scaleX(1.6);
 `;
 
+const Rectangle = styled.div`
+  width: 4px;
+  height: 16px;
+  background: #111;
+`;
+
 const PlayButton = ({ className }) => {
+  const { playing, onPlaying } = useContext(RoomContext);
+
+  const onClick = () => {
+    onPlaying(!playing);
+  };
+
   return (
-    <Wrapper className={className}>
-      <Triangle />
+    <Wrapper className={className} onClick={onClick}>
+      {playing ? (
+        <>
+          <Rectangle />
+          <Rectangle />
+        </>
+      ) : (
+        <Triangle />
+      )}
     </Wrapper>
   );
 };

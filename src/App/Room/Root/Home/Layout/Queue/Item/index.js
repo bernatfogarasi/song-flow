@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   border-top-color: transparent;
   position: relative;
   font-family: Montserrat;
-  background: #111;
   cursor: pointer;
   border-radius: 4px;
   width: calc(100% - 30px);
@@ -130,6 +129,10 @@ const Item = ({ className, index, data }) => {
     // dragElement.style.display = "none";
   };
 
+  const onClick = () => {
+    onCurrent(data, index);
+  };
+
   return (
     <Wrapper
       className={className}
@@ -142,7 +145,7 @@ const Item = ({ className, index, data }) => {
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={(event) => onDrop(event, id)}
-      onClick={() => onCurrent(data)}
+      onClick={onClick}
     >
       <Index>{index + 2}</Index>
       <Thumbnail src={thumbnailUrl} alt="" />
