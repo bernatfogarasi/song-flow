@@ -1,26 +1,38 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useContext } from "react";
 import { RoomContext } from "context";
 import Item from "./Item";
 
 const Wrapper = styled.div`
-  user-select: none;
   display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  gap: 10px;
+  border-radius: 4px;
+  ${({ hint }) =>
+    hint
+      ? css`
+          background: #222;
+          margin-right: 10px;
+        `
+      : css`
+          overflow-y: scroll;
+          overflow-x: hidden;
+          flex-direction: column;
+          user-select: none;
+          gap: 10px;
+          ::-webkit-scrollbar {
+            width: 10px;
+          }
+          :hover::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background: #333;
+          }
+          ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+          }
+        `}
+`;
 
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  :hover::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background: #333;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #444;
-  }
+const Hint = styled.div`
+  margin: auto;
 `;
 
 const Queue = ({ className }) => {
@@ -61,11 +73,15 @@ const Queue = ({ className }) => {
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
+      hint={!queue || queue.length === 0}
     >
-      {queue &&
+      {queue?.length > 0 ? (
         queue.map((data, index) => (
           <Item key={data._id} data={data} index={index}></Item>
-        ))}
+        ))
+      ) : (
+        <Hint>Drag something here</Hint>
+      )}
     </Wrapper>
   );
 };

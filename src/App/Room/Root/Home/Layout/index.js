@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   display: grid;
   @media (max-width: 1400px) {
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto auto auto 1fr auto;
     /* grid-template-columns: auto min-content 1fr; */
     grid-template-columns: auto 1fr 1fr;
   }
@@ -53,8 +53,8 @@ const Video = styled(VideoRaw)`
 
 const Info = styled(InfoRaw)`
   @media (max-width: 1400px) {
-    /* grid-row: 4;
-    grid-column: 2; */
+    grid-row: 3;
+    grid-column: 2;
   }
   @media (min-width: 1400px) {
     grid-row: 4;
@@ -64,7 +64,7 @@ const Info = styled(InfoRaw)`
 
 const Search = styled(SearchRaw)`
   @media (max-width: 1400px) {
-    grid-row: 3;
+    grid-row: 4;
     grid-column: 2;
   }
   @media (min-width: 1400px) {
@@ -75,7 +75,7 @@ const Search = styled(SearchRaw)`
 
 const Results = styled(ResultsRaw)`
   @media (max-width: 1400px) {
-    grid-row: 4;
+    grid-row: 5;
     grid-column: 2;
   }
   @media (min-width: 1400px) {
@@ -97,7 +97,7 @@ const Current = styled(CurrentRaw)`
 
 const Queue = styled(QueueRaw)`
   @media (max-width: 1400px) {
-    grid-row: 2 / 5;
+    grid-row: 2 / 6;
     grid-column: 3;
   }
   @media (min-width: 1400px) {
@@ -108,7 +108,7 @@ const Queue = styled(QueueRaw)`
 
 const Controls = styled(ControlsRaw)`
   @media (max-width: 1400px) {
-    grid-row: 5;
+    grid-row: 6;
     grid-column: 1 / 4;
   }
   @media (min-width: 1400px) {
@@ -119,8 +119,8 @@ const Controls = styled(ControlsRaw)`
 
 const Layout = ({ className }) => {
   return (
-    <Page logo menu>
-      <Wrapper className={className}>
+    <Page logo menu className={className}>
+      <Wrapper>
         <Members />
         <Search />
         <Results />

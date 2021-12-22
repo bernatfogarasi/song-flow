@@ -71,7 +71,7 @@ const SiteIcon = styled.img`
 `;
 
 const Result = ({ data }) => {
-  const { onNext, drag, setDrag } = useContext(RoomContext);
+  const { setDrag } = useContext(RoomContext);
 
   const onDragStart = (event) => {
     // event.target.style.opacity = "0";

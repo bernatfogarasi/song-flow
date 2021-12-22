@@ -1,12 +1,14 @@
 import { RoomContext } from "context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 // import spotify from "assets/icons/spotify.png";
 import youtube from "assets/icons/youtube.png";
+import useClickAway from "hooks/useClickAway";
+import MenuRaw from "components/Menu";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 10px 70px 1fr 20px;
+  grid-template-columns: auto auto 1fr auto;
   grid-template-rows: 50% 50%;
   column-gap: 15px;
   &.over {
@@ -67,18 +69,36 @@ const Author = styled.div`
 
 const SiteIcon = styled.img`
   grid-row: span 2;
+  grid-column: 4;
   justify-self: center;
   width: 20px;
   align-self: top;
   pointer-events: none;
 `;
 
-const CancelButton = styled.div``;
+const Menu = styled(MenuRaw)`
+  grid-column: span 2;
+  grid-row: span 2;
+`;
 
 const Item = ({ className, index, data }) => {
+  const [open, setOpen] = useState(false);
   const { id, title, author, thumbnailUrl } = data;
-  const { drag, setDrag, dragElement, setDragElement, onQueue, onCurrent } =
-    useContext(RoomContext);
+  const {
+    drag,
+    setDrag,
+    dragElement,
+    setDragElement,
+    onQueue,
+    onCurrent,
+    onRemove,
+  } = useContext(RoomContext);
+
+  const onClickAway = () => {
+    setOpen(false);
+  };
+
+  const { ref } = useClickAway(onClickAway);
 
   const onDragStart = (event) => {
     setDragElement(event.target);
@@ -133,10 +153,16 @@ const Item = ({ className, index, data }) => {
     onCurrent(data, index);
   };
 
+  const onContextMenu = (event) => {
+    event.preventDefault();
+    setOpen(!open);
+  };
+
   return (
     <Wrapper
+      ref={ref}
       className={className}
-      onContextMenu={(event) => event.preventDefault()}
+      onContextMenu={onContextMenu}
       key={id}
       draggable
       onDragStart={onDragStart}
@@ -149,9 +175,14 @@ const Item = ({ className, index, data }) => {
     >
       <Index>{index + 2}</Index>
       <Thumbnail src={thumbnailUrl} alt="" />
-      <Title title={title}>{title}</Title>
-      <Author title={author}>{author}</Author>
-      <SiteIcon src={youtube} />
+      {!open && (
+        <>
+          <Title title={title}>{title}</Title>
+          <Author title={author}>{author}</Author>
+          <SiteIcon src={youtube} />
+        </>
+      )}
+      {open && <Menu onBinClick={() => onRemove(index)} />}
     </Wrapper>
   );
 };

@@ -3,15 +3,14 @@ import IconBin from "components/IconBin";
 
 const Wrapper = styled.div`
   display: flex;
-
   justify-content: right;
   align-items: center;
 `;
 
-const Menu = ({ className }) => {
+const Menu = ({ className, onBinClick = () => {} }) => {
   return (
     <Wrapper className={className}>
-      <IconBin />
+      <IconBin onClick={onBinClick} />
     </Wrapper>
   );
 };

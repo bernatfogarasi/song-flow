@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import YouTubeApi from "react-youtube";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { RoomContext } from "context";
+import ReactPlayer from "react-player";
 
 const Wrapper = styled(YouTubeApi)`
   position: absolute;
@@ -21,7 +22,14 @@ const Wrapper = styled(YouTubeApi)`
 
 const YouTube = ({ className }) => {
   const [player, setPlayer] = useState(null);
-  const { current, playing, onPlaying } = useContext(RoomContext);
+  const { current, playing, onPlaying, progress, setProgressBar } =
+    useContext(RoomContext);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current.seekTo(progress);
+  }, [progress]);
 
   const options = {
     playerVars: {
@@ -33,35 +41,54 @@ const YouTube = ({ className }) => {
     },
   };
 
-  useEffect(() => {
-    const pause = () => {
-      if (!player) return;
-      player.pauseVideo();
-    };
+  // useEffect(() => {
+  //   const pause = () => {
+  //     if (!player) return;
+  //     player.pauseVideo();
+  //   };
 
-    const play = () => {
-      if (!player) return;
-      player.playVideo();
-    };
-    playing ? play() : pause();
-  }, [playing, player]);
+  //   const play = () => {
+  //     if (!player) return;
+  //     player.playVideo();
+  //   };
+  //   playing ? play() : pause();
+  // }, [playing, player]);
 
-  useEffect(() => {
-    console.log(current);
-  }, [current]);
+  // useEffect(() => {
+  //   console.log(current);
+  // }, [current]);
 
   return (
-    <Wrapper
+    // <Wrapper
+    //   className={className}
+    //   videoId={current && current.id}
+    //   // videoId={"qTGbWfEEnKI"}
+    //   opts={options}
+    //   onReady={(event) => {
+    //     setPlayer(event.target);
+    //     // onPlaying(true);
+    //   }}
+    //   onPlay={() => onPlaying(true)}
+    //   onStateChange={console.log}
+    // ></Wrapper>
+    <ReactPlayer
+      ref={ref}
+      width="1100%"
+      height="100%"
+      style={{ marginLeft: "-500%" }}
       className={className}
-      videoId={current && current.id}
-      // videoId={"qTGbWfEEnKI"}
-      opts={options}
+      url={current?.url}
+      progressInterval={0}
       onReady={(event) => {
-        setPlayer(event.target);
-        // onPlaying(true);
+        console.log("ready");
       }}
-      onPlay={() => onPlaying(true)}
-    ></Wrapper>
+      onPlay={() => console.log("play")}
+      onProgress={(event) => {
+        setProgressBar(event.played);
+        // console.log(progress);
+      }}
+      playing={true}
+    ></ReactPlayer>
   );
 };
 

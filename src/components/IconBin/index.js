@@ -67,9 +67,8 @@ const Body = styled.div`
     `}
 `;
 
-const IconBin = ({ className }) => {
+const IconBin = ({ className, onClick = () => {} }) => {
   const [hover, setHover] = useState(false);
-  const { queue, onCurrent, onDelete } = useContext(RoomContext);
 
   const onMouseEnter = () => {
     setHover(true);
@@ -79,16 +78,15 @@ const IconBin = ({ className }) => {
     setHover(false);
   };
 
-  const onClick = () => {
-    if (queue && queue.length > 0) onCurrent(queue[0]);
-    else onDelete(-1);
-  };
-
   return (
     <Wrapper
       className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={(event) => {
+        event.stopPropagation();
+        onClick();
+      }}
     >
       <Lid hover={hover}>
         <Handle />

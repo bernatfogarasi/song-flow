@@ -15,6 +15,8 @@ const Home = ({ shortId }) => {
   const [current, setCurrent] = useState();
   const [results, setResults] = useState();
   const [playing, setPlaying] = useState();
+  const [progress, setProgress] = useState();
+  const [progressBar, setProgressBar] = useState();
 
   useEffect(() => {
     setSocket(
@@ -30,12 +32,10 @@ const Home = ({ shortId }) => {
 
     socket.on("queue", (data) => {
       setQueue(data);
-      console.log(data);
     });
 
     socket.on("current", (data) => {
       setCurrent(data);
-      console.log(data);
     });
 
     socket.on("playing", (state) => {
@@ -48,7 +48,6 @@ const Home = ({ shortId }) => {
   }, [socket]);
 
   const onQueue = (data, from, to) => {
-    console.log("queue");
     socket.emit("request-queue", data, from, to);
   };
 
@@ -81,6 +80,10 @@ const Home = ({ shortId }) => {
           setDragElement,
           results,
           setResults,
+          progress,
+          setProgress,
+          progressBar,
+          setProgressBar,
         }}
       >
         <Layout />

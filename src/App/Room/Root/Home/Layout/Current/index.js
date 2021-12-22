@@ -4,7 +4,7 @@ import styled from "styled-components";
 import spotify from "assets/icons/spotify.png";
 import youtube from "assets/icons/youtube.png";
 import SpinnerLiveRaw from "components/SpinnerLive";
-import MenuRaw from "./Menu";
+import MenuRaw from "components/Menu";
 import useClickAway from "hooks/useClickAway";
 
 const icons = { spotify, youtube };
@@ -12,7 +12,7 @@ const icons = { spotify, youtube };
 const Wrapper = styled.div`
   background: #222;
   display: grid;
-  grid-template-columns: 10px 70px 1fr 20px 20px;
+  grid-template-columns: auto auto 1fr 20px auto;
   grid-template-rows: 50% 50%;
   column-gap: 15px;
   &.over {
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   font-family: Montserrat;
   cursor: pointer;
   border-radius: 4px;
-  width: calc(100% - 30px);
+  width: calc(100% - 40px);
   font-size: 14px;
   padding: 8px 15px;
   align-items: center;
@@ -89,14 +89,24 @@ const Menu = styled(MenuRaw)`
   grid-row: span 2;
 `;
 
+const Hint = styled.div`
+  grid-row: span 2;
+  grid-column: span 5;
+`;
+
 const Current = ({ className }) => {
-  const { current } = useContext(RoomContext);
   const [open, setOpen] = useState(false);
+  const { onRemove, current, playing, onPlaying } = useContext(RoomContext);
+
   const onClickAway = () => {
     setOpen(false);
   };
 
   const { ref } = useClickAway(onClickAway);
+
+  const onClick = () => {
+    onPlaying(!playing);
+  };
 
   const onContextMenu = (event) => {
     event.preventDefault();
@@ -104,8 +114,13 @@ const Current = ({ className }) => {
   };
 
   return (
-    <Wrapper className={className} ref={ref} onContextMenu={onContextMenu}>
-      {current && (
+    <Wrapper
+      className={className}
+      ref={ref}
+      onContextMenu={onContextMenu}
+      onClick={onClick}
+    >
+      {current ? (
         <>
           <Index>1</Index>
           <Thumbnail src={current.thumbnailUrl} alt="" />
@@ -117,8 +132,10 @@ const Current = ({ className }) => {
               <SiteIcon src={icons[current.site]} alt="" />
             </>
           )}
-          {open && <Menu />}
+          {open && <Menu onBinClick={() => onRemove(-1)} />}
         </>
+      ) : (
+        <Hint>The queue is empty.</Hint>
       )}
     </Wrapper>
   );

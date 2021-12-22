@@ -1,6 +1,7 @@
+import { RoomContext } from "context";
 import useMousePosition from "hooks/useMousePosition";
-import { useState } from "react";
-import styled from "styled-components";
+import { useContext, useState } from "react";
+import styled, { css } from "styled-components";
 
 const height = "10px";
 
@@ -16,15 +17,6 @@ const Fill = styled.div`
   height: ${height};
   background: #eee;
   /* border-radius: 4px 0 0 4px; */
-  animation: load 200s linear infinite;
-  @keyframes load {
-    0% {
-      width: 8px;
-    }
-    100% {
-      width: 100%;
-    }
-  }
   cursor: pointer;
 `;
 
@@ -50,6 +42,7 @@ const CursorLine = styled.div`
 const ProgressBar = ({ className }) => {
   const [hover, setHover] = useState();
   const mouse = useMousePosition();
+  const { progressBar, setProgress } = useContext(RoomContext);
 
   const onMouseEnter = () => {
     setHover(true);
@@ -59,13 +52,20 @@ const ProgressBar = ({ className }) => {
     setHover(false);
   };
 
+  const onClick = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    setProgress(x / bounds.width);
+  };
+
   return (
     <Wrapper
       className={className}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
-      <Fill>
+      <Fill style={{ width: `calc(100% * ${progressBar})` }}>
         {hover && (
           <Cursor style={{ left: mouse.x - 3 }}>
             <CursorLine />
