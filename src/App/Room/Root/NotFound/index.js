@@ -1,9 +1,10 @@
-import LargeButton from "components/LargeButton";
+import ButtonLarge from "components/ButtonLarge";
 import TopBar from "components/TopBar";
 import styled from "styled-components";
 import queryString from "querystring";
+import Page from "components/Page";
 
-const Wrapper = styled.div``;
+const Wrapper = styled(Page)``;
 
 const Message = styled.div`
   margin: auto;
@@ -25,10 +26,10 @@ const Details = styled.div`
 
 const NotFound = () => {
   return (
-    <Wrapper>
-      <TopBar logo search menu />
+    <Wrapper logo search menu logout>
       <Message>
         <Title>Room not found</Title>
+        {window.location.pathname}
         <Details>This room does not exist. Please check the url.</Details>
       </Message>
     </Wrapper>

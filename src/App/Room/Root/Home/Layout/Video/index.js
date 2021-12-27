@@ -7,8 +7,6 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   aspect-ratio: 16/9;
-  /* pointer-events: none; */
-  /* border-radius: 4px; */
 `;
 
 const Icon = styled.div`
@@ -37,6 +35,7 @@ const PauseIcon = styled(Icon)`
 
 const Overlay = styled.div`
   position: absolute;
+  top: 0px;
   width: 100%;
   height: 100%;
   background-image: url(${({ url }) => url});
@@ -70,21 +69,7 @@ const Overlay = styled.div`
       opacity: 0%;
     }
   }
-  /* background: red;
-  opacity: 60%; */
 `;
-
-// const Wrapper = styled.div`
-//   background: blue;
-//   width: calc(100% - 2px);
-//   height: 40%;
-// max-width: 400px;
-//   /* overflow: hidden; */
-//   border: 1px solid #333;
-//   position: relative;
-//   /* aspect-ratio: 16/9; */
-//   /* pointer-events: none; */
-// `;
 
 const Video = ({ className }) => {
   const { current, playing, onPlaying } = useContext(RoomContext);

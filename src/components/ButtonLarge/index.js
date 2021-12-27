@@ -19,8 +19,8 @@ const Wrapper = styled(LinkPlain)`
   }
 `;
 
-const LargeButton = (props) => {
+const ButtonLarge = (props) => {
   return <Wrapper {...props}></Wrapper>;
 };
 
-export default LargeButton;
+export default ButtonLarge;

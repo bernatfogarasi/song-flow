@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LogoTitle from "./LogoTitle";
+import Logout from "./Logout";
 import Menu from "./Menu";
 import Search from "./Search";
 
@@ -26,21 +27,27 @@ const Center = styled.div`
 const Left = styled.div`
   flex: 20%;
   display: flex;
+
   justify-content: left;
 `;
 
 const Right = styled.div`
   flex: 20%;
   display: flex;
+  align-items: center;
   justify-content: right;
+  gap: 20px;
 `;
 
-const TopBar = ({ logo, title, menu, search }) => {
+const TopBar = ({ logo, title, menu, search, logout }) => {
   return (
     <Wrapper>
       <Left>{logo && <LogoTitle title={title} />}</Left>
       <Center>{search && <Search />}</Center>
-      <Right>{menu && <Menu />}</Right>
+      <Right>
+        {logout && <Logout />}
+        {menu && <Menu />}
+      </Right>
     </Wrapper>
   );
 };

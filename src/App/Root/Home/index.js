@@ -16,7 +16,7 @@ const Home = () => {
   const { session } = useContext(SessionContext);
   return (
     <Wrapper>
-      <TopBar logo menu search />
+      <TopBar logo menu search logout />
       <PersonalInfo username={session?.username} />
       <Rooms />
     </Wrapper>

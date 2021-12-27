@@ -17,6 +17,7 @@ const Home = ({ shortId }) => {
   const [playing, setPlaying] = useState();
   const [progress, setProgress] = useState();
   const [progressBar, setProgressBar] = useState();
+  const [requests, setRequests] = useState();
 
   useEffect(() => {
     setSocket(
@@ -30,16 +31,17 @@ const Home = ({ shortId }) => {
     if (!socket) return;
     socket.on("message", (message) => console.log(message));
 
-    socket.on("queue", (data) => {
-      setQueue(data);
-    });
+    socket.on("queue", (data) => setQueue(data));
 
-    socket.on("current", (data) => {
-      setCurrent(data);
-    });
+    socket.on("current", (data) => setCurrent(data));
 
-    socket.on("playing", (state) => {
-      setPlaying(state);
+    socket.on("playing", (state) => setPlaying(state));
+
+    socket.on("progress", (fraction) => setProgress(fraction));
+
+    socket.on("requests", (requests) => {
+      console.log(requests);
+      setRequests(requests);
     });
 
     return () => {
@@ -63,6 +65,18 @@ const Home = ({ shortId }) => {
     socket.emit("request-remove", index);
   };
 
+  const onProgress = (fraction) => {
+    socket.emit("request-progress", fraction);
+  };
+
+  const onAccept = (index) => {
+    socket.emit("request-accept", index);
+  };
+
+  const onReject = (index) => {
+    socket.emit("request-reject", index);
+  };
+
   return (
     <Wrapper>
       <RoomContext.Provider
@@ -74,14 +88,17 @@ const Home = ({ shortId }) => {
           playing,
           onPlaying,
           onRemove,
+          progress,
+          onProgress,
+          requests,
+          onAccept,
+          onReject,
           drag,
           setDrag,
           dragElement,
           setDragElement,
           results,
           setResults,
-          progress,
-          setProgress,
           progressBar,
           setProgressBar,
         }}

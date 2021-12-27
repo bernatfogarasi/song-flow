@@ -1,9 +1,10 @@
-import LargeButton from "components/LargeButton";
+import ButtonLarge from "components/ButtonLarge";
 import TopBar from "components/TopBar";
 import styled from "styled-components";
 import queryString from "querystring";
+import Page from "components/Page";
 
-const Wrapper = styled.div``;
+const Wrapper = styled(Page)``;
 
 const Message = styled.div`
   margin: auto;
@@ -25,12 +26,11 @@ const Details = styled.div`
 
 const LoginOrSignUp = () => {
   return (
-    <Wrapper>
-      <TopBar logo search menu />
+    <Wrapper logo menu>
       <Message>
         <Title>Please log in or sign up to continue.</Title>
         <Details>Only logged in users can request access to rooms.</Details>
-        <LargeButton
+        <ButtonLarge
           to={{
             pathname: `/`,
             search: queryString.stringify({ path: window.location.pathname }),
@@ -38,8 +38,8 @@ const LoginOrSignUp = () => {
           }}
         >
           Log in
-        </LargeButton>
-        <LargeButton to="/signup">Sign up</LargeButton>
+        </ButtonLarge>
+        <ButtonLarge to="/signup">Sign up</ButtonLarge>
       </Message>
     </Wrapper>
   );

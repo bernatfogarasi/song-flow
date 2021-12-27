@@ -105,12 +105,18 @@ const Current = ({ className }) => {
   const { ref } = useClickAway(onClickAway);
 
   const onClick = () => {
+    if (!current) return;
     onPlaying(!playing);
   };
 
   const onContextMenu = (event) => {
     event.preventDefault();
     setOpen(!open);
+  };
+
+  const onBinClick = () => {
+    onRemove(-1);
+    setOpen(false);
   };
 
   return (
@@ -132,10 +138,10 @@ const Current = ({ className }) => {
               <SiteIcon src={icons[current.site]} alt="" />
             </>
           )}
-          {open && <Menu onBinClick={() => onRemove(-1)} />}
+          {open && <Menu onBinClick={onBinClick} />}
         </>
       ) : (
-        <Hint>The queue is empty.</Hint>
+        <Hint></Hint>
       )}
     </Wrapper>
   );

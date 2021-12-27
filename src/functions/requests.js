@@ -13,8 +13,12 @@ const serverRequest = async (
   options = { credentials: "include" }
 ) => {
   const response = await fetch(`${serverHost}${directory}`, options);
-  const json = await response.json();
-  return json;
+  try {
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    return { error: "response not json" };
+  }
 };
 
 export { serverHost, serverHostSocket, serverRequest };

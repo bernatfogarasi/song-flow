@@ -4,24 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { RoomContext } from "context";
 import ReactPlayer from "react-player";
 
-const Wrapper = styled(YouTubeApi)`
-  position: absolute;
-  background: black;
-  width: 1100%;
-  height: 100%;
-  margin-left: -500%;
-`;
-
-// const Wrapper = styled(YouTubeApi)`
-//   position: absolute;
-//   background: black;
-//   width: 100%;
-//   height: 300%;
-//   top: -100%;
-// `;
-
 const YouTube = ({ className }) => {
-  const [player, setPlayer] = useState(null);
   const { current, playing, onPlaying, progress, setProgressBar } =
     useContext(RoomContext);
 
@@ -54,13 +37,7 @@ const YouTube = ({ className }) => {
   //   playing ? play() : pause();
   // }, [playing, player]);
 
-  // useEffect(() => {
-  //   console.log(current);
-  // }, [current]);
-
   return (
-    // <Wrapper
-    //   className={className}
     //   videoId={current && current.id}
     //   // videoId={"qTGbWfEEnKI"}
     //   opts={options}
@@ -79,15 +56,11 @@ const YouTube = ({ className }) => {
       className={className}
       url={current?.url}
       progressInterval={0}
-      onReady={(event) => {
-        console.log("ready");
-      }}
-      onPlay={() => console.log("play")}
+      onPlay={() => onPlaying(true)}
       onProgress={(event) => {
         setProgressBar(event.played);
-        // console.log(progress);
       }}
-      playing={true}
+      playing={playing}
     ></ReactPlayer>
   );
 };

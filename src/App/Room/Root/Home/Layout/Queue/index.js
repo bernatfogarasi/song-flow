@@ -33,6 +33,7 @@ const Wrapper = styled.div`
 
 const Hint = styled.div`
   margin: auto;
+  opacity: 0.6;
 `;
 
 const Queue = ({ className }) => {
@@ -80,7 +81,7 @@ const Queue = ({ className }) => {
           <Item key={data._id} data={data} index={index}></Item>
         ))
       ) : (
-        <Hint>Drag something here</Hint>
+        <Hint>Queue is empty</Hint>
       )}
     </Wrapper>
   );

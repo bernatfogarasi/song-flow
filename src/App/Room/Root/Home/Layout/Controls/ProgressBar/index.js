@@ -42,7 +42,7 @@ const CursorLine = styled.div`
 const ProgressBar = ({ className }) => {
   const [hover, setHover] = useState();
   const mouse = useMousePosition();
-  const { progressBar, setProgress } = useContext(RoomContext);
+  const { progressBar, onProgress } = useContext(RoomContext);
 
   const onMouseEnter = () => {
     setHover(true);
@@ -55,7 +55,7 @@ const ProgressBar = ({ className }) => {
   const onClick = (event) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
-    setProgress(x / bounds.width);
+    onProgress(x / bounds.width);
   };
 
   return (

@@ -8,6 +8,7 @@ import Page from "components/Page";
 import ControlsRaw from "./Controls";
 import CurrentRaw from "./Current";
 import InfoRaw from "./Info";
+import RequestsRaw from "./Requests";
 
 const Wrapper = styled.div`
   gap: 20px;
@@ -28,11 +29,22 @@ const Wrapper = styled.div`
 
 const Members = styled(MembersRaw)`
   @media (max-width: 1400px) {
-    grid-row: 1 / 6;
+    grid-row: 1 / 4;
     grid-column: 1;
   }
   @media (min-width: 1400px) {
-    grid-row: 1 / 4;
+    grid-row: 1 / 3;
+    grid-column: 1;
+  }
+`;
+
+const Requests = styled(RequestsRaw)`
+  @media (max-width: 1400px) {
+    grid-row: 4 / 6;
+    grid-column: 1;
+  }
+  @media (min-width: 1400px) {
+    grid-row: 3 / 4;
     grid-column: 1;
   }
 `;
@@ -119,9 +131,10 @@ const Controls = styled(ControlsRaw)`
 
 const Layout = ({ className }) => {
   return (
-    <Page logo menu className={className}>
+    <Page logo menu logout className={className}>
       <Wrapper>
         <Members />
+        <Requests />
         <Search />
         <Results />
         <Current />

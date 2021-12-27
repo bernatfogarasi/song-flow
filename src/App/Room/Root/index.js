@@ -6,32 +6,52 @@ import styled from "styled-components";
 import Home from "./Home";
 import LoginOrSignUp from "./LoginOrSignUp";
 import NotFound from "./NotFound";
+import Request from "./Request";
+import Waiting from "./Waiting";
 
 const Wrapper = styled.div``;
 
 const Room = () => {
-  const { session, refreshSession, error } = useContext(SessionContext);
+  const { session, error } = useContext(SessionContext);
   const [roomExists, setRoomExists] = useState();
   const shortId = window.location.pathname.split("/").pop();
+  const [permission, setPermission] = useState();
+  const [waiting, setWaiting] = useState();
 
   useEffect(() => {
-    let mounted = true;
     const fetchData = async () => {
       const json = await serverRequest(`/room/get?shortId=${shortId}`);
-      if (!mounted) return;
+      setPermission(json.message !== "not member");
       setRoomExists(json.message === "success");
+      setWaiting(json.message === "not member waiting");
     };
     fetchData();
-    return () => {
-      mounted = false;
-    };
   }, []);
 
-  if (roomExists === undefined) return <LoadingScreen />;
-  if (!roomExists) return <NotFound />;
-  if (session) return <Home shortId={shortId} />;
-  if (error) return <LoginOrSignUp />;
-  return <LoadingScreen />;
+  return error ? (
+    <LoginOrSignUp />
+  ) : roomExists === undefined ? (
+    <LoadingScreen />
+  ) : waiting ? (
+    <Waiting />
+  ) : !permission ? (
+    <Request></Request>
+  ) : !roomExists ? (
+    <NotFound />
+  ) : session ? (
+    <Home shortId={shortId} />
+  ) : (
+    <LoadingScreen />
+  );
+  // return roomExists === undefined ? (
+  //   <LoadingScreen />
+  // ) : roomExists === false ? (
+  //   <NotFound />
+  // ) : session ? (
+  //   <Home shortId={shortId} />
+  // ) : (
+  //   <LoginOrSignUp />
+  // );
 };
 
 export default Room;

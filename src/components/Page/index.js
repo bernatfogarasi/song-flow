@@ -16,11 +16,11 @@ const Content = styled.div`
   grid-row: 2;
 `;
 
-const Page = ({ className, children, logo, search, menu }) => {
+const Page = ({ className, children, logo, search, menu, logout }) => {
   return (
-    <Wrapper className={className}>
-      <TopBar logo={logo} search={search} menu={menu} />
-      <Content>{children}</Content>
+    <Wrapper>
+      <TopBar logo={logo} search={search} menu={menu} logout={logout} />
+      <Content className={className}>{children}</Content>
     </Wrapper>
   );
 };
