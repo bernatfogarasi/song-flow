@@ -17,19 +17,24 @@ const Input = styled.input`
   width: 100%;
   background: #1a1a1a;
   color: white;
+  :focus {
+    outline-style: solid;
+    outline-color: #f3ca20;
+    outline-width: 2px;
+  }
 `;
 
 const Icon = styled.div`
   position: absolute;
   top: 50%;
-  right: 30px;
+  right: 35px;
   pointer-events: none;
   transform: translateY(-14px);
 `;
 
 const Circle = styled.div`
   position: absolute;
-  border: 2px solid #aaa;
+  border: 2px solid #999;
   height: 16px;
   width: 16px;
   border-radius: 16px;
@@ -38,7 +43,7 @@ const Circle = styled.div`
 const Line = styled.hr`
   position: absolute;
   width: 12px;
-  border: 1px solid #aaa;
+  border: 1px solid #999;
   transform: translate(14px, 12px) rotate(45deg);
 `;
 

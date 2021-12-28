@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import TopBar from "components/TopBar";
 import CrossMarkLarge from "components/CrossMarkLarge";
 import CheckMarkLarge from "components/CheckMarkLarge";
+import Page from "components/Page";
 
-const Wrapper = styled.div`
+const Wrapper = styled(Page)`
   padding-top: 20vh;
 `;
 
@@ -30,8 +30,7 @@ const Message = styled.div`
 
 const Feedback = ({ success, title, children }) => {
   return (
-    <Wrapper>
-      <TopBar logo />
+    <Wrapper logo>
       <Title>{title}</Title>
       <Message>
         {success ? <CheckMarkLarge /> : <CrossMarkLarge />}

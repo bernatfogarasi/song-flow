@@ -18,6 +18,8 @@ const Home = ({ shortId }) => {
   const [progress, setProgress] = useState();
   const [progressBar, setProgressBar] = useState();
   const [requests, setRequests] = useState();
+  const [members, setMembers] = useState();
+  const [name, setName] = useState();
 
   useEffect(() => {
     setSocket(
@@ -43,6 +45,10 @@ const Home = ({ shortId }) => {
       console.log(requests);
       setRequests(requests);
     });
+
+    socket.on("members", (members) => setMembers(members));
+
+    socket.on("name", (name) => setName(name));
 
     return () => {
       socket.close();
@@ -93,6 +99,8 @@ const Home = ({ shortId }) => {
           requests,
           onAccept,
           onReject,
+          members,
+          name,
           drag,
           setDrag,
           dragElement,

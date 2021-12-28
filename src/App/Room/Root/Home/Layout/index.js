@@ -18,36 +18,32 @@ const Wrapper = styled.div`
   display: grid;
   @media (max-width: 1400px) {
     grid-template-rows: auto auto auto auto 1fr auto;
-    /* grid-template-columns: auto min-content 1fr; */
-    grid-template-columns: auto 1fr 1fr;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   }
   @media (min-width: 1400px) {
     grid-template-rows: auto auto 1fr auto auto;
-    grid-template-columns: auto 1fr 1fr 2fr;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
   }
 `;
 
-const Members = styled(MembersRaw)`
+const MembersRequests = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   @media (max-width: 1400px) {
-    grid-row: 1 / 4;
+    grid-row: 1 / 6;
     grid-column: 1;
   }
   @media (min-width: 1400px) {
-    grid-row: 1 / 3;
+    grid-row: 1 / 6;
     grid-column: 1;
   }
 `;
 
-const Requests = styled(RequestsRaw)`
-  @media (max-width: 1400px) {
-    grid-row: 4 / 6;
-    grid-column: 1;
-  }
-  @media (min-width: 1400px) {
-    grid-row: 3 / 4;
-    grid-column: 1;
-  }
-`;
+const Members = styled(MembersRaw)``;
+
+const Requests = styled(RequestsRaw)``;
 
 const Video = styled(VideoRaw)`
   @media (max-width: 1400px) {
@@ -131,10 +127,12 @@ const Controls = styled(ControlsRaw)`
 
 const Layout = ({ className }) => {
   return (
-    <Page logo menu logout className={className}>
+    <Page logo menu logout className={className} roomName>
       <Wrapper>
-        <Members />
-        <Requests />
+        <MembersRequests>
+          <Members />
+          <Requests />
+        </MembersRequests>
         <Search />
         <Results />
         <Current />

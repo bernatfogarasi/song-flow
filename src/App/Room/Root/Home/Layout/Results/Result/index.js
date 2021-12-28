@@ -7,28 +7,13 @@ import { useContext, useState } from "react";
 const icons = { spotify, youtube };
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 70px 1fr 20px;
-  grid-template-rows: 50% 50%;
-  column-gap: 15px;
-  &.over {
-    ::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      background: #222;
-      height: 50px;
-      width: 100%;
-    }
-    border-top: 50px solid transparent;
-  }
-  border-top-color: transparent;
+  display: flex;
+  gap: 15px;
   position: relative;
   font-family: Montserrat;
   background: #111;
   cursor: pointer;
   border-radius: 4px;
-  width: calc(100% - 30px);
   font-size: 14px;
   height: 40px;
   padding: 8px 15px;
@@ -36,14 +21,18 @@ const Wrapper = styled.div`
 `;
 
 const Thumbnail = styled.img`
-  grid-row: span 2;
   height: 100%;
   pointer-events: none;
 `;
 
+const TitleAuthor = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 const Title = styled.div`
   font-family: MontserratMedium;
-  grid-column: 2;
   pointer-events: none;
   overflow: hidden;
   white-space: nowrap;
@@ -51,10 +40,7 @@ const Title = styled.div`
 `;
 
 const Author = styled.div`
-  grid-column: 2;
-  grid-row: 2;
   font-size: 13px;
-  /* border: 1px solid; */
   opacity: 0.6;
   pointer-events: none;
   overflow: hidden;
@@ -63,18 +49,15 @@ const Author = styled.div`
 `;
 
 const SiteIcon = styled.img`
-  grid-row: span 2;
-  justify-self: center;
   width: 20px;
-  align-self: top;
   pointer-events: none;
+  margin-left: auto;
 `;
 
 const Result = ({ data }) => {
-  const { setDrag } = useContext(RoomContext);
+  const { setDrag, onQueue } = useContext(RoomContext);
 
   const onDragStart = (event) => {
-    // event.target.style.opacity = "0";
     setDrag(true);
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData(
@@ -89,6 +72,10 @@ const Result = ({ data }) => {
     setDrag(false);
   };
 
+  const onClick = () => {
+    onQueue(data);
+  };
+
   return (
     <Wrapper
       onContextMenu={(event) => event.preventDefault()}
@@ -97,10 +84,13 @@ const Result = ({ data }) => {
       onDrag={onDrag}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
+      onClick={onClick}
     >
       <Thumbnail src={data.thumbnailUrl} alt="" />
-      <Title title={data.title}>{data.title}</Title>
-      <Author>{data.author}</Author>
+      <TitleAuthor>
+        <Title title={data.title}>{data.title}</Title>
+        <Author>{data.author}</Author>
+      </TitleAuthor>
 
       <SiteIcon src={icons[data.site]} alt="" />
     </Wrapper>

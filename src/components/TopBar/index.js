@@ -2,6 +2,7 @@ import styled from "styled-components";
 import LogoTitle from "./LogoTitle";
 import Logout from "./Logout";
 import Menu from "./Menu";
+import RoomName from "./RoomName";
 import Search from "./Search";
 
 const Wrapper = styled.div`
@@ -22,12 +23,13 @@ const Center = styled.div`
   flex: 60%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const Left = styled.div`
   flex: 20%;
   display: flex;
-
+  align-items: center;
   justify-content: left;
 `;
 
@@ -39,11 +41,16 @@ const Right = styled.div`
   gap: 20px;
 `;
 
-const TopBar = ({ logo, title, menu, search, logout }) => {
+const TopBar = ({ logo, title, menu, search, logout, roomName }) => {
   return (
     <Wrapper>
       <Left>{logo && <LogoTitle title={title} />}</Left>
-      <Center>{search && <Search />}</Center>
+      <Center>
+        {search && <Search />}
+        {roomName && (
+          <RoomName>{window.location.pathname.split("/").at(-1)}</RoomName>
+        )}
+      </Center>
       <Right>
         {logout && <Logout />}
         {menu && <Menu />}

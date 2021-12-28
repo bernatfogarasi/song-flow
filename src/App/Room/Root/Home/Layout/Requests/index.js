@@ -9,16 +9,25 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const Title = styled.div``;
+
+const Placeholder = styled.div`
+  opacity: 0.5;
+`;
+
 const Requests = ({ className }) => {
   const { requests } = useContext(RoomContext);
 
   return (
     <Wrapper className={className}>
-      Requests
-      {requests &&
+      <Title>Requests</Title>
+      {requests?.length ? (
         requests.map((request, index) => (
           <Request request={request} index={index} />
-        ))}
+        ))
+      ) : (
+        <Placeholder>None</Placeholder>
+      )}
     </Wrapper>
   );
 };

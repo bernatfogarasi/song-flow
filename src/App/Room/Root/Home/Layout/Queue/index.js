@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   ${({ hint }) =>
     hint
       ? css`
-          background: #222;
+          background: #1a1a1a;
           margin-right: 10px;
         `
       : css`
@@ -21,6 +21,8 @@ const Wrapper = styled.div`
           ::-webkit-scrollbar {
             width: 10px;
           }
+          scrollbar-width: thin;
+
           :hover::-webkit-scrollbar-thumb {
             border-radius: 5px;
             background: #333;
@@ -33,7 +35,7 @@ const Wrapper = styled.div`
 
 const Hint = styled.div`
   margin: auto;
-  opacity: 0.6;
+  opacity: 0.4;
 `;
 
 const Queue = ({ className }) => {

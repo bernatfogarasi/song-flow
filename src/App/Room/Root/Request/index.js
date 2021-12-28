@@ -8,13 +8,29 @@ const Wrapper = styled(Page)`
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 50px;
   align-items: center;
 `;
 
-const ButtonRequest = styled(Button)``;
+const RoomName = styled.div`
+  font-size: 30px;
+  color: #f3ca20;
+`;
 
-const Request = ({ className }) => {
+const Message = styled.div`
+  opacity: 0.6;
+`;
+
+const Members = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const MembersCount = styled.div``;
+
+const Request = ({ className, info }) => {
   const onClick = async () => {
     const json = await serverRequest("/room/request", {
       method: "POST",
@@ -26,12 +42,17 @@ const Request = ({ className }) => {
         shortId: window.location.pathname.split("/").at(-1),
       }),
     });
-    console.log(json);
+    window.location.reload();
   };
 
   return (
     <Wrapper className={className} logo search menu logout>
-      You are not a member of this room.
+      <RoomName>{info?.name}</RoomName>
+      <Members>
+        Members
+        <MembersCount>{info?.memberCount}</MembersCount>
+      </Members>
+      <Message>You are not a member of this room.</Message>
       <ButtonLarge to="#" onClick={onClick}>
         Request access
       </ButtonLarge>

@@ -1,6 +1,6 @@
 import { RoomContext } from "context";
 import { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import spotify from "assets/icons/spotify.png";
 import youtube from "assets/icons/youtube.png";
 import SpinnerLiveRaw from "components/SpinnerLive";
@@ -11,50 +11,45 @@ const icons = { spotify, youtube };
 
 const Wrapper = styled.div`
   background: #222;
-  display: grid;
-  grid-template-columns: auto auto 1fr 20px auto;
-  grid-template-rows: 50% 50%;
-  column-gap: 15px;
-  &.over {
-    ::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      background: #222;
-      height: 50px;
-      width: 100%;
-    }
-    border-top: 50px solid transparent;
-  }
-  border-top-color: transparent;
+  display: flex;
+  gap: 15px;
   position: relative;
   font-family: Montserrat;
   cursor: pointer;
   border-radius: 4px;
-  width: calc(100% - 40px);
+  margin-right: 10px;
   font-size: 14px;
   padding: 8px 15px;
   align-items: center;
   user-select: none;
   height: 40px;
+  ${({ empty }) =>
+    empty &&
+    css`
+      background: #1a1a1a;
+    `}
 `;
 
 const Index = styled.div`
-  grid-row: span 2;
   text-align: center;
   opacity: 0.6;
 `;
 
 const Thumbnail = styled.img`
-  grid-row: span 2;
+  border: 1px solid;
   height: 100%;
 
   pointer-events: none;
 `;
 
+const TitleAuthor = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 const Title = styled.div`
   font-family: MontserratMedium;
-  grid-column: 3;
   pointer-events: none;
   overflow: hidden;
   white-space: nowrap;
@@ -62,8 +57,6 @@ const Title = styled.div`
 `;
 
 const Author = styled.div`
-  grid-column: 3;
-  grid-row: 2;
   font-size: 13px;
   opacity: 0.6;
   pointer-events: none;
@@ -72,27 +65,18 @@ const Author = styled.div`
   text-overflow: ellipsis;
 `;
 
-const SpinnerLive = styled(SpinnerLiveRaw)`
-  grid-row: span 2;
-`;
+const SpinnerLive = styled(SpinnerLiveRaw)``;
 
 const SiteIcon = styled.img`
-  grid-row: span 2;
   justify-self: center;
   width: 20px;
   align-self: top;
   pointer-events: none;
 `;
 
-const Menu = styled(MenuRaw)`
-  grid-column: span 3;
-  grid-row: span 2;
-`;
+const Menu = styled(MenuRaw)``;
 
-const Hint = styled.div`
-  grid-row: span 2;
-  grid-column: span 5;
-`;
+const Hint = styled.div``;
 
 const Current = ({ className }) => {
   const [open, setOpen] = useState(false);
@@ -125,15 +109,18 @@ const Current = ({ className }) => {
       ref={ref}
       onContextMenu={onContextMenu}
       onClick={onClick}
+      empty={!current?.id}
     >
-      {current ? (
+      {current?.id ? (
         <>
           <Index>1</Index>
           <Thumbnail src={current.thumbnailUrl} alt="" />
           {!open && (
             <>
-              <Title title={current.title}>{current.title}</Title>
-              <Author>{current.author}</Author>
+              <TitleAuthor>
+                <Title title={current.title}>{current.title}</Title>
+                <Author>{current.author}</Author>
+              </TitleAuthor>
               <SpinnerLive />
               <SiteIcon src={icons[current.site]} alt="" />
             </>

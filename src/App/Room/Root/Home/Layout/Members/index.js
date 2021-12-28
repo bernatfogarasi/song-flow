@@ -1,9 +1,12 @@
+import { RoomContext } from "context";
+import { useContext } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
   gap: 10px;
   display: flex;
   flex-direction: column;
+  max-width: 100px;
 `;
 
 const Member = styled.div`
@@ -14,6 +17,8 @@ const Member = styled.div`
   transition: 0.2s;
   gap: 10px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 `;
 
 const MemberProfile = styled.div`
@@ -43,28 +48,41 @@ const MemberInactive = styled(MemberActivity)`
   background: #111;
 `;
 
-const members = [
-  { name: "asdf", active: false, date: 1 },
-  { name: "asdf", active: true, date: 2 },
-  { name: "asdf", active: false, date: 3 },
-  { name: "asdf", active: true, date: 4 },
-  { name: "asdf", active: true, date: 5 },
-];
+const Activity = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-sizing: border-box;
+`;
+
+const Active = styled(Activity)`
+  background: #f3ca20;
+`;
+
+const Inactive = styled(Activity)`
+  border: 4px solid #333;
+`;
+
+const Text = styled.div`
+  opacity: 0.7;
+`;
 
 const Members = ({ className }) => {
+  const { members } = useContext(RoomContext);
   return (
     <Wrapper className={className}>
-      {members
-        .sort((x, y) => {
-          return x.active === y.active ? 0 : x.active ? -1 : 1;
-        })
-        .map(({ date, name, active }) => (
-          <Member key={date}>
-            <MemberProfile>
-              {active ? <MemberActive /> : <MemberInactive />}
-            </MemberProfile>
-          </Member>
-        ))}
+      Members
+      {members &&
+        members
+          .sort((x, y) => {
+            return x.active === y.active ? 0 : x.active ? -1 : 1;
+          })
+          .map((member) => (
+            <Member key={member._id}>
+              {member.active ? <Active /> : <Inactive />}
+              <Text>{member.username}</Text>
+            </Member>
+          ))}
     </Wrapper>
   );
 };

@@ -7,10 +7,10 @@ import useClickAway from "hooks/useClickAway";
 import MenuRaw from "components/Menu";
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: auto auto 1fr auto;
-  grid-template-rows: 50% 50%;
-  column-gap: 15px;
+  display: flex;
+  /* grid-template-columns: auto auto 1fr auto;
+  grid-template-rows: 50% 50%; */
+  gap: 15px;
   &.over {
     ::before {
       content: "";
@@ -22,12 +22,11 @@ const Wrapper = styled.div`
     }
     border-top: 50px solid transparent;
   }
-  border-top-color: transparent;
+  /* border-top-color: transparent; */
   position: relative;
   font-family: Montserrat;
   cursor: pointer;
   border-radius: 4px;
-  width: calc(100% - 30px);
   font-size: 14px;
   height: 40px;
   padding: 8px 15px;
@@ -35,20 +34,24 @@ const Wrapper = styled.div`
 `;
 
 const Index = styled.div`
-  grid-row: span 2;
   text-align: center;
   opacity: 0.6;
 `;
 
 const Thumbnail = styled.img`
-  grid-row: span 2;
   height: 100%;
   pointer-events: none;
+  border: 1px solid;
+`;
+
+const TitleAuthor = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const Title = styled.div`
   font-family: MontserratMedium;
-  grid-column: 3;
   pointer-events: none;
   overflow: hidden;
   white-space: nowrap;
@@ -56,10 +59,7 @@ const Title = styled.div`
 `;
 
 const Author = styled.div`
-  grid-column: 3;
-  grid-row: 2;
   font-size: 13px;
-  /* border: 1px solid; */
   opacity: 0.6;
   pointer-events: none;
   overflow: hidden;
@@ -68,18 +68,12 @@ const Author = styled.div`
 `;
 
 const SiteIcon = styled.img`
-  grid-row: span 2;
-  grid-column: 4;
-  justify-self: center;
+  margin-left: auto;
   width: 20px;
-  align-self: top;
   pointer-events: none;
 `;
 
-const Menu = styled(MenuRaw)`
-  grid-column: span 2;
-  grid-row: span 2;
-`;
+const Menu = styled(MenuRaw)``;
 
 const Item = ({ className, index, data }) => {
   const [open, setOpen] = useState(false);
@@ -177,8 +171,10 @@ const Item = ({ className, index, data }) => {
       <Thumbnail src={thumbnailUrl} alt="" />
       {!open && (
         <>
-          <Title title={title}>{title}</Title>
-          <Author title={author}>{author}</Author>
+          <TitleAuthor>
+            <Title title={title}>{title}</Title>
+            <Author title={author}>{author}</Author>
+          </TitleAuthor>
           <SiteIcon src={youtube} />
         </>
       )}

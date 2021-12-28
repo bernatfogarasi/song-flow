@@ -11,9 +11,10 @@ const Wrapper = styled.div`
   gap: 10px;
   bottom: 0px;
   margin-bottom: -20px;
-  border-radius: 20px 20px 0 0;
+  border-radius: 4px 4px 0 0;
   padding: 10px;
-  border-top: 1px solid #333;
+  border: 1px solid #333;
+  border-bottom: none;
   background-color: #181818;
   justify-items: center;
   align-items: center;
@@ -42,7 +43,7 @@ const ProgressBar = styled(ProgressBarRaw)`
 const Controls = ({ className }) => {
   return (
     <Wrapper className={className}>
-      <PreviousButton />
+      {/* <PreviousButton /> */}
       <PlayButton />
       <NextButton />
       <ProgressBar />

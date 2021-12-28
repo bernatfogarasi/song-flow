@@ -17,6 +17,7 @@ const Room = () => {
   const shortId = window.location.pathname.split("/").pop();
   const [permission, setPermission] = useState();
   const [waiting, setWaiting] = useState();
+  const [info, setInfo] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,7 @@ const Room = () => {
       setPermission(json.message !== "not member");
       setRoomExists(json.message === "success");
       setWaiting(json.message === "not member waiting");
+      setInfo(json?.info);
     };
     fetchData();
   }, []);
@@ -33,9 +35,9 @@ const Room = () => {
   ) : roomExists === undefined ? (
     <LoadingScreen />
   ) : waiting ? (
-    <Waiting />
+    <Waiting info={info} />
   ) : !permission ? (
-    <Request></Request>
+    <Request info={info}></Request>
   ) : !roomExists ? (
     <NotFound />
   ) : session ? (

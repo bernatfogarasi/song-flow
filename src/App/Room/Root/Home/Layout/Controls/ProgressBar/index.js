@@ -3,17 +3,18 @@ import useMousePosition from "hooks/useMousePosition";
 import { useContext, useState } from "react";
 import styled, { css } from "styled-components";
 
-const height = "10px";
+const height = "20px";
 
 const Wrapper = styled.div`
   height: ${height};
   background: #333;
   width: 100%;
-  /* border-radius: 4px; */
+  border-radius: 4px;
   cursor: pointer;
 `;
 
 const Fill = styled.div`
+  border-radius: 4px;
   height: ${height};
   background: #eee;
   /* border-radius: 4px 0 0 4px; */
