@@ -7,31 +7,29 @@ const Wrapper = styled.div`
   border: 1px solid #333;
   border-radius: 4px;
   padding: 10px;
-  /* max-width: 300px; */
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 20px);
+  width: 100%;
+  box-sizing: border-box;
   background: #111;
   z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (max-width: 600px) {
+    width: 100vw;
+  }
 `;
 
-const Results = ({ show, rooms }) => {
+const Results = ({ className, rooms }) => {
   return (
-    // show &&
-    rooms &&
-    rooms.length > 0 && (
-      <Wrapper>
-        {rooms.map(({ name, url }) => (
-          <Room key={name} name={name} url={url} />
-        ))}
-      </Wrapper>
-    )
+    <Wrapper className={className}>
+      {rooms.map(({ name, url }) => (
+        <Room key={url} name={name} url={url} />
+      ))}
+    </Wrapper>
   );
 };
 

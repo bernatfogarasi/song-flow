@@ -10,11 +10,13 @@ const Wrapper = styled.div`
   :hover {
     transform: scale(1.1);
   }
-
   :active {
     transform: scale(1);
   }
   transition: 0.2s;
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const IconLogout = styled.img`

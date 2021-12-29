@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
   border: 8px solid;
   border-color: white transparent;
   border-radius: 50%;

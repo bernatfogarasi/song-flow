@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Form from "./Form";
-import LoginWith from "./LoginWith";
 import spotify from "assets/icons/spotify_black.png";
-import google from "assets/icons/google_black.png";
+import AuthGoogle from "components/AuthGoogle";
 
 const Wrapper = styled(Card)`
   display: flex;
@@ -49,18 +48,14 @@ const LoginField = ({ onLogin }) => {
         <OrLine />
         <OrText>OR</OrText>
       </Or>
-      <LoginWith
-        provider="Google"
-        icon={google}
-        // color="black"
-        // background="White"
-      ></LoginWith>
-      <LoginWith
+
+      <AuthGoogle method="login" />
+      {/* <LoginWith
         provider="Spotify"
         icon={spotify}
         // color="black"
         // background="#1dd05d"
-      ></LoginWith>
+      ></LoginWith> */}
     </Wrapper>
   );
 };

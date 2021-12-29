@@ -1,12 +1,16 @@
 const serverHost =
   window.location.hostname === "localhost"
     ? "http://localhost:4000"
-    : "http://api.teamlistener.com";
+    : // : window.location.hostname === "192.168.1.104"
+      // ? "http://192.168.1.104:4000"
+      "http://api.teamlistener.com";
 
 const serverHostSocket =
   window.location.hostname === "localhost"
     ? "ws://localhost:4000"
-    : "ws://api.teamlistener.com";
+    : // : window.location.hostname === "192.168.1.104"
+      // ? "ws://192.168.1.104:4000"
+      "ws://api.teamlistener.com";
 
 const serverRequest = async (
   directory,

@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import LoginButton from "./LoginButton";
-import RegisterButton from "./RegisterButton";
+import SignUpButton from "./SignUpButton";
+import Open from "./Open";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,15 +29,32 @@ const Line = styled.div`
 `;
 
 const Menu = () => {
+  const [open, setOpen] = useState(false);
+
+  const onClickOpen = () => {
+    setOpen(true);
+  };
+
+  const onClickClose = (event) => {
+    event && event.stopPropagation();
+
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    console.log(open);
+  }, [open]);
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClickOpen}>
       {/* <LoginButton />
-      <RegisterButton /> */}
+      <SignUpButton /> */}
       <Hamburger>
         <Line />
         <Line />
         <Line />
       </Hamburger>
+      {open && <Open onClickClose={onClickClose} onClick={onClickClose} />}
     </Wrapper>
   );
 };

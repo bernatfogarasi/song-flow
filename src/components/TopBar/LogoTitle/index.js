@@ -29,7 +29,7 @@ const Text = styled.div`
 
 const Logo = ({ title }) => {
   return (
-    <Wrapper to="">
+    <Wrapper to="" title="TeamListener">
       <Icon src={logo} alt="" />
       {title && <Text>TeamListener</Text>}
     </Wrapper>

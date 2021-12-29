@@ -60,8 +60,6 @@ const Rooms = ({ className }) => {
     setShowNewRoomModal(false);
   };
 
-  useEffect(() => {}, []);
-
   return (
     <Wrapper className={className}>
       <RoomsHeader>

@@ -15,12 +15,16 @@ const Wrapper = styled.div`
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  display: grid;
-  @media (max-width: 1400px) {
+  @media (max-width: 800px) {
+    display: grid;
+  }
+  @media (min-width: 800px) and (max-width: 1400px) {
+    display: grid;
     grid-template-rows: auto auto auto auto 1fr auto;
     grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   }
   @media (min-width: 1400px) {
+    display: grid;
     grid-template-rows: auto auto 1fr auto auto;
     grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
   }
@@ -31,7 +35,10 @@ const MembersRequests = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1400px) {
+  @media (max-width: 800px) {
+    display: none;
+  }
+  @media (min-width: 800px) and (min-width: 800px) and (max-width: 1400px) {
     grid-row: 1 / 6;
     grid-column: 1;
   }
@@ -46,7 +53,7 @@ const Members = styled(MembersRaw)``;
 const Requests = styled(RequestsRaw)``;
 
 const Video = styled(VideoRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     /* overflow: auto;
     resize: horizontal;
     resize: initial; */
@@ -60,7 +67,7 @@ const Video = styled(VideoRaw)`
 `;
 
 const Info = styled(InfoRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 3;
     grid-column: 2;
   }
@@ -71,7 +78,7 @@ const Info = styled(InfoRaw)`
 `;
 
 const Search = styled(SearchRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 4;
     grid-column: 2;
   }
@@ -82,7 +89,7 @@ const Search = styled(SearchRaw)`
 `;
 
 const Results = styled(ResultsRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 5;
     grid-column: 2;
   }
@@ -93,7 +100,7 @@ const Results = styled(ResultsRaw)`
 `;
 
 const Current = styled(CurrentRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 1;
     grid-column: 3;
   }
@@ -104,7 +111,7 @@ const Current = styled(CurrentRaw)`
 `;
 
 const Queue = styled(QueueRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 2 / 6;
     grid-column: 3;
   }
@@ -115,7 +122,7 @@ const Queue = styled(QueueRaw)`
 `;
 
 const Controls = styled(ControlsRaw)`
-  @media (max-width: 1400px) {
+  @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 6;
     grid-column: 1 / 4;
   }

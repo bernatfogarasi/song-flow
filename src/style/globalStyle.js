@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
         /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
         font-family: MontserratMedium;
         color: white;
+        background: #111;
+        user-select: none;
     }
 `;
 

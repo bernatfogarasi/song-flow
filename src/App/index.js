@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import GlobalStyle from "style/globalStyle";
 import {
-  BrowserRouter,
   Redirect,
   Route,
   Switch,
@@ -9,8 +8,6 @@ import {
   withRouter,
 } from "react-router-dom";
 import Root from "./Root";
-import Join from "./Join/Root";
-import Create from "./Create/Root";
 import Room from "./Room/Root";
 import SignUp from "./SignUp/Root";
 import SignUpConfirmation from "./SignUp/Confirmation/Root";
@@ -21,16 +18,14 @@ import useSession from "hooks/useSession";
 import { SessionContext } from "context";
 
 const Wrapper = styled.div`
-  background: #111;
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh; */
 `;
 
 const App = () => {
   const { session, refreshSession, error } = useSession();
   const location = useLocation();
   const onContextMenu = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   return (
@@ -39,8 +34,6 @@ const App = () => {
       <SessionContext.Provider value={{ session, refreshSession, error }}>
         <Switch location={window.location} key={window.location.pathname}>
           <Route component={Root} exact path="/" />
-          <Route component={Join} exact path="/join" />
-          <Route component={Create} exact path="/create" />
           <Route component={Room} path="/room" />
           <Route component={SignUp} exact path="/signup" />
           <Route

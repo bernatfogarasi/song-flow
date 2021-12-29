@@ -5,7 +5,6 @@ import styled from "styled-components";
 const Wrapper = styled(Link)`
   width: 50vw;
   min-width: 200px;
-  height: 40vh;
   border: 1px solid #333;
   border-radius: 4px;
   color: white;
@@ -46,21 +45,12 @@ const Rank = styled.div`
 
 const Star = styled(Rank)``;
 
-// const ranks = {
-//   admin: { color: "yellow", text: "★", element: Star },
-//   member: { color: "grey", text: "", element: Star },
-// };
-
 const Participants = styled.div`
-  /* display: flex;
-  align-items: center; */
   display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
   gap: 5px;
-  /* background: red; */
-  height: 140px;
 `;
 
 const Participant = styled.div`

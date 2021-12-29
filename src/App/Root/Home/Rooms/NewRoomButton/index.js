@@ -6,21 +6,17 @@ const Wrapper = styled.div`
   width: 20px;
   padding: 5px;
   aspect-ratio: 1;
-  /* border: 1px solid #fff; */
-  border: 2px solid #333;
+  border: 2px solid #fff;
+  opacity: 0.6;
   border-radius: 50%;
   transition: 0.2s;
   :hover {
     transform: scale(1.2);
-    border: 2px solid #fff;
-    div {
-      background: #fff;
-    }
   }
 `;
 
 const Line = styled.div`
-  background: #333;
+  background: #fff;
   width: 2px;
   height: 20px;
   position: absolute;
@@ -35,7 +31,7 @@ const LineHorizontal = styled(Line)`
 
 const NewRoomButton = ({ onClick }) => {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} title="Create a room">
       <LineVertical />
       <LineHorizontal />
     </Wrapper>

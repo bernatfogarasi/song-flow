@@ -1,11 +1,10 @@
-import SearchIcon from "components/SearchIcon";
+import imageSearch from "assets/icons/search.png";
+import imageCross from "assets/icons/cross.png";
 import { serverRequest } from "functions/requests";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Results from "./Results";
-import useFocus from "hooks/useFocus";
-import Modal from "components/Modal";
-import Category from "./Category";
+import useClickAway from "hooks/useClickAway";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,7 +12,6 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: 400px;
   position: relative;
-  /* ${({ isFocused }) => isFocused && `transform: scale(1.1);`} */
   transition: 0.2s;
   gap: 10px;
 `;
@@ -29,116 +27,76 @@ const Input = styled.input`
   width: calc(100% - 50px);
 `;
 
-const Icon = styled(SearchIcon)`
+const Icon = styled.img`
   position: absolute;
   right: 5px;
   top: 50%;
   transform: translateY(-50%) scale(0.9);
+  height: 60%;
+  cursor: pointer;
 `;
 
-const Overlay = styled.div`
-  z-index: 1;
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  top: 0px;
-  left: 0px;
-  background: #111;
-  right: 0;
-  bottom: 0;
+const IconClickThrough = styled(Icon)`
+  pointer-events: none;
 `;
 
-const OverlayChild = styled.div`
-  position: relative;
-  z-index: 1000;
-  /* transform: rotate(1deg); */
-  height: 100vh;
-  width: 100vw;
-  background: red;
-`;
-
-const Search = () => {
+const Search = ({ className }) => {
   const [text, setText] = useState("");
-  const [requestText, setRequestText] = useState("");
-  const [requestTimeout, setRequestTimeout] = useState(null);
   const [rooms, setRooms] = useState([]);
-  const [focusRef, setFocus, isFocused] = useFocus();
-  //   const [showResults, setShowResults] = useState(false);
+
+  const refInput = useRef();
+
+  const onClickAway = () => {
+    setText("");
+    setRooms([]);
+    refInput.current.blur();
+  };
+
+  const { ref } = useClickAway(onClickAway);
+
+  const onChange = async (event) => {
+    setText(event.target.value);
+  };
+
+  const onCloseClick = () => {
+    console.log("close");
+    setText("");
+    setRooms([]);
+  };
 
   useEffect(() => {
-    if (requestTimeout) clearTimeout(requestTimeout);
-    setRequestTimeout(
-      setTimeout(() => {
-        if (text !== requestText) {
-          setRequestText(text);
-        }
-      }, 400)
-    );
-  }, [text]);
-
-  useEffect(() => {
-    if (requestText === "") setRooms([]);
-    if (!requestText) return;
+    if (text === "") return;
     const fetchData = async () => {
+      console.log(text);
       const json = await serverRequest("/search/rooms", {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: requestText }),
+        body: JSON.stringify({ text }),
       });
       setRooms(json.data);
+      console.log(json);
     };
     fetchData();
-  }, [requestText]);
-
-  const onTextChange = (event) => {
-    setText(event.target.value);
-  };
-
-  const onClose = () => {
-    setText("");
-    setRequestText("");
-    setRooms([]);
-    setFocus(false);
-  };
-
-  const onOpen = () => {
-    setFocus(true);
-  };
-
-  //   const onFocus = () => {
-  //     setShowResults(true);
-  //   };
-
-  //   const onBlur = () => {
-  //     setShowResults(false);
-  //   };
+  }, [text]);
 
   return (
-    <Wrapper isFocused={isFocused}>
-      {/* <Category /> */}
+    <Wrapper className={className} ref={ref}>
       <Input
-        ref={focusRef}
+        ref={refInput}
         value={text}
-        onChange={onTextChange}
-        onFocus={onOpen}
-        // onBlur={onClose}
-        // onFocus={onFocus}
-        // onBlur={onBlur}
+        onChange={onChange}
+        placeholder="Search rooms"
+        title="Search rooms"
       />
-
-      <Icon
-        color="black"
-        showClose={text !== ""}
-        onOpen={onOpen}
-        onClose={onClose}
-      />
-      <Results
-        // show={showResults}
-        rooms={rooms}
-      />
+      {text === "" ? (
+        <IconClickThrough src={imageSearch} />
+      ) : (
+        <Icon src={imageCross} onClick={onCloseClick} />
+      )}
+      {rooms?.length > 0 && <Results rooms={rooms} />}
     </Wrapper>
   );
 };
