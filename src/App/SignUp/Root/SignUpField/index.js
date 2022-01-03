@@ -10,6 +10,8 @@ const Wrapper = styled(Card)`
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  width: 90vw;
+  max-width: 350px;
 `;
 
 const Or = styled.div`
@@ -32,12 +34,12 @@ const OrText = styled.div`
 const Login = () => {
   return (
     <Wrapper on>
-      <Form />
+      <AuthGoogle method="signup" />
       <Or>
         <OrLine />
         <OrText>OR</OrText>
       </Or>
-      <AuthGoogle method="signup" />
+      <Form />
     </Wrapper>
   );
 };

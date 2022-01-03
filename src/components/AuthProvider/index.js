@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   :active {
     background: #111;
   }
+  transition: 0.2s;
 `;
 
 const LoaderCircle = styled(LoaderCircleRaw)`

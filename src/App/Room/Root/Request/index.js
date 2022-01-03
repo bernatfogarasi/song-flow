@@ -14,7 +14,7 @@ const Wrapper = styled(Page)`
 
 const RoomName = styled.div`
   font-size: 30px;
-  color: #f3ca20;
+  color: #d6b11c;
 `;
 
 const Message = styled.div`

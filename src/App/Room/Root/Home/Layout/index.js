@@ -10,20 +10,21 @@ import CurrentRaw from "./Current";
 import InfoRaw from "./Info";
 import RequestsRaw from "./Requests";
 
-const Wrapper = styled.div`
+const Wrapper = styled(Page)`
   gap: 20px;
   height: 100%;
-  padding: 20px;
   box-sizing: border-box;
   @media (max-width: 800px) {
     display: grid;
   }
   @media (min-width: 800px) and (max-width: 1400px) {
+    padding: 20px;
     display: grid;
     grid-template-rows: auto auto auto auto 1fr auto;
     grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   }
   @media (min-width: 1400px) {
+    padding: 20px;
     display: grid;
     grid-template-rows: auto auto 1fr auto auto;
     grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
@@ -134,21 +135,19 @@ const Controls = styled(ControlsRaw)`
 
 const Layout = ({ className }) => {
   return (
-    <Page logo menu logout className={className} roomName>
-      <Wrapper>
-        <MembersRequests>
-          <Members />
-          <Requests />
-        </MembersRequests>
-        <Search />
-        <Results />
-        <Current />
-        <Queue />
-        <Video />
-        <Info />
-        <Controls />
-      </Wrapper>
-    </Page>
+    <Wrapper logo menu logout className={className} roomName>
+      <MembersRequests>
+        <Members />
+        <Requests />
+      </MembersRequests>
+      <Search />
+      <Results />
+      <Current />
+      <Queue />
+      <Video />
+      <Info />
+      <Controls />
+    </Wrapper>
   );
 };
 

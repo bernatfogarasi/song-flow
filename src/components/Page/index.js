@@ -12,7 +12,8 @@ const TopBar = styled(TopBarRaw)`
 `;
 
 const Content = styled.div`
-  overflow: hidden;
+  /* overflow: hidden; */
+  box-sizing: border-box;
   grid-row: 2;
 `;
 

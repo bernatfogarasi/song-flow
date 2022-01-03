@@ -4,7 +4,7 @@ import Link from "components/Link";
 const Wrapper = styled(Link)`
   color: black;
   border-radius: 4px;
-  background: #f3ca20;
+  background: #d6b11c;
   padding: 8px;
   margin: 10px;
   text-decoration: none;

@@ -5,7 +5,9 @@ import InputField from "components/InputField";
 import { useLocation } from "react-router";
 import { serverRequest } from "functions/requests";
 
-const Wrapper = styled.form``;
+const Wrapper = styled.form`
+  width: 100%;
+`;
 
 const Form = ({ onLogin, ...props }) => {
   const [email, setEmail] = useState("");

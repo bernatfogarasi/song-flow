@@ -4,12 +4,12 @@ import styled from "styled-components";
 const Wrapper = styled(LinkPlain)`
   padding: 10px;
   border-radius: 4px;
-  border: 2px solid #f3ca20;
-  color: #f3ca20;
+  border: 2px solid #d6b11c;
+  color: #d6b11c;
   width: 200px;
   display: block;
   text-align: center;
-  background: linear-gradient(to left, transparent 50%, #f3ca20 50%) right;
+  background: linear-gradient(to left, transparent 50%, #d6b11c 50%) right;
   background-size: 200%;
   transition: 0.5s;
   :hover {

@@ -1,7 +1,7 @@
 import { RoomContext } from "context";
 import useMousePosition from "hooks/useMousePosition";
 import { useContext, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const height = "20px";
 
@@ -9,15 +9,14 @@ const Wrapper = styled.div`
   height: ${height};
   background: #333;
   width: 100%;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   cursor: pointer;
 `;
 
 const Fill = styled.div`
-  border-radius: 4px;
+  /* border-radius: 4px; */
   height: ${height};
-  background: #eee;
-  /* border-radius: 4px 0 0 4px; */
+  background: #d6b11c;
   cursor: pointer;
 `;
 

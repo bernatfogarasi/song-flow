@@ -42,7 +42,6 @@ const Home = ({ shortId }) => {
     socket.on("progress", (fraction) => setProgress(fraction));
 
     socket.on("requests", (requests) => {
-      console.log(requests);
       setRequests(requests);
     });
 

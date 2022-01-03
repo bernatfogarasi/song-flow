@@ -9,12 +9,9 @@ const Wrapper = styled(Card)`
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  width: 90vw;
+  max-width: 350px;
 `;
-
-// const LoginText = styled.div`
-//   font-size: 20px;
-//   margin: 10px;
-// `;
 
 const Or = styled.div`
   width: calc(100% - 24px);
@@ -42,14 +39,13 @@ const ForgotPassword = styled.a`
 const LoginField = ({ onLogin }) => {
   return (
     <Wrapper on>
-      <Form onLogin={onLogin} />
-      <ForgotPassword href="/signup">Forgot password?</ForgotPassword>
+      <AuthGoogle method="login" />
+      {/* <ForgotPassword href="/signup">Forgot password?</ForgotPassword> */}
       <Or>
         <OrLine />
         <OrText>OR</OrText>
       </Or>
-
-      <AuthGoogle method="login" />
+      <Form onLogin={onLogin} />
       {/* <LoginWith
         provider="Spotify"
         icon={spotify}

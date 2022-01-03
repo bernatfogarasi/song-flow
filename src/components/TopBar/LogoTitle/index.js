@@ -8,12 +8,9 @@ const Wrapper = styled(Link)`
   font-size: 18px;
   display: flex;
   align-items: center;
-  color: #ddd;
+  color: #000;
   text-decoration: none;
   transition: 0.2s;
-  :active {
-    filter: brightness(70%);
-  }
   :hover {
     transform: scale(1.1);
   }
@@ -21,6 +18,7 @@ const Wrapper = styled(Link)`
 
 const Icon = styled.img`
   width: 40px;
+  filter: invert();
 `;
 
 const Text = styled.div`

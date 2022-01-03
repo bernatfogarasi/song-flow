@@ -5,12 +5,60 @@ import InputRequirement from "components/InputRequirement";
 import InputField from "components/InputField";
 import { serverRequest } from "functions/requests";
 
-const Wrapper = styled.form``;
+const Wrapper = styled.form`
+  width: 100%;
+`;
+
+const Invalid = styled.div`
+  color: #aa1616;
+  /* border: 1px solid; */
+  width: 90%;
+  margin: auto;
+`;
 
 const Form = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const invalid = {
+    username:
+      username === ""
+        ? true
+        : username.length < 3
+        ? "must be at least 3 characters"
+        : username.length > 20
+        ? "must be at most 20 characters"
+        : !username.match(/^[a-zA-Z0-9_-]*$/)
+        ? "must only contain, letters, numbers, underscores and dashes"
+        : false,
+    email:
+      email === ""
+        ? true
+        : email.length < 6
+        ? "must be at least 6 characters"
+        : !email.match(/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}/)
+        ? "must be valid"
+        : false,
+    password:
+      password === ""
+        ? true
+        : password.length < 8
+        ? "must be at least 8 characters"
+        : false,
+  };
+
+  const onUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const onEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const onPasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -27,67 +75,42 @@ const Form = () => {
     window.location.href = "/signup/confirmation";
   };
 
-  const onUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const onEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const onPasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
   return (
     <Wrapper onSubmit={onSubmit}>
       <InputField
-        autoComplete="nickname"
+        autoComplete="on"
         autoFocus={email.length > 3}
         label="Username"
-        maxLength="20"
-        pattern="^[A-Za-z][A-Za-z0-9_]{2,19}$"
+        maxLength={20}
+        minLength={3}
         required
         value={username}
         onChange={onUsernameChange}
-      >
-        <InputRequirement>
-          Between 3 and 20 characters in length.
-        </InputRequirement>
-        <InputRequirement>
-          Contains only letters, numbers or underscores.
-        </InputRequirement>
-        <InputRequirement>Starts with a letter.</InputRequirement>
-      </InputField>
+      ></InputField>
+      <Invalid>{invalid.username}</Invalid>
       <InputField
         autoComplete="email"
         label="Email"
-        minLength="6"
-        pattern="^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$"
         required
         value={email}
         onChange={onEmailChange}
       />
+      <Invalid>{invalid.email}</Invalid>
       <InputField
         autoComplete="password"
         label="Password"
-        minLength="10"
-        pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$"
+        minLength={10}
         required
         type="password"
         onChange={onPasswordChange}
         value={password}
+      ></InputField>
+      <Invalid>{invalid.password}</Invalid>
+      <SubmitButton
+        disabled={invalid.username || invalid.email || invalid.password}
       >
-        <InputRequirement>More than 10 characters long.</InputRequirement>
-        <InputRequirement>
-          Contains each of the following:
-          <br /> - lowercase letter
-          <br /> - uppercase letter
-          <br /> - number
-          <br /> - special character
-        </InputRequirement>
-      </InputField>
-      <SubmitButton>Sign up</SubmitButton>
+        Sign up
+      </SubmitButton>
     </Wrapper>
   );
 };

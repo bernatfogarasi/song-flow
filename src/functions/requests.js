@@ -12,10 +12,9 @@ const serverHostSocket =
       // ? "ws://192.168.1.104:4000"
       "ws://api.teamlistener.com";
 
-const serverRequest = async (
-  directory,
-  options = { credentials: "include" }
-) => {
+const serverRequest = async (directory, options = {}) => {
+  options.credentials = "include";
+  options.redirect = "follow";
   const response = await fetch(`${serverHost}${directory}`, options);
   try {
     const json = await response.json();

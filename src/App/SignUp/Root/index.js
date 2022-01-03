@@ -3,9 +3,13 @@ import TopBar from "components/TopBar";
 import SignUp from "./SignUpField";
 import Welcome from "./Welcome";
 import OrLogin from "./OrLogin";
+import Page from "components/Page";
 // import video from "assets/ignore/dancing1.mp4";
 
-const Wrapper = styled.div``;
+const Wrapper = styled(Page)`
+  padding: 10px 0;
+  margin: auto;
+`;
 
 // const Video = styled.video`
 //   position: absolute;
@@ -14,11 +18,10 @@ const Wrapper = styled.div``;
 
 const Root = () => {
   return (
-    <Wrapper>
+    <Wrapper logo>
       {/* <Video autoplay muted loop>
         <source src={video} type="video/mp4" />
       </Video> */}
-      <TopBar logo />
       <Welcome />
       <SignUp />
       <OrLogin />

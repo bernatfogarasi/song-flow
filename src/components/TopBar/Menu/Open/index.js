@@ -11,7 +11,7 @@ import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.div`
   width: 100vw;
-  max-width: 200px;
+  max-width: 300px;
   position: absolute;
   right: 0px;
   top: 0px;

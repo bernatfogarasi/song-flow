@@ -62,6 +62,7 @@ const ProfilePicture = () => {
 
   useEffect(() => {
     setLoading(false);
+    console.log(session);
   }, [session]);
 
   const onChange = (event) => {
@@ -104,11 +105,13 @@ const ProfilePicture = () => {
               src={
                 file
                   ? URL.createObjectURL(file)
-                  : `data:${
+                  : session.profilePicture.data === "asd"
+                  ? `data:${
                       session.profilePicture.contentType
                     };base64,${Buffer.from(
                       session.profilePicture.data
-                    ).toString("base64")}` || imageProfile
+                    ).toString("base64")}`
+                  : imageProfile
               }
             />
           )}

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import LoginButton from "./LoginButton";
-import SignUpButton from "./SignUpButton";
 import Open from "./Open";
 
 const Wrapper = styled.div`
@@ -25,7 +23,7 @@ const Line = styled.div`
   width: 30px;
   height: 4px;
   border-radius: 2px;
-  background: #ddd;
+  background: #222;
 `;
 
 const Menu = () => {
@@ -41,14 +39,8 @@ const Menu = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    console.log(open);
-  }, [open]);
-
   return (
     <Wrapper onClick={onClickOpen}>
-      {/* <LoginButton />
-      <SignUpButton /> */}
       <Hamburger>
         <Line />
         <Line />

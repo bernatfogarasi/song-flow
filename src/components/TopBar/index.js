@@ -7,6 +7,7 @@ import Search from "./Search";
 
 const Wrapper = styled.div`
   /* position: sticky; */
+  background: #d6b11c;
   display: flex;
   top: 0px;
   left: 0px;

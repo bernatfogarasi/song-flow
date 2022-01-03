@@ -20,11 +20,15 @@ const Input = styled.input`
   border-radius: 4px;
   font-size: 16px;
   border: none;
-  background: #fff;
+  background: #222;
   padding: 10px;
   padding-right: 40px;
   font-family: MontserratSemibold;
   width: calc(100% - 50px);
+  :focus {
+    outline: none;
+  }
+  color: #ddd;
 `;
 
 const Icon = styled.img`
@@ -34,6 +38,7 @@ const Icon = styled.img`
   transform: translateY(-50%) scale(0.9);
   height: 60%;
   cursor: pointer;
+  filter: invert();
 `;
 
 const IconClickThrough = styled(Icon)`

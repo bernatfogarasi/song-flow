@@ -1,31 +1,38 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.button`
   font-family: MontserratSemibold;
   font-size: 18px;
-  background: #f3ca20;
+  background: #d6b11c;
   width: calc(100% - 20px);
   text-align: center;
-  color: black;
   border: 1px solid #333;
   border-radius: 4px;
   padding: 8px 30px;
   margin: 10px;
   margin-top: 20px;
-  cursor: pointer;
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          opacity: 0.6;
+          color: #555;
+        `
+      : css`
+          color: black;
+          cursor: pointer;
+          :hover {
+            transform: scale(1.05);
+          }
+          :active {
+            background: #816909;
+          }
+        `}
   transition: 0.2s;
-  :hover {
-    transform: scale(1.05);
-  }
-  :active {
-    background: #816909;
-  }
 `;
 
-const SubmitButton = ({ children, disabled, label }) => {
+const SubmitButton = ({ className, children, disabled, ...props }) => {
   return (
-    <Wrapper type="submit" disabled={disabled}>
-      {label}
+    <Wrapper className={className} type="submit" disabled={disabled} {...props}>
       {children}
     </Wrapper>
   );

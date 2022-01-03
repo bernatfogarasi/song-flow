@@ -6,7 +6,7 @@ const Wrapper = styled(Link)`
   color: white;
   text-decoration: none;
   box-sizing: border-box;
-  height: 40px;
+  height: 60px;
   border: 1px solid #333;
   display: flex;
   align-items: center;

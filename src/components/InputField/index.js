@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin: 10px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
 `;
 
@@ -11,7 +13,8 @@ const Label = styled.div`
 
 const Input = styled.input`
   font-size: 16px;
-  width: 300px;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid #333;
   background: #222;
   color: white;

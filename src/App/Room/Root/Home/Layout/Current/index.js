@@ -65,7 +65,9 @@ const Author = styled.div`
   text-overflow: ellipsis;
 `;
 
-const SpinnerLive = styled(SpinnerLiveRaw)``;
+const SpinnerLive = styled(SpinnerLiveRaw)`
+  margin-left: auto;
+`;
 
 const SiteIcon = styled.img`
   justify-self: center;
@@ -75,8 +77,6 @@ const SiteIcon = styled.img`
 `;
 
 const Menu = styled(MenuRaw)``;
-
-const Hint = styled.div``;
 
 const Current = ({ className }) => {
   const [open, setOpen] = useState(false);
@@ -111,7 +111,7 @@ const Current = ({ className }) => {
       onClick={onClick}
       empty={!current?.id}
     >
-      {current?.id ? (
+      {current?.id && (
         <>
           <Index>1</Index>
           <Thumbnail src={current.thumbnailUrl} alt="" />
@@ -127,8 +127,6 @@ const Current = ({ className }) => {
           )}
           {open && <Menu onBinClick={onBinClick} />}
         </>
-      ) : (
-        <Hint></Hint>
       )}
     </Wrapper>
   );

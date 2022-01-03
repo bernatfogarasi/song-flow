@@ -9,13 +9,12 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 40px 40px 40px 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 10px;
-  bottom: 0px;
-  margin-bottom: -20px;
-  border-radius: 4px 4px 0 0;
-  padding: 10px;
-  border: 1px solid #333;
-  border-bottom: none;
-  background-color: #181818;
+  /* bottom: 0px; */
+  /* margin-bottom: -20px; */
+  padding: 30px 20px 0 20px;
+  /* border-radius: 4px 4px 0 0; */
+  /* border-bottom: none; */
+  background-color: #1a1a1a;
   justify-items: center;
   align-items: center;
 `;

@@ -1,10 +1,13 @@
 import { shuffle } from "functions/math";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { css } from "styled-components";
+import Members from "./Members";
 
 const Wrapper = styled(Link)`
   width: 50vw;
   min-width: 200px;
+  max-width: 400px;
   border: 1px solid #333;
   border-radius: 4px;
   color: white;
@@ -27,14 +30,10 @@ const Wrapper = styled(Link)`
   cursor: pointer;
 `;
 
-const Line = styled.div`
-  /* border: 1px solid #333; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const Title = styled.div`
+  color: #d6b11c;
+  display: flex;
+  justify-content: space-between;
   letter-spacing: 0.1em;
   font-family: Montserrat;
 `;
@@ -44,53 +43,6 @@ const Rank = styled.div`
 `;
 
 const Star = styled(Rank)``;
-
-const Participants = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
-  gap: 5px;
-`;
-
-const Participant = styled.div`
-  border-radius: 50%;
-  height: 30px;
-  aspect-ratio: 1;
-  border: 1px solid #333;
-`;
-
-const Genres = styled.div`
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-`;
-
-const Genre = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const GenreRank = styled.div`
-  width: 20px;
-`;
-
-const GenreName = styled.div`
-  color: #777;
-`;
-
-const genres = [
-  "blues",
-  "country",
-  "easy listening",
-  "electronic",
-  "contemporary folk",
-  "hip hop",
-  "jazz",
-  "pop",
-  "r&b and soul",
-  "rock",
-];
 
 const Arrow = styled.div`
   z-index: 0;
@@ -128,41 +80,34 @@ const ArrowShaft = styled(ArrowLine)`
   transform: translateY(-50%);
 `;
 
-const Room = ({ name, url }) => {
+const Activity = styled.div`
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 2px solid #333;
+  border-radius: 50%;
+  ${({ active }) =>
+    active &&
+    css`
+      background: #d6b11c;
+    `}
+`;
+
+const Room = ({ room }) => {
   return (
-    <Wrapper to={url}>
-      <Line>
-        <Title>{name}</Title>
-        {/* <Rank color={ranks[rank].color}>{ranks[rank].text}</Rank> */}
-        {/* {ranks[rank].element} */}
-        <Star />
+    <Wrapper to={room.url}>
+      <Title>
+        <Activity active={room.playing} />
+        {room.name}
         <Arrow className="arrow">
           <ArrowHeapTop />
           <ArrowHeapBottom />
           <ArrowShaft />
         </Arrow>
-      </Line>
-      <Line>
-        <Participants>
-          {Array((name.length % 10) + 1)
-            .fill(0)
-            .map((value, index) => (
-              <Participant key={index} />
-            ))}
-        </Participants>
-      </Line>
-      <Line>
-        <Genres>
-          {shuffle(genres)
-            .slice(0, Math.ceil(Math.random() * 3))
-            .map((genre, index) => (
-              <Genre key={index}>
-                <GenreRank>{["I", "II", "III"][index]}.</GenreRank>
-                <GenreName>{genre}</GenreName>
-              </Genre>
-            ))}
-        </Genres>
-      </Line>
+      </Title>
+      {/* <Rank color={ranks[rank].color}>{ranks[rank].text}</Rank> */}
+      {/* {ranks[rank].element} */}
+      <Members members={room.members}></Members>
     </Wrapper>
   );
 };

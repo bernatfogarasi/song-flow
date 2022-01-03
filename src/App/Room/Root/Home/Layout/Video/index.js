@@ -2,6 +2,8 @@ import { RoomContext } from "context";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import YouTube from "./YouTube";
+import imagePlay from "assets/icons/play.png";
+import imagePause from "assets/icons/pause.png";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -9,28 +11,12 @@ const Wrapper = styled.div`
   aspect-ratio: 16/9;
 `;
 
-const Icon = styled.div`
+const Icon = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
-`;
-
-const PlayIcon = styled(Icon)`
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid white;
-  transform: translateX(calc(-50% + 10px)) translateY(-50%) scaleX(1.6);
-`;
-
-const PauseIcon = styled(Icon)`
-  position: absolute;
-  width: 7px;
-  height: 40px;
-  border-left: 7px solid white;
-  border-right: 7px solid white;
-  transform: translateX(calc(-50% + 10px)) translateY(-50%) scaleX(1.6);
+  height: 50px;
+  transform: translate(-50%, -50%);
 `;
 
 const Overlay = styled.div`
@@ -85,7 +71,13 @@ const Video = ({ className }) => {
         className={playing ? "playing" : "paused"}
         url={current?.thumbnailUrl}
       >
-        {playing ? <PauseIcon /> : <PlayIcon />}
+        {playing ? (
+          <Icon src={imagePause} />
+        ) : (
+          <>
+            <Icon src={imagePlay} />
+          </>
+        )}
       </Overlay>
     </Wrapper>
   );

@@ -14,14 +14,14 @@ const Input = styled.input`
   border: 0px;
   padding: 5px 50px 5px 5px;
   font-size: 30px;
-  width: 100%;
   background: #1a1a1a;
   color: white;
   :focus {
-    outline-style: solid;
-    outline-color: #f3ca20;
-    outline-width: 2px;
+    border: 2px solid #d6b11c;
+    outline: none;
   }
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 const Icon = styled.div`

@@ -68,9 +68,7 @@ const Rooms = ({ className }) => {
       </RoomsHeader>
       <RoomList>
         {session?.rooms &&
-          session.rooms.map(({ name, url }) => (
-            <Room key={name} name={name} url={url} />
-          ))}
+          session.rooms.map((room) => <Room key={room.url} room={room} />)}
       </RoomList>
       {showNewRoomModal && <NewRoomModal onClose={onNewRoomModalClose} />}
     </Wrapper>

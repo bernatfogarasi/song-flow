@@ -20,7 +20,6 @@ const Wrapper = styled.div`
 `;
 
 const IconLogout = styled.img`
-  filter: invert();
   height: 100%;
 `;
 

@@ -3,7 +3,8 @@ import { useContext } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  color: #f3ca20;
+  color: #000;
+  font-weight: bold;
   font-size: 25px;
 `;
 

@@ -56,7 +56,7 @@ const Activity = styled.div`
 `;
 
 const Active = styled(Activity)`
-  background: #f3ca20;
+  background: #d6b11c;
 `;
 
 const Inactive = styled(Activity)`
