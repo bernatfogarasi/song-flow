@@ -1,19 +1,18 @@
 import styled from "styled-components";
 import SubmitButton from "components/SubmitButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputField from "components/InputField";
-import { useLocation } from "react-router";
 import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.form`
   width: 100%;
 `;
 
-const Form = ({ onLogin, ...props }) => {
+const Form = ({ className, onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const location = useLocation();
-  const path = new URLSearchParams(location.search).get("path");
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const path = urlSearchParams.get("path");
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -40,7 +39,7 @@ const Form = ({ onLogin, ...props }) => {
   };
 
   return (
-    <Wrapper onSubmit={onSubmit}>
+    <Wrapper className={className} onSubmit={onSubmit}>
       <InputField
         autoComplete="email"
         label="Email"

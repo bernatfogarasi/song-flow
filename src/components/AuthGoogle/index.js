@@ -43,7 +43,7 @@ const AuthGoogle = ({ className, method }) => {
             ></AuthProvider>
           )}
           onSuccess={responseGoogle}
-          onFailure={console.log("google auth fail")}
+          onFailure={() => console.log("google auth fail")}
         />
       )}
     </Wrapper>

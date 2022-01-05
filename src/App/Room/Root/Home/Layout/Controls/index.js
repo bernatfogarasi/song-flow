@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PreviousButtonRaw from "./PreviousButton";
+// import PreviousButtonRaw from "./PreviousButton";
 import PlayButtonRaw from "./PlayButton";
 import NextButtonRaw from "./NextButton";
 import ProgressBarRaw from "./ProgressBar";
@@ -19,10 +19,10 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const PreviousButton = styled(PreviousButtonRaw)`
-  grid-row: 1;
-  grid-column: 2;
-`;
+// const PreviousButton = styled(PreviousButtonRaw)`
+//   grid-row: 1;
+//   grid-column: 2;
+// `;
 
 const PlayButton = styled(PlayButtonRaw)`
   grid-row: 1;

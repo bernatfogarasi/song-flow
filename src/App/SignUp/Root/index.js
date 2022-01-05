@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import TopBar from "components/TopBar";
 import SignUp from "./SignUpField";
 import Welcome from "./Welcome";
 import OrLogin from "./OrLogin";

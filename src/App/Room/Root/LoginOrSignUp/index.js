@@ -1,5 +1,4 @@
 import ButtonLarge from "components/ButtonLarge";
-import TopBar from "components/TopBar";
 import styled from "styled-components";
 import queryString from "querystring";
 import Page from "components/Page";

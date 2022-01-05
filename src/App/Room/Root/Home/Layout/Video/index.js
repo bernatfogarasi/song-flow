@@ -1,5 +1,5 @@
 import { RoomContext } from "context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import YouTube from "./YouTube";
 import imagePlay from "assets/icons/play.png";

@@ -1,26 +1,26 @@
 import styled from "styled-components";
-import ImageBinaryRaw from "components/ImageBinary";
+import ProfilePicture from "components/ProfilePicture";
+import { sourceBuffer } from "functions/image";
 
-const Wrapper = styled.div`
+const Wrapper = styled(ProfilePicture)`
   border-radius: 50%;
-  height: 30px;
-  aspect-ratio: 1;
+  height: 35px;
   border: 1px solid #333;
-  overflow: hidden;
-`;
-
-const Image = styled(ImageBinaryRaw)`
-  height: 100%;
 `;
 
 const Member = ({ className, member }) => {
   return (
-    <Wrapper className={className} title={member.username}>
-      <Image
-        type={member.profilePicture.contentType}
-        data={member.profilePicture.data}
-      />
-    </Wrapper>
+    <Wrapper
+      className={className}
+      title={member.username}
+      src={
+        member.profilePicture &&
+        sourceBuffer(
+          member.profilePicture.data,
+          member.profilePicture.contentType
+        )
+      }
+    ></Wrapper>
   );
 };
 

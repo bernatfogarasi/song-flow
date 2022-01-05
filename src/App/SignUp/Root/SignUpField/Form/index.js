@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
 import SubmitButton from "components/SubmitButton";
-import InputRequirement from "components/InputRequirement";
 import InputField from "components/InputField";
 import { serverRequest } from "functions/requests";
 
@@ -37,7 +36,7 @@ const Form = () => {
         ? true
         : email.length < 6
         ? "must be at least 6 characters"
-        : !email.match(/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}/)
+        : !email.match(/^[a-z0-9.]+@[a-z]+\.[a-z]{2,3}/)
         ? "must be valid"
         : false,
     password:

@@ -4,9 +4,6 @@ import imageLogout from "assets/icons/logout.png";
 import useClickAway from "hooks/useClickAway";
 import imageClose from "assets/icons/cross.png";
 import imageHome from "assets/icons/home.png";
-import { useState } from "react";
-import NewRoomModal from "components/NewRoomModal";
-import { Link } from "react-router-dom";
 import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.div`
@@ -42,14 +39,13 @@ const ButtonClose = styled.img`
 `;
 
 const Open = ({ className, onClickClose }) => {
-  const [showNewRoomModal, setShowNewRoomModal] = useState(false);
   const { ref } = useClickAway(onClickClose);
 
   const onClickHome = () => {};
 
   const onClickLogout = async () => {
     const json = await serverRequest("/user/logout");
-    if (json.message == "success") window.location.href = "/";
+    if (json.message === "success") window.location.href = "/";
   };
 
   return (

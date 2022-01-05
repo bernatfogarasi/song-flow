@@ -73,8 +73,7 @@ const Search = ({ className }) => {
   );
 
   useEffect(() => {
-    if (requestText === "") setResults([]);
-    if (!requestText) return;
+    if (requestText === "") return setResults([]);
     const fetchData = async () => {
       const json = await serverRequest("/search/youtube", {
         method: "post",
@@ -87,7 +86,7 @@ const Search = ({ className }) => {
       setResults(json.data);
     };
     fetchData();
-  }, [requestText]);
+  }, [requestText, setResults]);
 
   return (
     <Wrapper className={className}>

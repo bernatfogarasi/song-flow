@@ -2,7 +2,7 @@ import styled from "styled-components";
 import spotify from "assets/icons/spotify.png";
 import youtube from "assets/icons/youtube.png";
 import { RoomContext } from "context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const icons = { spotify, youtube };
 

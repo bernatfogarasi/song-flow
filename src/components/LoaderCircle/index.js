@@ -7,9 +7,9 @@ const Wrapper = styled.div`
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  aspect-ratio: 1;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
-
   @keyframes spin {
     0% {
       transform: rotate(0deg);

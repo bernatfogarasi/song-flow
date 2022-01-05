@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import TopBar from "components/TopBar";
 import LoginField from "./LoginField";
 import Welcome from "./Welcome";
 import SignUp from "./SignUp";

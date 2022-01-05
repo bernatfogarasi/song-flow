@@ -1,5 +1,5 @@
 import { RoomContext } from "context";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import Request from "./Request";
 

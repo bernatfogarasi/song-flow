@@ -1,5 +1,5 @@
 import { RoomContext } from "context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -21,36 +21,10 @@ const Member = styled.div`
   align-items: center;
 `;
 
-const MemberProfile = styled.div`
-  background: #333;
-  border: 1px solid #333;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  position: relative;
-  width: 50px;
-`;
-
-const MemberActivity = styled.div`
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  width: 12px;
-  border: 2px solid #333;
-`;
-
-const MemberActive = styled(MemberActivity)`
-  background: orange;
-`;
-
-const MemberInactive = styled(MemberActivity)`
-  background: #111;
-`;
-
 const Activity = styled.div`
   width: 10px;
   height: 10px;
+  aspect-ratio: 1;
   border-radius: 50%;
   box-sizing: border-box;
 `;
@@ -65,10 +39,18 @@ const Inactive = styled(Activity)`
 
 const Text = styled.div`
   opacity: 0.7;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 const Members = ({ className }) => {
-  const { members } = useContext(RoomContext);
+  const { members, onPlaying } = useContext(RoomContext);
+  useEffect(() => {
+    console.log(members);
+    if (!members || !onPlaying) return;
+    if (!members.filter((member) => member.active).length) onPlaying(false);
+  }, [members, onPlaying]);
   return (
     <Wrapper className={className}>
       Members
@@ -78,7 +60,12 @@ const Members = ({ className }) => {
             return x.active === y.active ? 0 : x.active ? -1 : 1;
           })
           .map((member) => (
-            <Member key={member._id}>
+            <Member
+              key={member._id}
+              title={`${member.username} is ${
+                member.active ? "online" : "offline"
+              }`}
+            >
               {member.active ? <Active /> : <Inactive />}
               <Text>{member.username}</Text>
             </Member>

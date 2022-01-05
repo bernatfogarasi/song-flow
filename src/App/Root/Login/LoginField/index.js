@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Form from "./Form";
-import spotify from "assets/icons/spotify_black.png";
 import AuthGoogle from "components/AuthGoogle";
+import AuthSpotify from "components/AuthSpotify";
 
 const Wrapper = styled(Card)`
   display: flex;
@@ -30,16 +30,17 @@ const OrText = styled.div`
   padding: 10px;
 `;
 
-const ForgotPassword = styled.a`
-  margin: 10px;
-  font-size: 14px;
-  color: white;
-`;
+// const ForgotPassword = styled.a`
+//   margin: 10px;
+//   font-size: 14px;
+//   color: white;
+// `;
 
 const LoginField = ({ onLogin }) => {
   return (
     <Wrapper on>
       <AuthGoogle method="login" />
+      <AuthSpotify method="login" />
       {/* <ForgotPassword href="/signup">Forgot password?</ForgotPassword> */}
       <Or>
         <OrLine />

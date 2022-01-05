@@ -18,8 +18,7 @@ const useServerRequest = (
   };
 
   useEffect(() => {
-    if (!count) return;
-
+    if (!count || !directory || !options) return;
     const fetchData = async () => {
       try {
         const response = await fetch(`${serverHost}${directory}`, options);
@@ -36,6 +35,7 @@ const useServerRequest = (
       }
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return { json, message, status, error, run };

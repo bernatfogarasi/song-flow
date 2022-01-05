@@ -13,7 +13,7 @@ const useClickAway = (callback) => {
     document.addEventListener("click", onClickAway, true);
     document.addEventListener("contextmenu", onClickAway, true);
     document.onkeydown = function (event) {
-      if (event.key == "Escape") {
+      if (event.key === "Escape") {
         callback();
       }
     };

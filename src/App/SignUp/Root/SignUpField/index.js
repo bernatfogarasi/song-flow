@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Form from "./Form";
-import spotify from "assets/icons/spotify_black.png";
-import google from "assets/icons/google_black.png";
 import AuthGoogle from "components/AuthGoogle";
+import AuthSpotify from "components/AuthSpotify";
 
 const Wrapper = styled(Card)`
   display: flex;
@@ -35,6 +34,7 @@ const Login = () => {
   return (
     <Wrapper on>
       <AuthGoogle method="signup" />
+      <AuthSpotify method="signup" />
       <Or>
         <OrLine />
         <OrText>OR</OrText>

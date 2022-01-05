@@ -6,6 +6,8 @@ import imageProfile from "assets/icons/profile.jpg";
 import imageAccept from "assets/icons/accept.png";
 import imageReject from "assets/icons/reject.png";
 import LoaderCircle from "components/LoaderCircle";
+import imageCompression from "browser-image-compression";
+import ProfilePictureRaw from "components/ProfilePicture";
 
 const Wrapper = styled.div``;
 
@@ -20,10 +22,9 @@ const Label = styled.label`
   justify-content: center;
   width: 100px;
   height: 100px;
-  aspect-ratio: 1;
+  /* aspect-ratio: 1; */
   border-radius: 50%;
   transition: 0.2s;
-  border: 2px solid #888;
   cursor: pointer;
   :hover {
     transform: scale(1.1);
@@ -33,8 +34,8 @@ const Label = styled.label`
   align-items: center;
 `;
 
-const Profile = styled.img`
-  height: 100%;
+const ProfilePicture = styled(ProfilePictureRaw)`
+  border: 2px solid;
 `;
 
 const Edit = styled.input`
@@ -55,28 +56,33 @@ const ButtonImage = styled.img`
   height: 100%;
 `;
 
-const ProfilePicture = () => {
+const Profile = () => {
   const { session, refreshSession } = useContext(SessionContext);
   const [file, setFile] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(false);
-    console.log(session);
   }, [session]);
 
-  const onChange = (event) => {
-    setFile(event.target.files?.[0]);
+  const onChange = async (event) => {
+    console.log("Change");
+    const fileOriginal = event.target.files?.[0];
+    event.target.value = "";
+    if (!fileOriginal) return;
+    const options = { maxSizeMB: 0.05, maxWidthOrHeight: 256 };
+    const fileReduced = await imageCompression(fileOriginal, options);
+    setFile(fileReduced);
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (event) => {
+    event.preventDefault();
     if (!file) return;
     setLoading(true);
     setFile("");
     const formData = new FormData();
     formData.append("file", file);
-    const json = await serverRequest("/user/edit/profile-picture", {
+    await serverRequest("/user/edit/profile-picture", {
       method: "POST",
       credentials: "include",
       body: formData,
@@ -85,7 +91,7 @@ const ProfilePicture = () => {
   };
 
   const onCancel = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     setFile("");
   };
 
@@ -101,22 +107,22 @@ const ProfilePicture = () => {
           {loading ? (
             <LoaderCircle />
           ) : (
-            <Profile
+            <ProfilePicture
               src={
                 file
                   ? URL.createObjectURL(file)
-                  : session.profilePicture.data === "asd"
+                  : session.profilePicture.data
                   ? `data:${
                       session.profilePicture.contentType
                     };base64,${Buffer.from(
                       session.profilePicture.data
                     ).toString("base64")}`
-                  : imageProfile
+                  : session.profilePicture.url || imageProfile
               }
             />
           )}
         </Label>
-        <Edit type="file" id="input" onChange={onChange} />
+        <Edit type="file" id="input" onChange={onChange} on />
         {file && (
           <Button onClick={onCancel}>
             <ButtonImage src={imageReject} />
@@ -127,4 +133,4 @@ const ProfilePicture = () => {
   );
 };
 
-export default ProfilePicture;
+export default Profile;

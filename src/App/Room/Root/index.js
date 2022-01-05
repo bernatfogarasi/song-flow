@@ -2,24 +2,21 @@ import LoadingScreen from "components/LoadingScreen";
 import { SessionContext } from "context";
 import { serverRequest } from "functions/requests";
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import Home from "./Home";
 import LoginOrSignUp from "./LoginOrSignUp";
 import NotFound from "./NotFound";
 import Request from "./Request";
 import Waiting from "./Waiting";
 
-const Wrapper = styled.div``;
-
 const Room = () => {
   const { session, error } = useContext(SessionContext);
   const [roomExists, setRoomExists] = useState();
-  const shortId = window.location.pathname.split("/").pop();
   const [permission, setPermission] = useState();
   const [waiting, setWaiting] = useState();
   const [info, setInfo] = useState();
 
   useEffect(() => {
+    const shortId = window.location.pathname.split("/").pop();
     const fetchData = async () => {
       const json = await serverRequest(`/room/get?shortId=${shortId}`);
       setPermission(json.message !== "not member");
@@ -41,7 +38,7 @@ const Room = () => {
   ) : !roomExists ? (
     <NotFound />
   ) : session ? (
-    <Home shortId={shortId} />
+    <Home />
   ) : (
     <LoadingScreen />
   );

@@ -1,6 +1,4 @@
-import styled from "styled-components";
-import YouTubeApi from "react-youtube";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { RoomContext } from "context";
 import ReactPlayer from "react-player";
 
@@ -14,40 +12,17 @@ const YouTube = ({ className }) => {
     ref.current.seekTo(progress);
   }, [progress]);
 
-  const options = {
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      modestbranding: 1,
-      rel: 0,
-      iv_load_policy: 0,
-    },
-  };
-
-  // useEffect(() => {
-  //   const pause = () => {
-  //     if (!player) return;
-  //     player.pauseVideo();
-  //   };
-
-  //   const play = () => {
-  //     if (!player) return;
-  //     player.playVideo();
-  //   };
-  //   playing ? play() : pause();
-  // }, [playing, player]);
+  // const options = {
+  //   playerVars: {
+  //     autoplay: 1,
+  //     controls: 0,
+  //     modestbranding: 1,
+  //     rel: 0,
+  //     iv_load_policy: 0,
+  //   },
+  // };
 
   return (
-    //   videoId={current && current.id}
-    //   // videoId={"qTGbWfEEnKI"}
-    //   opts={options}
-    //   onReady={(event) => {
-    //     setPlayer(event.target);
-    //     // onPlaying(true);
-    //   }}
-    //   onPlay={() => onPlaying(true)}
-    //   onStateChange={console.log}
-    // ></Wrapper>
     <ReactPlayer
       ref={ref}
       width="1100%"

@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import TopBar from "components/TopBar";
 import PersonalInfo from "./PersonalInfo";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import RoomsRaw from "./Rooms";
 import { SessionContext } from "context";
 import Page from "components/Page";
@@ -16,7 +15,11 @@ const Rooms = styled(RoomsRaw)`
 `;
 
 const Home = () => {
-  const { session } = useContext(SessionContext);
+  const { session, refreshSession } = useContext(SessionContext);
+  useEffect(() => {
+    refreshSession();
+    //eslint-disable-next-line
+  }, []);
   return (
     <Wrapper logo menu search logout>
       <PersonalInfo username={session?.username} />

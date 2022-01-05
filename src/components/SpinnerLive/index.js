@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { RoomContext } from "context";
 import styled from "styled-components";
-import { css } from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;

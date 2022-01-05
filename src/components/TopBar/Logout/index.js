@@ -1,4 +1,3 @@
-import IconLogoutRaw from "components/IconLogout";
 import styled from "styled-components";
 import imageLogout from "assets//icons/logout.png";
 import { serverRequest } from "functions/requests";
@@ -26,7 +25,7 @@ const IconLogout = styled.img`
 const Logout = ({ className }) => {
   const onClick = async () => {
     const json = await serverRequest("/user/logout");
-    if (json.message == "success") window.location.href = "/";
+    if (json.message === "success") window.location.href = "/";
   };
   return (
     <Wrapper className={className} onClick={onClick}>

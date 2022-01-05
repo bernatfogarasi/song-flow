@@ -7,7 +7,7 @@ import { RoomContext } from "context";
 
 const Wrapper = styled.div``;
 
-const Home = ({ shortId }) => {
+const Home = () => {
   const [socket, setSocket] = useState();
   const [drag, setDrag] = useState();
   const [dragElement, setDragElement] = useState();
@@ -22,6 +22,7 @@ const Home = ({ shortId }) => {
   const [name, setName] = useState();
 
   useEffect(() => {
+    const shortId = window.location.pathname.split("/").pop();
     setSocket(
       io(`${serverHostSocket}?shortId=${shortId}`, {
         transports: ["websocket"],

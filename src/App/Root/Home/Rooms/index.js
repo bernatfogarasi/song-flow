@@ -2,7 +2,7 @@ import styled from "styled-components";
 import NewRoomButton from "./NewRoomButton";
 import Room from "./Room";
 import NewRoomModal from "components/NewRoomModal";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { SessionContext } from "context";
 
 const Wrapper = styled.div`

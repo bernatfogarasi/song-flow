@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProfilePicture from "./ProfilePicture";
+import Profile from "./Profile";
 import Username from "./Username";
 
 const Wrapper = styled.div`
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const PersonalInfo = ({ username }) => {
   return (
     <Wrapper>
-      <ProfilePicture />
+      <Profile />
       <Username text={username} />
     </Wrapper>
   );

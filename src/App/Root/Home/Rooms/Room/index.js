@@ -1,4 +1,3 @@
-import { shuffle } from "functions/math";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { css } from "styled-components";
@@ -37,12 +36,6 @@ const Title = styled.div`
   letter-spacing: 0.1em;
   font-family: Montserrat;
 `;
-
-const Rank = styled.div`
-  color: ${({ color }) => color};
-`;
-
-const Star = styled(Rank)``;
 
 const Arrow = styled.div`
   z-index: 0;
@@ -105,8 +98,6 @@ const Room = ({ room }) => {
           <ArrowShaft />
         </Arrow>
       </Title>
-      {/* <Rank color={ranks[rank].color}>{ranks[rank].text}</Rank> */}
-      {/* {ranks[rank].element} */}
       <Members members={room.members}></Members>
     </Wrapper>
   );

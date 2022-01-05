@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import GlobalStyle from "style/globalStyle";
-import {
-  Redirect,
-  Route,
-  Switch,
-  useLocation,
-  withRouter,
-} from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Root from "./Root";
 import Room from "./Room/Root";
 import SignUp from "./SignUp/Root";
@@ -23,7 +17,6 @@ const Wrapper = styled.div`
 
 const App = () => {
   const { session, refreshSession, error } = useSession();
-  const location = useLocation();
   const onContextMenu = (event) => {
     // event.preventDefault();
   };

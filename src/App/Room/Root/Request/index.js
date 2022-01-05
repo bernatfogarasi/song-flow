@@ -1,4 +1,3 @@
-import Button from "components/Button";
 import Page from "components/Page";
 import styled from "styled-components";
 import ButtonLarge from "components/ButtonLarge";
@@ -32,7 +31,7 @@ const MembersCount = styled.div``;
 
 const Request = ({ className, info }) => {
   const onClick = async () => {
-    const json = await serverRequest("/room/request", {
+    await serverRequest("/room/request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

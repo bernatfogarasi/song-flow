@@ -9,10 +9,9 @@ import LoaderCircleRaw from "components/LoaderCircle";
 const Wrapper = styled.form``;
 
 const LoaderCircle = styled(LoaderCircleRaw)`
-  width: 14px;
-  height: 14px;
-  border: 4px solid;
-  margin: auto;
+  height: 100%;
+  aspect-ratio: 1;
+  margin: 0 auto;
   border-color: black transparent;
 `;
 
@@ -49,11 +48,11 @@ const Form = ({ onClose }) => {
         required
       />
       {loading ? (
-        <SubmitButton label="" disabled>
+        <SubmitButton disabled>
           <LoaderCircle />
         </SubmitButton>
       ) : (
-        <SubmitButton label="Create room" />
+        <SubmitButton>Create room</SubmitButton>
       )}
     </Wrapper>
   );
