@@ -3,13 +3,13 @@ import { RoomContext } from "context";
 import ReactPlayer from "react-player";
 
 const YouTube = ({ className }) => {
-  const { current, playing, onPlaying, progress, setProgressBar } =
+  const { current, playing, progress, onNext, setProgressBar } =
     useContext(RoomContext);
 
   const ref = useRef();
 
   useEffect(() => {
-    ref.current.seekTo(progress);
+    if (ref?.current) ref.current.seekTo(progress);
   }, [progress]);
 
   // const options = {
@@ -31,10 +31,10 @@ const YouTube = ({ className }) => {
       className={className}
       url={current?.url}
       progressInterval={0}
-      onPlay={() => onPlaying(true)}
       onProgress={(event) => {
         setProgressBar(event.played);
       }}
+      onEnded={() => onNext()}
       playing={playing}
     ></ReactPlayer>
   );

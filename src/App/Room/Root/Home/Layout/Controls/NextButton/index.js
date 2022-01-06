@@ -1,12 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { RoomContext } from "context";
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
-  cursor: pointer;
-  ${({ active }) => (active ? "opacity : 0.8" : "opacity: 0.3")};
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          opacity: 0.3;
+        `
+      : css`
+          cursor: pointer;
+          opacity: 0.8;
+        `};
 `;
 
 const Triangle = styled.div`
@@ -27,18 +36,14 @@ const Rectangle = styled.div`
 `;
 
 const NextButton = ({ className }) => {
-  const { queue, onCurrent } = useContext(RoomContext);
-  const [active, setActive] = useState();
+  const { queue, onNext } = useContext(RoomContext);
 
   const onClick = () => {
-    if (queue && queue.length > 0) onCurrent(queue[0], 0);
+    onNext();
   };
 
-  useEffect(() => {
-    setActive(Boolean(queue && queue.length > 0));
-  }, [queue]);
   return (
-    <Wrapper className={className} onClick={onClick} active={active}>
+    <Wrapper className={className} onClick={onClick} disabled={!queue?.length}>
       <Triangle />
       <Rectangle />
     </Wrapper>

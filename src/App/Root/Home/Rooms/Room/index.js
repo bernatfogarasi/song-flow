@@ -7,6 +7,7 @@ const Wrapper = styled(Link)`
   width: 50vw;
   min-width: 200px;
   max-width: 400px;
+  height: 200px;
   border: 1px solid #333;
   border-radius: 4px;
   color: white;

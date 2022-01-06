@@ -1,15 +1,13 @@
 import { RoomContext } from "context";
 import { useContext, useState } from "react";
 import styled from "styled-components";
-// import spotify from "assets/icons/spotify.png";
-import youtube from "assets/icons/youtube.png";
+import imageSpotify from "assets/icons/spotify.png";
+import imageYoutube from "assets/icons/youtube.png";
 import useClickAway from "hooks/useClickAway";
 import MenuRaw from "components/Menu";
 
 const Wrapper = styled.div`
   display: flex;
-  /* grid-template-columns: auto auto 1fr auto;
-  grid-template-rows: 50% 50%; */
   gap: 15px;
   &.over {
     ::before {
@@ -22,7 +20,6 @@ const Wrapper = styled.div`
     }
     border-top: 50px solid transparent;
   }
-  /* border-top-color: transparent; */
   position: relative;
   font-family: Montserrat;
   cursor: pointer;
@@ -40,8 +37,10 @@ const Index = styled.div`
 
 const Thumbnail = styled.img`
   height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   pointer-events: none;
-  border: 1px solid;
+  border: 1px solid #333;
 `;
 
 const TitleAuthor = styled.div`
@@ -75,18 +74,12 @@ const SiteIcon = styled.img`
 
 const Menu = styled(MenuRaw)``;
 
-const Item = ({ className, index, data }) => {
+const siteIcons = { spotify: imageSpotify, youtube: imageYoutube };
+
+const Item = ({ className, index, content }) => {
   const [open, setOpen] = useState(false);
-  const { id, title, author, thumbnailUrl } = data;
-  const {
-    drag,
-    setDrag,
-    dragElement,
-    setDragElement,
-    onQueue,
-    onCurrent,
-    onRemove,
-  } = useContext(RoomContext);
+  const { dragElement, setDragElement, onCurrent, onRemove, onInsert, onMove } =
+    useContext(RoomContext);
 
   const onClickAway = () => {
     setOpen(false);
@@ -94,57 +87,9 @@ const Item = ({ className, index, data }) => {
 
   const { ref } = useClickAway(onClickAway);
 
-  const onDragStart = (event) => {
-    setDragElement(event.target);
-    setDrag(true);
-
-    event.dataTransfer.setData(
-      "text/plain",
-      JSON.stringify({ ...data, from: index })
-    );
-  };
-
-  const onDragEnd = (event) => {
-    setDragElement(undefined);
-    setDrag(false);
-
-    event.target.classList.remove("over");
-  };
-
-  const onDragEnter = (event) => {
-    event.stopPropagation();
-    event.target.classList.add("over");
-    if (dragElement === event.target || !drag) return;
-  };
-
-  const onDragOver = (event) => {
-    if (dragElement === event.target || !drag) return;
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
-  const onDragLeave = (event) => {
-    event.stopPropagation();
-    event.target.classList.remove("over");
-    if (dragElement === event.target || !drag) return;
-  };
-
-  const onDrop = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    if (dragElement === event.target || !drag) return;
-    setDragElement(undefined);
-    const { from, ...data } = JSON.parse(
-      event.dataTransfer.getData("text/plain")
-    );
-    setDrag(undefined);
-    event.target.classList.remove("over");
-    onQueue(data, from, index);
-    // dragElement.style.display = "none";
-  };
-
   const onClick = () => {
-    onCurrent(data, index);
+    onCurrent(content);
+    onRemove(index);
   };
 
   const onContextMenu = (event) => {
@@ -152,30 +97,72 @@ const Item = ({ className, index, data }) => {
     setOpen(!open);
   };
 
+  const onDragStart = (event) => {
+    setDragElement(event.target);
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({ ...content, from: index })
+    );
+  };
+
+  const onDragEnd = (event) => {
+    setDragElement(undefined);
+    event.target.classList.remove("over");
+  };
+
+  const onDragEnter = (event) => {
+    event.stopPropagation();
+    event.target.classList.add("over");
+  };
+
+  const onDragOver = (event) => {
+    if (dragElement === event.target) return;
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const onDragLeave = (event) => {
+    event.stopPropagation();
+    event.target.classList.remove("over");
+  };
+
+  const onDrop = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    event.target.classList.remove("over");
+    setDragElement(undefined);
+    const { from, ...content } = JSON.parse(
+      event.dataTransfer.getData("text/plain")
+    );
+    event.target.classList.remove("over");
+    if (Number.isInteger(from)) onMove(from, index);
+    else onInsert(content, index);
+  };
+
   return (
     <Wrapper
       ref={ref}
       className={className}
       onContextMenu={onContextMenu}
-      key={id}
+      key={content.id}
       draggable
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
-      onDrop={(event) => onDrop(event, id)}
+      onDrop={(event) => onDrop(event, content.id)}
       onClick={onClick}
     >
       <Index>{index + 2}</Index>
-      <Thumbnail src={thumbnailUrl} alt="" />
+      <Thumbnail src={content.thumbnailUrl} alt="" />
       {!open && (
         <>
           <TitleAuthor>
-            <Title title={title}>{title}</Title>
-            <Author title={author}>{author}</Author>
+            <Title title={content.title}>{content.title}</Title>
+            <Author title={content.author}>{content.author}</Author>
           </TitleAuthor>
-          <SiteIcon src={youtube} />
+          <SiteIcon src={siteIcons[content.site]} />
         </>
       )}
       {open && <Menu onBinClick={() => onRemove(index)} />}

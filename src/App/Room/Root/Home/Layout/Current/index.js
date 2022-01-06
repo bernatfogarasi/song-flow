@@ -36,10 +36,11 @@ const Index = styled.div`
 `;
 
 const Thumbnail = styled.img`
-  border: 1px solid;
   height: 100%;
-
+  aspect-ratio: 1;
+  object-fit: cover;
   pointer-events: none;
+  border: 1px solid #333;
 `;
 
 const TitleAuthor = styled.div`
@@ -80,7 +81,7 @@ const Menu = styled(MenuRaw)``;
 
 const Current = ({ className }) => {
   const [open, setOpen] = useState(false);
-  const { onRemove, current, playing, onPlaying } = useContext(RoomContext);
+  const { current, playing, onPlaying, onNext } = useContext(RoomContext);
 
   const onClickAway = () => {
     setOpen(false);
@@ -99,7 +100,7 @@ const Current = ({ className }) => {
   };
 
   const onBinClick = () => {
-    onRemove(-1);
+    onNext();
     setOpen(false);
   };
 

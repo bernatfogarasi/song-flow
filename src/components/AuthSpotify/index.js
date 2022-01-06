@@ -10,7 +10,13 @@ const AuthSpotify = ({ className, method }) => {
   const authEndpoint = "https://accounts.spotify.com/authorize";
   const redirectUrl = "http://localhost:3000/";
   const clientId = "f791df7f17f84cd69dc57dd991a5dd33";
-  const scopes = ["user-read-private", "user-read-email"];
+  const scopes = [
+    "user-read-private",
+    "user-read-email",
+    "streaming",
+    "user-read-playback-state",
+    "user-modify-playback-state",
+  ];
   const loginUrl = `${authEndpoint}?client_id=${encodeURIComponent(
     clientId
   )}&response_type=code&redirect_uri=${encodeURIComponent(

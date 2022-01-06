@@ -1,7 +1,7 @@
 import { RoomContext } from "context";
 import useMousePosition from "hooks/useMousePosition";
 import { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const height = "20px";
 
@@ -10,14 +10,26 @@ const Wrapper = styled.div`
   background: #333;
   width: 100%;
   /* border-radius: 4px; */
-  cursor: pointer;
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          opacity: 0.5;
+        `
+      : css`
+          cursor: pointer;
+        `}
 `;
 
 const Fill = styled.div`
   /* border-radius: 4px; */
   height: ${height};
   background: #d6b11c;
-  cursor: pointer;
+  transition: 0.3s;
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      cursor: pointer;
+    `};
 `;
 
 const Cursor = styled.div`
@@ -26,25 +38,36 @@ const Cursor = styled.div`
   box-sizing: border-box;
   height: ${height};
   position: absolute;
-  cursor: pointer;
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      cursor: pointer;
+    `}
 `;
 
 const CursorLine = styled.div`
-  transform: translateX(-50%);
-  top: -2px;
-  position: absolute;
-  cursor: pointer;
   height: ${height};
   width: 2px;
+  position: absolute;
+  top: -2px;
+  transform: translateX(-50%);
   background: black;
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      cursor: pointer;
+    `}
 `;
 
 const ProgressBar = ({ className }) => {
+  const { progressBar, current, onProgress } = useContext(RoomContext);
   const [hover, setHover] = useState();
   const mouse = useMousePosition();
-  const { progressBar, onProgress } = useContext(RoomContext);
+
+  const disabled = !current?.id;
 
   const onMouseEnter = () => {
+    if (disabled) return;
     setHover(true);
   };
 
@@ -53,6 +76,7 @@ const ProgressBar = ({ className }) => {
   };
 
   const onClick = (event) => {
+    if (disabled) return;
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
     onProgress(x / bounds.width);
@@ -64,11 +88,15 @@ const ProgressBar = ({ className }) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      disabled={disabled}
     >
-      <Fill style={{ width: `calc(100% * ${progressBar})` }}>
+      <Fill
+        disabled={disabled}
+        style={{ width: `calc(100% * ${progressBar})` }}
+      >
         {hover && (
-          <Cursor style={{ left: mouse.x - 3 }}>
-            <CursorLine />
+          <Cursor disabled={disabled} style={{ left: mouse.x - 3 }}>
+            <CursorLine disabled={disabled} />
           </Cursor>
         )}
       </Fill>

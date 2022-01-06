@@ -17,6 +17,7 @@
     "react-spotify-web-playback": "^0.9.1",
     "react-youtube": "^7.13.1",
     "socket.io-client": "^4.4.0",
+    "spotify-web-api-node": "^5.0.2",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },

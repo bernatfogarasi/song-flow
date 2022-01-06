@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PersonalInfo from "./PersonalInfo";
+import PersonalInfoRaw from "./PersonalInfo";
 import { useContext, useEffect } from "react";
 import RoomsRaw from "./Rooms";
 import { SessionContext } from "context";
@@ -7,12 +7,23 @@ import Page from "components/Page";
 
 const Wrapper = styled(Page)`
   gap: 50px;
-  padding-top: 100px;
+  @media (max-width: 800px) {
+    padding-top: 20px;
+  }
+  @media (min-width: 800px) {
+    padding-top: 100px;
+  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-around;
+  align-items: center;
 `;
 
-const Rooms = styled(RoomsRaw)`
-  margin: auto;
-`;
+const Rooms = styled(RoomsRaw)``;
+
+const PersonalInfo = styled(PersonalInfoRaw)``;
 
 const Home = () => {
   const { session, refreshSession } = useContext(SessionContext);

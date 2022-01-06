@@ -19,26 +19,27 @@ const Button = styled.img`
   filter: brightness(0);
   cursor: pointer;
 `;
+const Name = styled.div``;
 
 const ButtonAccept = styled(Button)``;
 
 const ButtonReject = styled(Button)``;
 
 const Request = ({ className, request, index }) => {
-  const { onAccept, onReject } = useContext(RoomContext);
+  const { onRequestAccept, onRequestRemove } = useContext(RoomContext);
 
   const onClickAccept = () => {
-    onAccept(index);
+    onRequestAccept(index);
   };
   const onClickReject = () => {
-    onReject(index);
+    onRequestRemove(index);
   };
 
   return (
     <Wrapper className={className}>
       <ButtonAccept src={ImageAccept} onClick={onClickAccept} />
       <ButtonReject src={ImageReject} onClick={onClickReject} />
-      {request.username}
+      <Name>{request.username}</Name>
     </Wrapper>
   );
 };

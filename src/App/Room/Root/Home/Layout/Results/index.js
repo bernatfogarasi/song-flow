@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import Result from "./Result";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RoomContext } from "context";
 import { css } from "styled-components";
+import Result from "./Result";
+import { mergeChunks } from "functions/math";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   overflow-x: hidden;
-
-  gap: 15px;
   border-radius: 4px;
   ::-webkit-scrollbar {
     width: 10px;
@@ -30,11 +29,21 @@ const Wrapper = styled.div`
 `;
 
 const Results = ({ className }) => {
-  const { results } = useContext(RoomContext);
+  const { resultsYoutube, resultsSpotify } = useContext(RoomContext);
+  const [results, setResults] = useState([]);
+  const chunkSize = 3;
+
+  useEffect(() => {
+    if (!resultsSpotify?.length || !resultsYoutube?.length)
+      return setResults([]);
+    setResults(mergeChunks([resultsSpotify, resultsYoutube], chunkSize));
+  }, [resultsYoutube, resultsSpotify, chunkSize]);
+
   return (
-    <Wrapper className={className} empty={!results?.length}>
-      {results &&
-        results.map((result) => <Result key={result.url} data={result} />)}
+    <Wrapper className={className} empty={!results.length}>
+      {results?.map((content) => {
+        return <Result key={content.id} content={content} />;
+      })}
     </Wrapper>
   );
 };

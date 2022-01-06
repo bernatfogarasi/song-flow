@@ -6,14 +6,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
-  margin: auto;
+  @media (max-width: 800px) {
+    height: 20vw;
+  }
   justify-content: space-between;
   align-items: center;
 `;
 
-const PersonalInfo = ({ username }) => {
+const PersonalInfo = ({ className, username }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Profile />
       <Username text={username} />
     </Wrapper>

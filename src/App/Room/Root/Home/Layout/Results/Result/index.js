@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import spotify from "assets/icons/spotify.png";
-import youtube from "assets/icons/youtube.png";
+import imageYoutube from "assets/icons/youtube.png";
+import imageSpotify from "assets/icons/spotify.png";
 import { RoomContext } from "context";
 import { useContext } from "react";
-
-const icons = { spotify, youtube };
+import TimeRaw from "components/Time";
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,13 +21,18 @@ const Wrapper = styled.div`
 
 const Thumbnail = styled.img`
   height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   pointer-events: none;
+  border: 1px solid #333;
 `;
 
 const TitleAuthor = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  gap: 3px;
+  width: 100%;
 `;
 
 const Title = styled.div`
@@ -48,51 +52,57 @@ const Author = styled.div`
   text-overflow: ellipsis;
 `;
 
-const SiteIcon = styled.img`
-  width: 20px;
-  pointer-events: none;
+const Time = styled(TimeRaw)`
+  opacity: 0.6;
+  min-width: 60px;
+  text-align: right;
   margin-left: auto;
 `;
 
-const Result = ({ data }) => {
-  const { setDrag, onQueue } = useContext(RoomContext);
+const SiteIcon = styled.img`
+  width: 20px;
+  pointer-events: none;
+`;
 
-  const onDragStart = (event) => {
-    setDrag(true);
-    event.dataTransfer.effectAllowed = "move";
-    event.dataTransfer.setData(
-      "text/plain",
-      JSON.stringify({ ...data, from: undefined })
-    );
+const siteIcons = { spotify: imageSpotify, youtube: imageYoutube };
+
+const Result = ({ className, content }) => {
+  const { onInsert, setDragElement } = useContext(RoomContext);
+
+  const onContextMenu = (event) => {
+    event.preventDefault();
   };
 
-  const onDrag = (event) => {};
+  const onDragStart = (event) => {
+    setDragElement(event.target);
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", JSON.stringify({ ...content }));
+  };
 
   const onDragEnd = (event) => {
-    setDrag(false);
+    setDragElement(undefined);
   };
 
   const onClick = () => {
-    onQueue(data);
+    onInsert(content);
   };
 
   return (
     <Wrapper
-      onContextMenu={(event) => event.preventDefault()}
-      key={data.thumbnailUrl}
+      className={className}
+      onContextMenu={onContextMenu}
       draggable
-      onDrag={onDrag}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onClick={onClick}
     >
-      <Thumbnail src={data.thumbnailUrl} alt="" />
+      <Thumbnail src={content.thumbnailUrl} alt="" />
       <TitleAuthor>
-        <Title title={data.title}>{data.title}</Title>
-        <Author>{data.author}</Author>
+        <Title title={content.title}>{content.title}</Title>
+        <Author>{content.author}</Author>
       </TitleAuthor>
-
-      <SiteIcon src={icons[data.site]} alt="" />
+      <Time duration={content.duration} type="duration"></Time>
+      <SiteIcon src={siteIcons[content.site]} alt="" />
     </Wrapper>
   );
 };

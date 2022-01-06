@@ -45,31 +45,24 @@ const Text = styled.div`
 `;
 
 const Members = ({ className }) => {
-  const { members, onPlaying } = useContext(RoomContext);
-  useEffect(() => {
-    console.log(members);
-    if (!members || !onPlaying) return;
-    if (!members.filter((member) => member.active).length) onPlaying(false);
-  }, [members, onPlaying]);
+  const { members } = useContext(RoomContext);
+
+  const sortActivity = (members) =>
+    members.sort((x, y) => (x.active === y.active ? 0 : x.active ? -1 : 1));
+
+  const title = (member) =>
+    `${member.username} is ${member.active ? "online" : "offline"}`;
+
   return (
     <Wrapper className={className}>
       Members
       {members &&
-        members
-          .sort((x, y) => {
-            return x.active === y.active ? 0 : x.active ? -1 : 1;
-          })
-          .map((member) => (
-            <Member
-              key={member._id}
-              title={`${member.username} is ${
-                member.active ? "online" : "offline"
-              }`}
-            >
-              {member.active ? <Active /> : <Inactive />}
-              <Text>{member.username}</Text>
-            </Member>
-          ))}
+        sortActivity(members).map((member) => (
+          <Member key={member._id} title={title(member)}>
+            {member.active ? <Active /> : <Inactive />}
+            <Text>{member.username}</Text>
+          </Member>
+        ))}
     </Wrapper>
   );
 };

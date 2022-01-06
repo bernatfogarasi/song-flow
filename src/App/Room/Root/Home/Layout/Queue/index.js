@@ -6,6 +6,7 @@ import Item from "./Item";
 const Wrapper = styled.div`
   display: flex;
   border-radius: 4px;
+  transition: 0.4s;
   ${({ hint }) =>
     hint
       ? css`
@@ -39,34 +40,41 @@ const Hint = styled.div`
 `;
 
 const Queue = ({ className }) => {
-  const { queue, onQueue, drag, setDrag } = useContext(RoomContext);
+  const { queue, onInsert, onMove, dragElement, setDragElement } =
+    useContext(RoomContext);
 
   const onDragEnter = (event) => {
-    if (!drag) return;
+    if (!dragElement) return;
     event.target.style.background = "#222";
   };
 
   const onDragOver = (event) => {
-    if (!drag) return;
+    if (!dragElement) return;
     event.preventDefault();
     event.stopPropagation();
   };
 
   const onDragLeave = (event) => {
-    if (!drag) return;
+    if (!dragElement) return;
     event.target.style.background = "transparent";
   };
 
   const onDrop = (event) => {
-    if (!drag) return;
+    if (!dragElement) return;
     event.target.style.background = "transparent";
     event.preventDefault();
     event.stopPropagation();
-    const { from, ...data } = JSON.parse(
+    const { from, ...content } = JSON.parse(
       event.dataTransfer.getData("text/plain")
     );
-    setDrag(undefined);
-    onQueue(data, from);
+
+    console.log(
+      "data-drop",
+      JSON.parse(event.dataTransfer.getData("text/plain"))
+    );
+    if (Number.isInteger(from)) onMove(from);
+    else onInsert(content);
+    setDragElement(undefined);
   };
 
   return (
@@ -76,11 +84,11 @@ const Queue = ({ className }) => {
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      hint={!queue || queue.length === 0}
+      hint={!queue?.length}
     >
-      {queue?.length > 0 ? (
-        queue.map((data, index) => (
-          <Item key={data._id} data={data} index={index}></Item>
+      {queue?.length ? (
+        queue.map((content, index) => (
+          <Item key={content._id} content={content} index={index}></Item>
         ))
       ) : (
         <Hint>Queue is empty</Hint>

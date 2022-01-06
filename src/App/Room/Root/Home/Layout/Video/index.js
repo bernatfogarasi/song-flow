@@ -1,14 +1,17 @@
+import styled from "styled-components";
 import { RoomContext } from "context";
 import { useContext } from "react";
-import styled from "styled-components";
 import YouTube from "./YouTube";
 import imagePlay from "assets/icons/play.png";
 import imagePause from "assets/icons/pause.png";
+import Spotify from "./Spotify";
 
 const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   aspect-ratio: 16/9;
+  border-radius: 4px;
+  box-sizing: border-box;
 `;
 
 const Icon = styled.img`
@@ -26,6 +29,7 @@ const Overlay = styled.div`
   height: 100%;
   background-image: url(${({ url }) => url});
   background-size: contain;
+  z-index: 2;
   &.playing {
     animation: fade-out 0.2s forwards;
     animation-delay: 0.2s;
@@ -66,19 +70,24 @@ const Video = ({ className }) => {
 
   return (
     <Wrapper className={className} onClick={onClick}>
-      <YouTube playing={playing} />
-      <Overlay
-        className={playing ? "playing" : "paused"}
-        url={current?.thumbnailUrl}
-      >
-        {playing ? (
-          <Icon src={imagePause} />
-        ) : (
-          <>
-            <Icon src={imagePlay} />
-          </>
-        )}
-      </Overlay>
+      {current?.site === "spotify" && <Spotify />}
+      {current?.site === "youtube" && (
+        <>
+          <YouTube />
+          <Overlay
+            className={playing ? "playing" : "paused"}
+            url={current?.thumbnailUrl}
+          >
+            {/* {playing ? (
+              <Icon src={imagePause} />
+            ) : (
+              <>
+                <Icon src={imagePlay} />
+              </>
+            )} */}
+          </Overlay>
+        </>
+      )}
     </Wrapper>
   );
 };

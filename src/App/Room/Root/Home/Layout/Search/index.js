@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Input = styled.input`
   border-radius: 4px;
   border: 0px;
-  padding: 5px 50px 5px 5px;
+  padding: 10px 50px 10px 10px;
   font-size: 30px;
   background: #1a1a1a;
   color: white;
@@ -22,6 +22,7 @@ const Input = styled.input`
   }
   box-sizing: border-box;
   width: 100%;
+  font-size: 20px;
 `;
 
 const Icon = styled.div`
@@ -51,7 +52,7 @@ const Search = ({ className }) => {
   const [text, setText] = useState("");
   const [requestText, setRequestText] = useState("");
   const [requestTimeout, setRequestTimeout] = useState(null);
-  const { setResults } = useContext(RoomContext);
+  const { setResultsYoutube, setResultsSpotify } = useContext(RoomContext);
 
   const onChange = (event) => {
     setText(event.target.value);
@@ -73,9 +74,12 @@ const Search = ({ className }) => {
   );
 
   useEffect(() => {
-    if (requestText === "") return setResults([]);
-    const fetchData = async () => {
-      const json = await serverRequest("/search/youtube", {
+    if (requestText === "") {
+      setResultsYoutube([]);
+      setResultsSpotify([]);
+    }
+    const fetchData = async (site, setCallback) => {
+      const json = await serverRequest(`/search/${site}`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -83,10 +87,12 @@ const Search = ({ className }) => {
         credentials: "include",
         body: JSON.stringify({ text: requestText }),
       });
-      setResults(json.data);
+      setCallback(json.data);
     };
-    fetchData();
-  }, [requestText, setResults]);
+    fetchData("youtube", setResultsYoutube);
+    fetchData("spotify", setResultsSpotify);
+    // eslint-disable-next-line
+  }, [requestText]);
 
   return (
     <Wrapper className={className}>
@@ -94,7 +100,7 @@ const Search = ({ className }) => {
         <Circle />
         <Line />
       </Icon>
-      <Input type="text" onChange={onChange} />
+      <Input type="text" onChange={onChange} placeholder="Search content" />
     </Wrapper>
   );
 };

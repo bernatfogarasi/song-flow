@@ -6,9 +6,14 @@ import { useContext, useState } from "react";
 import { SessionContext } from "context";
 import LoaderCircleRaw from "components/LoaderCircle";
 
-const Wrapper = styled.form``;
+const Wrapper = styled.form`
+  width: 500px;
+  max-width: 90vw;
+  box-sizing: border-box;
+`;
 
 const LoaderCircle = styled(LoaderCircleRaw)`
+  box-sizing: border-box;
   height: 100%;
   aspect-ratio: 1;
   margin: 0 auto;
