@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LinkSpotify from "./LinkSpotify";
 import LogoTitle from "./LogoTitle";
 import Logout from "./Logout";
 import Menu from "./Menu";
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
   width: calc(100% - 30px);
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+  height: 40px;
   padding: 0px 15px;
   gap: 20px;
   flex: 0 1 auto;
@@ -22,6 +23,7 @@ const Wrapper = styled.div`
 
 const Center = styled.div`
   flex: 60%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +31,7 @@ const Center = styled.div`
 
 const Left = styled.div`
   flex: 20%;
+  height: 80%;
   display: flex;
   align-items: center;
   justify-content: left;
@@ -36,6 +39,7 @@ const Left = styled.div`
 
 const Right = styled.div`
   flex: 20%;
+  height: 80%;
   display: flex;
   align-items: center;
   justify-content: right;
@@ -53,6 +57,7 @@ const TopBar = ({ logo, title, menu, search, logout, roomName }) => {
         )}
       </Center>
       <Right>
+        <LinkSpotify />
         {logout && <Logout />}
         {menu && <Menu />}
       </Right>

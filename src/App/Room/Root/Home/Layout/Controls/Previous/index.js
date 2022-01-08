@@ -23,7 +23,7 @@ const Rectangle = styled.div`
   margin-right: 1px;
 `;
 
-const PreviousButton = ({ className }) => {
+const Previous = ({ className }) => {
   return (
     <Wrapper className={className}>
       <Rectangle />
@@ -32,4 +32,4 @@ const PreviousButton = ({ className }) => {
   );
 };
 
-export default PreviousButton;
+export default Previous;

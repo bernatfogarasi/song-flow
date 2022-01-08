@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
-import { useContext } from "react";
-import { RoomContext } from "context";
 import Item from "./Item";
+import useRoom from "hooks/useRoom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +17,6 @@ const Wrapper = styled.div`
           overflow-x: hidden;
           flex-direction: column;
           user-select: none;
-          gap: 10px;
           ::-webkit-scrollbar {
             width: 10px;
           }
@@ -40,8 +38,7 @@ const Hint = styled.div`
 `;
 
 const Queue = ({ className }) => {
-  const { queue, onInsert, onMove, dragElement, setDragElement } =
-    useContext(RoomContext);
+  const { queue, onInsert, onMove, dragElement, setDragElement } = useRoom();
 
   const onDragEnter = (event) => {
     if (!dragElement) return;

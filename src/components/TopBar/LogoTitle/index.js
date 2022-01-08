@@ -11,13 +11,14 @@ const Wrapper = styled(Link)`
   color: #000;
   text-decoration: none;
   transition: 0.2s;
+  height: 100%;
   :hover {
     transform: scale(1.1);
   }
 `;
 
 const Icon = styled.img`
-  width: 40px;
+  height: 100%;
   filter: invert();
 `;
 

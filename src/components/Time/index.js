@@ -1,11 +1,10 @@
-import { RoomContext } from "context";
-import { useContext } from "react";
+import useRoom from "hooks/useRoom";
 import styled from "styled-components";
 
 const Wrapper = styled.div``;
 
 const Time = ({ className, duration, type }) => {
-  const { progressBar } = useContext(RoomContext);
+  const { progressBar } = useRoom();
 
   duration = duration || 0;
   const showHours = duration >= 60 * 60 * 1000;
@@ -35,7 +34,8 @@ const Time = ({ className, duration, type }) => {
     ? [hours, minutes, seconds]
     : [minutes, seconds];
 
-  const timeText = timeComponents.join(":");
+  const timeText =
+    duration && type && progressBar ? timeComponents.join(":") : "0:00";
 
   return <Wrapper className={className}>{timeText}</Wrapper>;
 };

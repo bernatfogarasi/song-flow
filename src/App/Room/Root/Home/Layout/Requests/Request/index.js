@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import ImageAccept from "assets/icons/accept.png";
 import ImageReject from "assets/icons/reject.png";
-import { useContext } from "react";
-import { RoomContext } from "context";
+import useRoom from "hooks/useRoom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ const ButtonAccept = styled(Button)``;
 const ButtonReject = styled(Button)``;
 
 const Request = ({ className, request, index }) => {
-  const { onRequestAccept, onRequestRemove } = useContext(RoomContext);
+  const { onRequestAccept, onRequestRemove } = useRoom();
 
   const onClickAccept = () => {
     onRequestAccept(index);

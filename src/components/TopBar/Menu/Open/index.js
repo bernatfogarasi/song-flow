@@ -13,21 +13,18 @@ const Wrapper = styled.div`
   right: 0px;
   top: 0px;
   box-sizing: border-box;
-  height: calc(100vh - 20px);
+  height: 100vh;
   background: #222;
-  z-index: 1;
-  border: 1px solid #aaa;
+  z-index: 10;
+  border-left: 1px solid #000;
   padding: 5px;
   gap: 5px;
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
-  margin: 10px;
 `;
 
 const ButtonClose = styled.img`
-  height: 30px;
-  width: 30px;
+  height: 25px;
   margin-left: auto;
   filter: invert();
   cursor: pointer;

@@ -1,5 +1,4 @@
-import { RoomContext } from "context";
-import { useContext } from "react";
+import useRoom from "hooks/useRoom";
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.button`
@@ -23,7 +22,7 @@ const Wrapper = styled.button`
         `}
 `;
 
-const Play = styled.div`
+const Triange = styled.div`
   width: 0;
   height: 0;
   border-top: 8px solid transparent;
@@ -32,7 +31,7 @@ const Play = styled.div`
   transform: translateX(2px) scaleX(1.6);
 `;
 
-const Pause = styled.div`
+const Bars = styled.div`
   width: 4px;
   border-style: solid;
   border-color: black;
@@ -40,9 +39,8 @@ const Pause = styled.div`
   height: 16px;
 `;
 
-const PlayButton = ({ className }) => {
-  const { playing, current, onPlaying, onProgress, progressBar } =
-    useContext(RoomContext);
+const Play = ({ className }) => {
+  const { playing, current, onPlaying, onProgress, progressBar } = useRoom();
 
   const onClick = () => {
     onPlaying(!playing);
@@ -51,9 +49,9 @@ const PlayButton = ({ className }) => {
 
   return (
     <Wrapper className={className} onClick={onClick} disabled={!current?.id}>
-      {playing ? <Pause /> : <Play />}
+      {playing ? <Bars /> : <Triange />}
     </Wrapper>
   );
 };
 
-export default PlayButton;
+export default Play;

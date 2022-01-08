@@ -16,7 +16,7 @@ const Form = ({ className, onLogin }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const json = await serverRequest("/user/login/manual", {
+    const json = await serverRequest("/user/auth/manual/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

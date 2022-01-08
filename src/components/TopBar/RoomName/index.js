@@ -1,5 +1,4 @@
-import { RoomContext } from "context";
-import { useContext } from "react";
+import useRoom from "hooks/useRoom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -8,8 +7,8 @@ const Wrapper = styled.div`
   font-size: 25px;
 `;
 
-const RoomName = ({ className, children }) => {
-  const { name } = useContext(RoomContext);
+const RoomName = ({ className }) => {
+  const { name } = useRoom();
   return <Wrapper className={className}>{name}</Wrapper>;
 };
 

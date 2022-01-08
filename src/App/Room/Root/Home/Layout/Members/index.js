@@ -1,5 +1,4 @@
-import { RoomContext } from "context";
-import { useContext, useEffect } from "react";
+import useRoom from "hooks/useRoom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -45,7 +44,7 @@ const Text = styled.div`
 `;
 
 const Members = ({ className }) => {
-  const { members } = useContext(RoomContext);
+  const { members } = useRoom();
 
   const sortActivity = (members) =>
     members.sort((x, y) => (x.active === y.active ? 0 : x.active ? -1 : 1));

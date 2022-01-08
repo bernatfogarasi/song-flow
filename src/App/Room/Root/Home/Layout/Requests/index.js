@@ -1,5 +1,4 @@
-import { RoomContext } from "context";
-import { useContext } from "react";
+import useRoom from "hooks/useRoom";
 import styled from "styled-components";
 import Request from "./Request";
 
@@ -22,7 +21,7 @@ const Content = styled.div`
 `;
 
 const Requests = ({ className }) => {
-  const { requests } = useContext(RoomContext);
+  const { requests } = useRoom();
 
   return (
     <Wrapper className={className}>

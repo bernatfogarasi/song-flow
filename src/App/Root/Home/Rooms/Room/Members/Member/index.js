@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProfilePicture from "components/ProfilePicture";
-import { sourceBuffer } from "functions/image";
+import { profilePicture } from "functions/image";
 
 const Wrapper = styled(ProfilePicture)`
   border-radius: 50%;
@@ -13,13 +13,7 @@ const Member = ({ className, member }) => {
     <Wrapper
       className={className}
       title={member.username}
-      src={
-        member.profilePicture &&
-        sourceBuffer(
-          member.profilePicture.data,
-          member.profilePicture.contentType
-        )
-      }
+      src={profilePicture(member.profilePicture)}
     ></Wrapper>
   );
 };

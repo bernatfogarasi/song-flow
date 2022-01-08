@@ -8,6 +8,7 @@ import imageReject from "assets/icons/reject.png";
 import LoaderCircle from "components/LoaderCircle";
 import imageCompression from "browser-image-compression";
 import ProfilePictureRaw from "components/ProfilePicture";
+import { profilePicture } from "functions/image";
 
 const Wrapper = styled.div``;
 
@@ -111,13 +112,7 @@ const Profile = () => {
               src={
                 file
                   ? URL.createObjectURL(file)
-                  : session.profilePicture.data
-                  ? `data:${
-                      session.profilePicture.contentType
-                    };base64,${Buffer.from(
-                      session.profilePicture.data
-                    ).toString("base64")}`
-                  : session.profilePicture.url || imageProfile
+                  : profilePicture(session.profilePicture)
               }
             />
           )}

@@ -1,6 +1,6 @@
-import { RoomContext } from "context";
 import { serverRequest } from "functions/requests";
-import { useContext, useEffect, useState } from "react";
+import useRoom from "hooks/useRoom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -52,7 +52,7 @@ const Search = ({ className }) => {
   const [text, setText] = useState("");
   const [requestText, setRequestText] = useState("");
   const [requestTimeout, setRequestTimeout] = useState(null);
-  const { setResultsYoutube, setResultsSpotify } = useContext(RoomContext);
+  const { setResultsYoutube, setResultsSpotify } = useRoom();
 
   const onChange = (event) => {
     setText(event.target.value);
@@ -75,6 +75,7 @@ const Search = ({ className }) => {
 
   useEffect(() => {
     if (requestText === "") {
+      console.log(setResultsYoutube);
       setResultsYoutube([]);
       setResultsSpotify([]);
     }

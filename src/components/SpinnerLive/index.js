@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { RoomContext } from "context";
 import styled from "styled-components";
+import useRoom from "hooks/useRoom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,7 +35,7 @@ const Wrapper = styled.div`
 `;
 
 const SpinnerLive = ({ className }) => {
-  const { playing } = useContext(RoomContext);
+  const { playing } = useRoom();
   return (
     <Wrapper className={className} playing={playing}>
       <div />

@@ -8,11 +8,10 @@ import Layout from "./Layout";
 const Wrapper = styled.div``;
 
 const Home = () => {
-  const [socket, setSocket] = useState();
-  const [drag, setDrag] = useState();
-  const [dragElement, setDragElement] = useState();
-  const [queue, setQueue] = useState();
   const [current, setCurrent] = useState();
+  const [queue, setQueue] = useState();
+  const [socket, setSocket] = useState();
+  const [dragElement, setDragElement] = useState();
   const [resultsSpotify, setResultsSpotify] = useState([]);
   const [resultsYoutube, setResultsYoutube] = useState([]);
   const [playing, setPlaying] = useState();
@@ -21,6 +20,9 @@ const Home = () => {
   const [requests, setRequests] = useState();
   const [members, setMembers] = useState();
   const [name, setName] = useState();
+  const [selected, setSelected] = useState();
+  const [message, setMessage] = useState();
+  const [sound, setSound] = useState();
 
   useEffect(() => {
     const shortId = window.location.pathname.split("/").pop();
@@ -34,35 +36,22 @@ const Home = () => {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("message", console.log);
-    socket.on("queue", setQueue);
-    socket.on("current", setCurrent);
-    socket.on("playing", setPlaying);
-    socket.on("progress", setProgress);
-    socket.on("requests", setRequests);
-    socket.on("members", setMembers);
-    socket.on("name", setName);
-
-    socket.on("queue", (...params) =>
-      console.log(Date.now(), "queue", ...params)
-    );
-    socket.on("current", (...params) =>
-      console.log(Date.now(), "current", ...params)
-    );
-    socket.on("playing", (...params) =>
-      console.log(Date.now(), "playing", ...params)
-    );
-    socket.on("progress", (...params) =>
-      console.log(Date.now(), "progress", ...params)
-    );
-    socket.on("requests", (...params) =>
-      console.log(Date.now(), "requests", ...params)
-    );
-    socket.on("members", (...params) =>
-      console.log(Date.now(), "members", ...params)
-    );
-    socket.on("name", (...params) =>
-      console.log(Date.now(), "name", ...params)
+    const socketsIn = Object.entries({
+      current: setCurrent,
+      members: setMembers,
+      message: setMessage,
+      name: setName,
+      playing: setPlaying,
+      progress: setProgress,
+      queue: setQueue,
+      requests: setRequests,
+    }).map(
+      ([name, func]) =>
+        socket &&
+        socket.on(name, (...params) => {
+          console.log(Date.now(), name, ...params);
+          return func(...params);
+        })
     );
 
     return () => {
@@ -70,85 +59,53 @@ const Home = () => {
     };
   }, [socket]);
 
-  const onPlaying = (playing) => {
-    socket.emit("request-playing", playing);
-    console.log(Date.now(), "request-playing", playing);
-  };
-  const onProgress = (progress) => {
-    socket.emit("request-progress", progress);
-    console.log(Date.now(), "request-progress", progress);
-  };
-  const onCurrent = (content) => {
-    socket.emit("request-current", content);
-    console.log(Date.now(), "request-current", content);
-  };
-  const onRemove = (index) => {
-    socket.emit("request-remove", index);
-    console.log(Date.now(), "request-remove", index);
-  };
-  const onNext = () => {
-    socket.emit("request-next");
-    console.log(Date.now(), "request-next");
-  };
-  const onFill = () => {
-    socket.emit("request-fill");
-    console.log(Date.now(), "request-fill");
-  };
-  const onInsert = (content, index) => {
-    socket.emit("request-insert", content, index);
-    console.log(Date.now(), "request-insert", content, index);
-  };
-  const onMove = (indexFrom, indexTo) => {
-    socket.emit("request-move", indexFrom, indexTo);
-    console.log(Date.now(), "request-move", indexFrom, indexTo);
-  };
-  // const onMemberInsert = (id, index) => socket.emit("request-member-insert");
-  const onMemberRemove = (index) => {
-    socket.emit("request-member-remove");
-    console.log(Date.now(), "request-member-remove");
-  };
-  const onRequestAccept = (index) => {
-    socket.emit("request-request-accept");
-    console.log(Date.now(), "request-request-accept");
-  };
-  const onRequestRemove = (index) => {
-    socket.emit("request-request-remove");
-    console.log(Date.now(), "request-request-remove");
-  };
+  const socketsOut = Object.entries({
+    onCurrent: "request-current",
+    onFill: "request-fill",
+    onInsert: "request-insert",
+    onMemberRemove: "request-member-remove",
+    onMove: "request-move",
+    onNext: "request-next",
+    onPlaying: "request-playing",
+    onProgress: "request-progress",
+    onRemove: "request-remove",
+    onRequestAccept: "request-request-accept",
+    onRequestRemove: "request-request-remove",
+  }).reduce(
+    (previous, [funcName, name]) => ({
+      ...previous,
+      [funcName]: (...params) => {
+        socket.emit(name, ...params);
+        console.log(Date.now(), name, ...params);
+      },
+    }),
+    {}
+  );
 
   return (
     <Wrapper>
       <RoomContext.Provider
         value={{
-          queue,
           current,
-          playing,
-          progress,
-          requests,
           members,
           name,
-          onPlaying,
-          onProgress,
-          onCurrent,
-          onRemove,
-          onNext,
-          onFill,
-          onInsert,
-          onMove,
-          // onMemberInsert,
-          onMemberRemove,
-          onRequestAccept,
-          onRequestRemove,
-          drag,
+          playing,
+          progress,
+          queue,
+          requests,
+          ...socketsOut,
           dragElement,
           resultsYoutube,
           resultsSpotify,
           progressBar,
-          setDrag,
+          selected,
+          sound,
           setDragElement,
+          setProgressBar,
           setResultsYoutube,
           setResultsSpotify,
-          setProgressBar,
+          setSelected,
+          setSound,
         }}
       >
         <Layout />

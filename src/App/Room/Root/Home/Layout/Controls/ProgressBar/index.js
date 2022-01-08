@@ -1,6 +1,6 @@
-import { RoomContext } from "context";
 import useMousePosition from "hooks/useMousePosition";
-import { useContext, useState } from "react";
+import useRoom from "hooks/useRoom";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 
 const height = "20px";
@@ -60,7 +60,7 @@ const CursorLine = styled.div`
 `;
 
 const ProgressBar = ({ className }) => {
-  const { progressBar, current, onProgress } = useContext(RoomContext);
+  const { progressBar, current, onProgress } = useRoom();
   const [hover, setHover] = useState();
   const mouse = useMousePosition();
 

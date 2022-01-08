@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import { RoomContext } from "context";
+import useRoom from "hooks/useRoom";
 
 const Wrapper = styled.button`
   background: transparent;
@@ -35,8 +34,8 @@ const Rectangle = styled.div`
   margin-left: 1px;
 `;
 
-const NextButton = ({ className }) => {
-  const { queue, onNext } = useContext(RoomContext);
+const Next = ({ className }) => {
+  const { queue, onNext } = useRoom();
 
   const onClick = () => {
     onNext();
@@ -50,4 +49,4 @@ const NextButton = ({ className }) => {
   );
 };
 
-export default NextButton;
+export default Next;

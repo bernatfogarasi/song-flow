@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import { RoomContext } from "context";
+import { useEffect, useState } from "react";
 import { css } from "styled-components";
 import Result from "./Result";
 import { mergeChunks } from "functions/math";
+import useRoom from "hooks/useRoom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 4px;
+  box-sizing: border-box;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
 `;
 
 const Results = ({ className }) => {
-  const { resultsYoutube, resultsSpotify } = useContext(RoomContext);
+  const { resultsYoutube, resultsSpotify } = useRoom();
   const [results, setResults] = useState([]);
   const chunkSize = 3;
 

@@ -3,7 +3,7 @@ import imageLogout from "assets//icons/logout.png";
 import { serverRequest } from "functions/requests";
 
 const Wrapper = styled.div`
-  height: 25px;
+  height: 100%;
   cursor: pointer;
   padding: 10px;
   :hover {
