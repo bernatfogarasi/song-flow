@@ -1,3 +1,4 @@
+import useHint from "hooks/useHint";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { css } from "styled-components";
@@ -88,8 +89,10 @@ const Activity = styled.div`
 `;
 
 const Room = ({ room }) => {
+  const { setHint } = useHint();
+  const onClick = () => setHint(room.name);
   return (
-    <Wrapper to={room.url}>
+    <Wrapper to={room.url} onClick={onClick}>
       <Title>
         <Activity active={room.playing} />
         {room.name}

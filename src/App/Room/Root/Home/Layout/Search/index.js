@@ -50,50 +50,45 @@ const Line = styled.hr`
 
 const Search = ({ className }) => {
   const [text, setText] = useState("");
-  const [requestText, setRequestText] = useState("");
-  const [requestTimeout, setRequestTimeout] = useState(null);
-  const { setResultsYoutube, setResultsSpotify } = useRoom();
+  // const [requestText, setRequestText] = useState("");
+  // const [requestTimeout, setRequestTimeout] = useState();
+  const { setResults, setResultsSpotify, setResultsYoutube } = useRoom();
 
   const onChange = (event) => {
     setText(event.target.value);
+    // if (requestTimeout) clearTimeout(requestTimeout);
+    // setRequestTimeout(
+    //   setTimeout(() => {
+    //     if (event.target.value !== requestText) {
+    //       setRequestText(event.target.value);
+    //     }
+    //   }, 400)
+    // );
   };
 
-  useEffect(
-    () => {
-      if (requestTimeout) clearTimeout(requestTimeout);
-      setRequestTimeout(
-        setTimeout(() => {
-          if (text !== requestText) {
-            setRequestText(text);
-          }
-        }, 400)
-      );
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [text]
-  );
-
   useEffect(() => {
-    if (requestText === "") {
-      console.log(setResultsYoutube);
-      setResultsYoutube([]);
-      setResultsSpotify([]);
+    if (text === "") {
+      setResults(undefined);
+      return;
     }
-    const fetchData = async (site, setCallback) => {
-      const json = await serverRequest(`/search/${site}`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ text: requestText }),
-      });
-      setCallback(json.data);
+    const fetchData = async () => {
+      const fetchProvider = async (site) => {
+        const json = await serverRequest(`/search/${site}`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ text }),
+        });
+        return json.data;
+      };
+      const spotify = await fetchProvider("spotify");
+      const youtube = await fetchProvider("youtube");
+      if (text) setResults({ spotify, youtube });
     };
-    fetchData("youtube", setResultsYoutube);
-    fetchData("spotify", setResultsSpotify);
-    // eslint-disable-next-line
-  }, [requestText]);
+    fetchData();
+  }, [text]);
 
   return (
     <Wrapper className={className}>
@@ -101,7 +96,12 @@ const Search = ({ className }) => {
         <Circle />
         <Line />
       </Icon>
-      <Input type="text" onChange={onChange} placeholder="Search content" />
+      <Input
+        type="text"
+        onChange={onChange}
+        placeholder="Search content"
+        value={text}
+      />
     </Wrapper>
   );
 };

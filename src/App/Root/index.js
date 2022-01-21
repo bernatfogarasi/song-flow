@@ -5,6 +5,7 @@ import Home from "./Home";
 import LoadingScreen from "components/LoadingScreen";
 import { SessionContext } from "context";
 import { serverRequest } from "functions/requests";
+import useHint from "hooks/useHint";
 
 // const Video = styled.video`
 //   position: absolute;
@@ -13,6 +14,7 @@ import { serverRequest } from "functions/requests";
 
 const Root = () => {
   const { session, refreshSession, error } = useContext(SessionContext);
+  const { setHint } = useHint();
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -29,6 +31,7 @@ const Root = () => {
       });
       console.log("json", json);
       window.location.href = "/";
+      setHint(json.message);
     };
     authSpotify();
   }, []);

@@ -12,10 +12,17 @@ const mergeShuffleKeepIternalOrder = (arrays) => {
 };
 
 const mergeChunks = (arrays, chunkLength) => {
+  arrays = arrays.filter((array) => array?.length);
+  console.log("math", arrays);
   let result = [];
   while (arrays.flat().length > 0) {
-    result.push(...arrays.map((array) => array.splice(0, chunkLength)).flat());
+    result.push(
+      ...arrays
+        .map((array) => Array.isArray(array) && array.splice(0, chunkLength))
+        .flat()
+    );
   }
+  console.log("math-result", result);
   return result;
 };
 

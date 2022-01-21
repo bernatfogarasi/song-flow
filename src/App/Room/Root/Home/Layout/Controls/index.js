@@ -9,7 +9,7 @@ import Mute from "./Mute";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 40px 1fr 40px 40px 40px 1fr auto;
+  grid-template-columns: 60px 1fr 40px 40px 40px 1fr 60px;
   grid-template-rows: 1fr 1fr;
   gap: 10px;
   padding: 20px 20px 10px 20px;

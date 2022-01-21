@@ -4,7 +4,7 @@ import Room from "./Room";
 import NewRoomModal from "components/NewRoomModal";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SessionContext } from "context";
-import imageMove from "assets/icons/next.png";
+import imageMove from "assets/icons/arrow.png";
 
 const Wrapper = styled.div`
   border-radius: 4px;
@@ -56,14 +56,20 @@ const List = styled.div`
 
 const ButtonMove = styled.img`
   width: 50px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
   max-width: 10vw;
-  filter: invert();
+  z-index: 2;
   position: absolute;
   cursor: pointer;
   z-index: 1;
   top: 50%;
   opacity: 0.8;
   transition: 0.2s;
+  border: 1px solid black;
+  background: white;
+  padding: 10px;
+  border-radius: 50%;
 `;
 
 const ButtonMoveRight = styled(ButtonMove)`

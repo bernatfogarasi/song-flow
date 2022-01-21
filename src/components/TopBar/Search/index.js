@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   position: relative;
   transition: 0.2s;
   gap: 10px;
+  height: 100%;
 `;
 
 const Input = styled.input`
@@ -21,10 +22,12 @@ const Input = styled.input`
   font-size: 16px;
   border: none;
   background: #222;
-  padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
   padding-right: 40px;
+  padding: 10px;
   font-family: MontserratSemibold;
-  width: calc(100% - 50px);
+  width: 100%;
   :focus {
     outline: none;
   }
@@ -70,7 +73,11 @@ const Search = ({ className }) => {
   };
 
   useEffect(() => {
-    if (text === "") return;
+    if (text === "") {
+      setText("");
+      setRooms([]);
+      return;
+    }
     const fetchData = async () => {
       console.log(text);
       const json = await serverRequest("/search/rooms", {

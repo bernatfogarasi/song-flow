@@ -12,7 +12,7 @@ const Current = ({ className }) => {
   return (
     <Wrapper
       className={className}
-      index={1}
+      index={0}
       content={current}
       type="current"
     ></Wrapper>

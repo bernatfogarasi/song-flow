@@ -1,4 +1,6 @@
+import useSession from "hooks/useSession";
 import styled from "styled-components";
+import Hint from "./Hint";
 import LinkSpotify from "./LinkSpotify";
 import LogoTitle from "./LogoTitle";
 import Logout from "./Logout";
@@ -22,7 +24,6 @@ const Wrapper = styled.div`
 `;
 
 const Center = styled.div`
-  flex: 60%;
   height: 80%;
   display: flex;
   justify-content: center;
@@ -30,15 +31,16 @@ const Center = styled.div`
 `;
 
 const Left = styled.div`
-  flex: 20%;
+  flex: 25%;
   height: 80%;
   display: flex;
   align-items: center;
   justify-content: left;
+  gap: 20px;
 `;
 
 const Right = styled.div`
-  flex: 20%;
+  flex: 25%;
   height: 80%;
   display: flex;
   align-items: center;
@@ -46,10 +48,14 @@ const Right = styled.div`
   gap: 20px;
 `;
 
-const TopBar = ({ logo, title, menu, search, logout, roomName }) => {
+const TopBar = ({ logo, title, menu, search, logout, spotify, roomName }) => {
+  const { session } = useSession();
   return (
     <Wrapper>
-      <Left>{logo && <LogoTitle title={title} />}</Left>
+      <Left>
+        {logo && <LogoTitle title={title} />}
+        <Hint />
+      </Left>
       <Center>
         {search && <Search />}
         {roomName && (
@@ -57,7 +63,7 @@ const TopBar = ({ logo, title, menu, search, logout, roomName }) => {
         )}
       </Center>
       <Right>
-        <LinkSpotify />
+        {!session?.spotifyAvailable && spotify && <LinkSpotify />}
         {logout && <Logout />}
         {menu && <Menu />}
       </Right>

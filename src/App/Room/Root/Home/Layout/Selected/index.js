@@ -58,7 +58,8 @@ const Title = styled.div`
 `;
 
 const Selected = ({ className }) => {
-  const { onInsert, onCurrent, selected, setSelected } = useRoom();
+  const { onInsert, onRemove, onMove, onNext, onJump, selected, setSelected } =
+    useRoom();
   const { refExit } = useSelected();
 
   const onClickClose = () => {
@@ -69,7 +70,6 @@ const Selected = ({ className }) => {
     <Wrapper className={className} show={selected} ref={refExit}>
       <ImageClose src={imageClose} onClick={onClickClose} />
       <Title>Actions</Title>
-      {/* {JSON.stringify(selected)} */}
       <Actions>
         {selected?.type === "result" && (
           <>
@@ -87,28 +87,28 @@ const Selected = ({ className }) => {
             <Action
               src={imagePlay}
               invert
-              onClick={() => onCurrent(selected.content, selected.index - 1)}
+              onClick={() => onMove(selected.index, "current")}
             >
               Play now
             </Action>
             <Action
               src={imageContinue}
               invert
-              onClick={() => onInsert(selected.content)}
+              onClick={() => onJump(selected.index)}
             >
               Continue here
             </Action>
             <Action
               src={imageDuplicate}
               invert
-              onClick={() => onInsert(selected.content)}
+              onClick={() => onInsert(selected.content, selected.index)}
             >
               Duplicate
             </Action>
             <Action
               src={imageRemove}
               invert
-              onClick={() => onInsert(selected.content)}
+              onClick={() => onRemove(selected.index)}
             >
               Remove
             </Action>
@@ -116,7 +116,7 @@ const Selected = ({ className }) => {
         )}
         {selected?.type === "current" && (
           <>
-            <Action src={imageSkip} invert>
+            <Action src={imageSkip} invert onClick={() => onNext()}>
               Skip
             </Action>
           </>

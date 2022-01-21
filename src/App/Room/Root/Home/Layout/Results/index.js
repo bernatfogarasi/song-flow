@@ -30,21 +30,28 @@ const Wrapper = styled.div`
 `;
 
 const Results = ({ className }) => {
-  const { resultsYoutube, resultsSpotify } = useRoom();
-  const [results, setResults] = useState([]);
-  const chunkSize = 3;
+  const { results } = useRoom();
+  const [resultsOrdered, setResultsOrdered] = useState();
 
   useEffect(() => {
-    if (!resultsSpotify?.length || !resultsYoutube?.length)
-      return setResults([]);
-    setResults(mergeChunks([resultsSpotify, resultsYoutube], chunkSize));
-  }, [resultsYoutube, resultsSpotify, chunkSize]);
+    if (!results) return;
+    console.log("results", results);
+    const chunkSize = 3;
+    setResultsOrdered(mergeChunks(Object.values(results), chunkSize));
+  }, [results]);
+
+  // useEffect(() => {
+  //   if (!resultsSpotify?.length || !resultsYoutube?.length) return;
+  //   const chunkSize = 3;
+  //   setResultsOrdered(mergeChunks([resultsSpotify, resultsYoutube], chunkSize));
+  // }, [resultsSpotify, resultsYoutube]);
 
   return (
-    <Wrapper className={className} empty={!results.length}>
-      {results?.map((content) => {
-        return <Result key={content.id} content={content} />;
-      })}
+    <Wrapper className={className}>
+      {resultsOrdered?.map &&
+        resultsOrdered.map((content) => {
+          return <Result key={content.id} content={content} />;
+        })}
     </Wrapper>
   );
 };

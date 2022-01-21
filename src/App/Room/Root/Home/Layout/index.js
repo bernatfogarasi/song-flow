@@ -110,16 +110,15 @@ const Search = styled(SearchRaw)`
 
 const Results = styled(ResultsRaw)`
   @media (max-width: 800px) {
-    ${({ showResults }) =>
-      showResults
-        ? css`
-            grid-row: 2 / 5;
-            z-index: 4;
-            background: #1a1a1a;
-          `
+    grid-row: 2 / 5;
+    z-index: 4;
+    background: #1a1a1a;
+    /* ${({ show }) =>
+      show
+        ? css``
         : css`
             display: none;
-          `}
+          `} */
   }
   @media (min-width: 800px) and (max-width: 1400px) {
     grid-row: 5;
@@ -180,20 +179,20 @@ const Controls = styled(ControlsRaw)`
 const Selected = styled(SelectedRaw)``;
 
 const Layout = ({ className }) => {
-  const { current, resultsSpotify, resultsYoutube } = useRoom();
+  const { current, results } = useRoom();
   const room = useRoom();
   useEffect(() => {
     console.log("room", room);
   }, [current]);
 
   return (
-    <Wrapper logo menu logout className={className} roomName>
+    <Wrapper className={className} logo menu logout spotify roomName>
       <MembersRequests>
         <Members />
         <Requests />
       </MembersRequests>
       <Search />
-      <Results showResults={resultsSpotify?.length && resultsYoutube?.length} />
+      <Results show={results?.length} />
       {current?.site === "spotify" && <Spotify />}
       {current?.site === "youtube" && <YouTube />}
       <Current />

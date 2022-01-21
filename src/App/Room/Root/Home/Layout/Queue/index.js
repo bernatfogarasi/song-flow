@@ -6,8 +6,8 @@ const Wrapper = styled.div`
   display: flex;
   border-radius: 4px;
   transition: 0.4s;
-  ${({ hint }) =>
-    hint
+  ${({ empty }) =>
+    empty
       ? css`
           background: #1a1a1a;
           margin-right: 10px;
@@ -38,7 +38,15 @@ const Hint = styled.div`
 `;
 
 const Queue = ({ className }) => {
-  const { queue, onInsert, onMove, dragElement, setDragElement } = useRoom();
+  const {
+    current,
+    queue,
+    results,
+    onInsert,
+    onMove,
+    dragElement,
+    setDragElement,
+  } = useRoom();
 
   const onDragEnter = (event) => {
     if (!dragElement) return;
@@ -74,6 +82,8 @@ const Queue = ({ className }) => {
     setDragElement(undefined);
   };
 
+  const empty = !results && (!current || current === {});
+
   return (
     <Wrapper
       className={className}
@@ -81,15 +91,13 @@ const Queue = ({ className }) => {
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      hint={!queue?.length}
+      empty={empty}
     >
-      {queue?.length ? (
-        queue.map((content, index) => (
-          <Item key={content._id} content={content} index={index}></Item>
-        ))
-      ) : (
-        <Hint>Queue is empty</Hint>
-      )}
+      {queue?.length
+        ? queue.map((content, index) => (
+            <Item key={content._id} content={content} index={index}></Item>
+          ))
+        : empty && <Hint>Queue is empty</Hint>}
     </Wrapper>
   );
 };

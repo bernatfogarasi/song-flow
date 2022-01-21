@@ -41,6 +41,8 @@ const ActionText = styled.div`
 const Name = styled.div``;
 
 const AuthProvider = ({
+  className,
+  children,
   background,
   color,
   icon,
@@ -50,17 +52,30 @@ const AuthProvider = ({
   loading,
 }) => {
   return (
-    <Wrapper background={background} color={color} onClick={onClick}>
-      <Icon src={icon} />
-
-      {loading ? (
-        <LoaderCircle />
-      ) : (
+    <Wrapper
+      className={className}
+      background={background}
+      color={color}
+      onClick={onClick}
+    >
+      {children || (
         <>
-          <ActionText>
-            {method === "login" ? "Log in" : "Sign up"} with{" "}
-          </ActionText>
-          <Name>{provider}</Name>
+          <Icon src={icon} />
+
+          {loading ? (
+            <LoaderCircle />
+          ) : (
+            <>
+              <ActionText>
+                {method === "login"
+                  ? `Log in with`
+                  : method === "signup"
+                  ? `Sign up with`
+                  : `Link `}
+              </ActionText>
+              <Name>{provider}</Name>
+            </>
+          )}
         </>
       )}
     </Wrapper>

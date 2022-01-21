@@ -5,15 +5,14 @@ import { RoomContext } from "context";
 import { serverHostSocket } from "functions/requests";
 import Layout from "./Layout";
 
-const Wrapper = styled.div``;
-
 const Home = () => {
   const [current, setCurrent] = useState();
   const [queue, setQueue] = useState();
   const [socket, setSocket] = useState();
   const [dragElement, setDragElement] = useState();
-  const [resultsSpotify, setResultsSpotify] = useState([]);
-  const [resultsYoutube, setResultsYoutube] = useState([]);
+  const [resultsSpotify, setResultsSpotify] = useState();
+  const [resultsYoutube, setResultsYoutube] = useState();
+  const [results, setResults] = useState();
   const [playing, setPlaying] = useState();
   const [progress, setProgress] = useState();
   const [progressBar, setProgressBar] = useState();
@@ -63,6 +62,7 @@ const Home = () => {
     onCurrent: "request-current",
     onFill: "request-fill",
     onInsert: "request-insert",
+    onJump: "request-jump",
     onMemberRemove: "request-member-remove",
     onMove: "request-move",
     onNext: "request-next",
@@ -83,34 +83,34 @@ const Home = () => {
   );
 
   return (
-    <Wrapper>
-      <RoomContext.Provider
-        value={{
-          current,
-          members,
-          name,
-          playing,
-          progress,
-          queue,
-          requests,
-          ...socketsOut,
-          dragElement,
-          resultsYoutube,
-          resultsSpotify,
-          progressBar,
-          selected,
-          sound,
-          setDragElement,
-          setProgressBar,
-          setResultsYoutube,
-          setResultsSpotify,
-          setSelected,
-          setSound,
-        }}
-      >
-        <Layout />
-      </RoomContext.Provider>
-    </Wrapper>
+    <RoomContext.Provider
+      value={{
+        current,
+        members,
+        name,
+        playing,
+        progress,
+        queue,
+        requests,
+        ...socketsOut,
+        dragElement,
+        progressBar,
+        results,
+        resultsYoutube,
+        resultsSpotify,
+        selected,
+        sound,
+        setDragElement,
+        setProgressBar,
+        setResults,
+        setResultsYoutube,
+        setResultsSpotify,
+        setSelected,
+        setSound,
+      }}
+    >
+      <Layout />
+    </RoomContext.Provider>
   );
 };
 

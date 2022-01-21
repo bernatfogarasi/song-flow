@@ -32,7 +32,7 @@ const Home = () => {
     //eslint-disable-next-line
   }, []);
   return (
-    <Wrapper logo menu search logout>
+    <Wrapper logo menu search logout spotify>
       <PersonalInfo username={session?.username} />
       <Rooms />
     </Wrapper>

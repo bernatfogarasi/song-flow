@@ -107,7 +107,6 @@ const YouTube = ({ className }) => {
         onPlay={() => onPlaying(true)}
         onPause={() => onPlaying(false)}
         onReady={() => setReady(true)}
-        onUnstarted={() => onPlaying(false)}
         onEnded={() => onNext()}
         playing={playing}
         muted={!sound}

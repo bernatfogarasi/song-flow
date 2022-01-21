@@ -62,7 +62,7 @@ const Item = ({ className, index, content }) => {
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      index={index + 2}
+      index={index}
       content={content}
       type="queue"
       over={over}

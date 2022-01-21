@@ -21,10 +21,11 @@ const Page = ({
   className,
   children,
   logo,
-  search,
-  menu,
   logout,
+  menu,
   roomName,
+  search,
+  spotify,
 }) => {
   return (
     <Wrapper>
@@ -34,6 +35,7 @@ const Page = ({
         menu={menu}
         logout={logout}
         roomName={roomName}
+        spotify={spotify}
       />
       <Content className={className}>{children}</Content>
     </Wrapper>

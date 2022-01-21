@@ -1,38 +1,39 @@
 import styled from "styled-components";
 import imageSpotify from "assets/icons/spotify.png";
+import AuthSpotify from "components/AuthSpotify";
 
-const Wrapper = styled.div`
-  border-radius: 4px;
-  background: #fff;
-  padding: 5px 10px;
-  border: 2px solid #111;
-  color: #000;
-  font-family: MontserratSemibold;
-  display: flex;
-  align-items: center;
+const Wrapper = styled(AuthSpotify)`
+  /* padding: 5px 10px; */
+  border: none;
+  background: #000;
+  /* color: #000; */
+  /* font-family: MontserratSemibold; */
+  /* display: flex; */
+  /* align-items: center; */
   gap: 10px;
   transition: 0.2s;
   cursor: pointer;
   :hover {
     transform: scale(1.1);
+    background: #000;
   }
+  height: 100%;
+  @media (max-width: 800px) {
+    display: none;
+  }
+  flex-shrink: 0;
 `;
 
 const Icon = styled.img`
   height: 20px;
 `;
 
-const Text = styled.div`
-  flex-shrink: 0;
-`;
+const Text = styled.div``;
 
 const LinkSpotify = ({ className }) => {
-  const onClick = () => {};
-
   return (
-    <Wrapper className={className} onClick={onClick}>
-      <Icon src={imageSpotify} />
-      <Text>Link Spotify Account</Text>
+    <Wrapper className={className}>
+      <Icon src={imageSpotify} /> Link Spotify
     </Wrapper>
   );
 };

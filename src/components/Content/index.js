@@ -64,6 +64,12 @@ const Content = ({
     onContextMenu(event);
   };
 
+  const number = {
+    queue: (index) => index + 2,
+    current: () => 1,
+    result: (index) => index,
+  };
+
   return (
     <Wrapper
       className={className}
@@ -76,7 +82,7 @@ const Content = ({
       {children}
       {content?.id && (
         <>
-          <Number>{index}</Number>
+          <Number>{number[type](index)}</Number>
           <Thumbnail src={content.thumbnailUrl} alt="" />
           <Title title={content.title} selected={selected}>
             {content.title}
