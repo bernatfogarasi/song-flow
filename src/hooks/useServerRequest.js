@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { serverHost } from "functions/requests";
 
 const useServerRequest = (
   directory,
@@ -21,7 +20,10 @@ const useServerRequest = (
     if (!count || !directory || !options) return;
     const fetchData = async () => {
       try {
-        const response = await fetch(`${serverHost}${directory}`, options);
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_ORIGIN}${directory}`,
+          options
+        );
         const json = await response.json();
         setJson(json);
         setMessage(json.message);

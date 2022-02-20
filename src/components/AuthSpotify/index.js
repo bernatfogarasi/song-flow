@@ -3,12 +3,12 @@ import styled from "styled-components";
 // import { SpotifyLogin } from "react-spotify-login";
 // import SpotifyPlayer from "react-spotify-web-playback";
 import imageSpotify from "assets/icons/spotify_black.png";
+import { useEffect, useState } from "react";
 
 const Wrapper = styled(AuthProvider)``;
 
 const AuthSpotify = ({ className, method, children }) => {
   const authEndpoint = "https://accounts.spotify.com/authorize";
-  const redirectUrl = "http://localhost:3000/";
   const clientId = "f791df7f17f84cd69dc57dd991a5dd33";
   const scopes = [
     "user-read-private",
@@ -20,7 +20,7 @@ const AuthSpotify = ({ className, method, children }) => {
   const loginUrl = `${authEndpoint}?show_dialog=true&client_id=${encodeURIComponent(
     clientId
   )}&response_type=code&redirect_uri=${encodeURIComponent(
-    redirectUrl
+    window.location.origin + "/"
   )}&scope=${encodeURIComponent(scopes.join(" "))}`;
 
   const onClick = () => {

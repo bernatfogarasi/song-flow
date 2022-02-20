@@ -31,6 +31,7 @@ const AuthGoogle = ({ className, method }) => {
     <Wrapper className={className}>
       {["login", "signup"].includes(method) && (
         <GoogleLogin
+          prompt="select_account"
           clientId={clientId}
           render={(renderProps) => (
             <AuthProvider

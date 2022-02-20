@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
 import { RoomContext } from "context";
-import { serverHostSocket } from "functions/requests";
 import Layout from "./Layout";
 
 const Home = () => {
@@ -26,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     const shortId = window.location.pathname.split("/").pop();
     setSocket(
-      io(`${serverHostSocket}?shortId=${shortId}`, {
+      io(`${process.env.REACT_APP_SERVER_SOCKET}?shortId=${shortId}`, {
         transports: ["websocket"],
       })
     );

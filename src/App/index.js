@@ -11,6 +11,7 @@ import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound
 import useSession from "hooks/useSession";
 import { HintContext, SessionContext } from "context";
 import { useState } from "react";
+import "style/fonts/index.css";
 
 const Wrapper = styled.div`
   /* height: 100vh; */
