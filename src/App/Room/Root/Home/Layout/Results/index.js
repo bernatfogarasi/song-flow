@@ -1,9 +1,10 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { css } from "styled-components";
-import Result from "./Result";
 import { mergeChunks } from "functions/math";
 import useRoom from "hooks/useRoom";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { css } from "styled-components";
+
+import Result from "./Result";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,11 +32,10 @@ const Wrapper = styled.div`
 
 const Results = ({ className }) => {
   const { results } = useRoom();
-  const [resultsOrdered, setResultsOrdered] = useState();
+  const [resultsOrdered, setResultsOrdered] = useState([]);
 
   useEffect(() => {
     if (!results) return;
-    console.log("results", results);
     const chunkSize = 3;
     setResultsOrdered(mergeChunks(Object.values(results), chunkSize));
   }, [results]);
@@ -48,10 +48,11 @@ const Results = ({ className }) => {
 
   return (
     <Wrapper className={className}>
-      {resultsOrdered?.map &&
-        resultsOrdered.map((content) => {
-          return <Result key={content.id} content={content} />;
-        })}
+      {results && Object.keys(results).length
+        ? resultsOrdered.map((content) => {
+            return <Result key={content.id} content={content} />;
+          })
+        : null}
     </Wrapper>
   );
 };

@@ -1,6 +1,8 @@
-import styled, { css } from "styled-components";
-import useRoom from "hooks/useRoom";
 import Page from "components/Page";
+import useRoom from "hooks/useRoom";
+import { useEffect } from "react";
+import styled, { css } from "styled-components";
+
 import ControlsRaw from "./Controls";
 import CurrentRaw from "./Current";
 import InfoRaw from "./Info";
@@ -12,7 +14,6 @@ import SearchRaw from "./Search";
 import SelectedRaw from "./Selected";
 import Spotify from "./Spotify";
 import YouTubeRaw from "./YouTube";
-import { useEffect } from "react";
 
 const Wrapper = styled(Page)`
   height: 100%;
@@ -192,7 +193,7 @@ const Layout = ({ className }) => {
         <Requests />
       </MembersRequests>
       <Search />
-      <Results show={results?.length} />
+      {results && Object.keys(results).length ? <Results /> : null}
       {current?.site === "spotify" && <Spotify />}
       {current?.site === "youtube" && <YouTube />}
       <Current />

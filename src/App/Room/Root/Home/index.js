@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import io from "socket.io-client";
 import { RoomContext } from "context";
+import { useEffect, useState } from "react";
+import io from "socket.io-client";
+import styled from "styled-components";
+
 import Layout from "./Layout";
 
 const Home = () => {

@@ -52,7 +52,7 @@ const Search = ({ className }) => {
   const [text, setText] = useState("");
   // const [requestText, setRequestText] = useState("");
   // const [requestTimeout, setRequestTimeout] = useState();
-  const { setResults, setResultsSpotify, setResultsYoutube } = useRoom();
+  const { setResults } = useRoom();
 
   const onChange = (event) => {
     setText(event.target.value);
@@ -67,9 +67,9 @@ const Search = ({ className }) => {
   };
 
   useEffect(() => {
-    if (text === "") {
+    const textQuery = text.trim();
+    if (!textQuery) {
       setResults(undefined);
-      return;
     }
     const fetchData = async () => {
       const fetchProvider = async (site) => {
@@ -79,13 +79,22 @@ const Search = ({ className }) => {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify({ text }),
+          body: JSON.stringify({ text: textQuery }),
         });
-        return json.data;
+        return json?.data;
       };
-      const spotify = await fetchProvider("spotify");
-      const youtube = await fetchProvider("youtube");
-      if (text) setResults({ spotify, youtube });
+
+      const results = {
+        spotify: await fetchProvider("spotify"),
+        youtube: await fetchProvider("youtube"),
+      };
+      setResults(
+        Object.entries(results).reduce(
+          (previous, [provider, items]) =>
+            items?.length ? { ...previous, [provider]: items } : previous,
+          {}
+        )
+      );
     };
     fetchData();
   }, [text]);
