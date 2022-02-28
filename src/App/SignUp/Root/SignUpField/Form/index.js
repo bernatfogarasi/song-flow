@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { useState } from "react";
-import SubmitButton from "components/SubmitButton";
 import InputField from "components/InputField";
+import SubmitButton from "components/SubmitButton";
 import { serverRequest } from "functions/requests";
+import useHint from "hooks/useHint";
+import { useState } from "react";
+import styled from "styled-components";
 
 const Wrapper = styled.form`
   width: 100%;
@@ -24,8 +25,6 @@ const Form = () => {
     username:
       username === ""
         ? true
-        : username.length < 3
-        ? "must be at least 3 characters"
         : username.length > 20
         ? "must be at most 20 characters"
         : !username.match(/^[a-zA-Z0-9_-]*$/)
@@ -59,6 +58,8 @@ const Form = () => {
     setPassword(event.target.value);
   };
 
+  const { setHint } = useHint();
+
   const onSubmit = async (event) => {
     event.preventDefault();
     const json = await serverRequest("/user/auth/manual/signup", {
@@ -70,7 +71,7 @@ const Form = () => {
         password,
       }),
     });
-    if (json.message !== "success") return;
+    if (json.message !== "success") return setHint(json.message);
     window.location.href = "/signup/confirmation";
   };
 
@@ -81,7 +82,7 @@ const Form = () => {
         autoFocus={email.length > 3}
         label="Username"
         maxLength={20}
-        minLength={3}
+        minLength={1}
         required
         value={username}
         onChange={onUsernameChange}

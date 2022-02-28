@@ -12,7 +12,7 @@ import RequestsRaw from "./Requests";
 import ResultsRaw from "./Results";
 import SearchRaw from "./Search";
 import SelectedRaw from "./Selected";
-import Spotify from "./Spotify";
+import SpotifyRaw from "./Spotify";
 import YouTubeRaw from "./YouTube";
 
 const Wrapper = styled(Page)`
@@ -65,6 +65,22 @@ const Members = styled(MembersRaw)``;
 const Requests = styled(RequestsRaw)``;
 
 const YouTube = styled(YouTubeRaw)`
+  @media (max-width: 800px) {
+    width: 100vw;
+    border: 2px solid;
+    display: none;
+  }
+  @media (min-width: 800px) and (max-width: 1400px) {
+    grid-row: 1 / 3;
+    grid-column: 2;
+  }
+  @media (min-width: 1400px) {
+    grid-row: 1 / 4;
+    grid-column: 4;
+  }
+`;
+
+const Spotify = styled(SpotifyRaw)`
   @media (max-width: 800px) {
     width: 100vw;
     border: 2px solid;

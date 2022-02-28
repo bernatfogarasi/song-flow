@@ -1,19 +1,18 @@
+import { HintContext } from "context";
 import { useContext } from "react";
 
-import { HintContext } from "context";
-
-const useHint = (configGiven = { time: 3000 }) => {
+const useHint = (configInitial = { time: 3000 }) => {
   const { config, setHint, setConfig, ...context } = useContext(HintContext);
   const setTemporaryHint = (value) => {
-    setConfig(configGiven);
+    setConfig(configInitial);
     setHint(value);
     setTimeout(() => {
       setHint(undefined);
-    }, configGiven.time);
+    }, configInitial.time);
   };
 
   return {
-    config: config || configGiven,
+    config: config || configInitial,
     ...context,
     setHint: setTemporaryHint,
   };

@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import SubmitButton from "components/SubmitButton";
-import { useState } from "react";
 import InputField from "components/InputField";
+import SubmitButton from "components/SubmitButton";
 import { serverRequest } from "functions/requests";
+import useHint from "hooks/useHint";
+import { useState } from "react";
+import styled from "styled-components";
 
 const Wrapper = styled.form`
   width: 100%;
@@ -13,6 +14,7 @@ const Form = ({ className, onLogin }) => {
   const [password, setPassword] = useState("");
   const urlSearchParams = new URLSearchParams(window.location.search);
   const path = urlSearchParams.get("path");
+  const { setHint } = useHint();
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ const Form = ({ className, onLogin }) => {
       }),
       credentials: "include",
     });
-    if (json.message !== "success") return;
+    if (json.message !== "success") return setHint(json.message);
     if (path) window.location.href = path;
     else onLogin();
   };

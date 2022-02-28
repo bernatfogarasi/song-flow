@@ -1,5 +1,7 @@
+import useHint from "hooks/useHint";
 import useSession from "hooks/useSession";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
 import Hint from "./Hint";
 import LinkSpotify from "./LinkSpotify";
 import LogoTitle from "./LogoTitle";
@@ -9,8 +11,6 @@ import RoomName from "./RoomName";
 import Search from "./Search";
 
 const Wrapper = styled.div`
-  /* position: sticky; */
-  background: #d6b11c;
   display: flex;
   top: 0px;
   left: 0px;
@@ -21,6 +21,15 @@ const Wrapper = styled.div`
   padding: 0px 15px;
   gap: 20px;
   flex: 0 1 auto;
+  ${({ hint }) =>
+    hint
+      ? css`
+          background: white;
+        `
+      : css`
+          background: #d6b11c;
+        `}
+  transition: 0.1s;
 `;
 
 const Center = styled.div`
@@ -50,8 +59,9 @@ const Right = styled.div`
 
 const TopBar = ({ logo, title, menu, search, logout, spotify, roomName }) => {
   const { session } = useSession();
+  const { hint } = useHint();
   return (
-    <Wrapper>
+    <Wrapper hint={hint}>
       <Left>
         {logo && <LogoTitle title={title} />}
         <Hint />
@@ -63,7 +73,7 @@ const TopBar = ({ logo, title, menu, search, logout, spotify, roomName }) => {
         )}
       </Center>
       <Right>
-        {!session?.spotifyAvailable && spotify && <LinkSpotify />}
+        {session && !session?.spotifyAvailable && spotify && <LinkSpotify />}
         {logout && <Logout />}
         {menu && <Menu />}
       </Right>

@@ -1,14 +1,28 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import SpotifyWebPlayer from "react-spotify-web-playback";
+import SiteIcon from "components/Content/SiteIcon";
 import { serverRequest } from "functions/requests";
 import useRoom from "hooks/useRoom";
+import { useEffect, useState } from "react";
+import SpotifyWebPlayer from "react-spotify-web-playback";
+import styled from "styled-components";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100%;
+  border: 1px solid;
+  display: flex;
+`;
 
 const Player = styled.div`
   display: none;
 `;
+
+const Source = styled.div`
+  display: flex;
+  margin: auto;
+  width: fit-content;
+  gap: 5px;
+`;
+
+const Text = styled.div``;
 
 const Spotify = ({ className }) => {
   const {
@@ -25,7 +39,6 @@ const Spotify = ({ className }) => {
   const [status, setStatus] = useState();
 
   useEffect(() => {
-    // if (!current) return;
     const fetchData = async () => {
       const json = await serverRequest("/user/auth/spotify-access-token");
       console.log(json.data.accessToken);
@@ -133,6 +146,10 @@ const Spotify = ({ className }) => {
 
   return (
     <Wrapper className={className}>
+      <Source>
+        <Text>Playing from Spotify</Text>
+        <SiteIcon site="spotify" />
+      </Source>
       <Player>
         {accessToken && (
           <SpotifyWebPlayer

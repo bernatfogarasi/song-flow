@@ -1,13 +1,17 @@
+import imageMove from "assets/icons/arrow.png";
+import NewRoomModal from "components/NewRoomModal";
+import { SessionContext } from "context";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+
 import NewRoomButton from "./NewRoomButton";
 import Room from "./Room";
-import NewRoomModal from "components/NewRoomModal";
-import { useContext, useEffect, useRef, useState } from "react";
-import { SessionContext } from "context";
-import imageMove from "assets/icons/arrow.png";
 
 const Wrapper = styled.div`
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 `;
 
 const RoomsHeader = styled.div`
@@ -133,18 +137,22 @@ const Rooms = ({ className }) => {
 
   return (
     <Wrapper className={className}>
-      <RoomsHeader>
-        Rooms
-        <NewRoomButton onClick={onNewRoomButtonClick} />
-      </RoomsHeader>
-      <ListContainer>
-        <ButtonMoveLeft src={imageMove} onClick={onClickLeft} />
-        <List draggable={false} ref={ref}>
-          {session?.rooms &&
-            session.rooms.map((room) => <Room key={room.url} room={room} />)}
-        </List>
-        <ButtonMoveRight src={imageMove} onClick={onClickRight} />
-      </ListContainer>
+      <NewRoomButton onClick={onNewRoomButtonClick} />
+      {session?.rooms?.length ? (
+        <>
+          <RoomsHeader>Rooms</RoomsHeader>
+          <ListContainer>
+            <ButtonMoveLeft src={imageMove} onClick={onClickLeft} />
+            <List draggable={false} ref={ref}>
+              {session?.rooms &&
+                session.rooms.map((room) => (
+                  <Room key={room.url} room={room} />
+                ))}
+            </List>
+            <ButtonMoveRight src={imageMove} onClick={onClickRight} />
+          </ListContainer>
+        </>
+      ) : null}
       {showNewRoomModal && <NewRoomModal onClose={onNewRoomModalClose} />}
     </Wrapper>
   );

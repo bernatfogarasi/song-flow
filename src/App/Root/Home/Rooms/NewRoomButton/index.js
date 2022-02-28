@@ -6,20 +6,21 @@ const Wrapper = styled.div`
   width: 20px;
   padding: 5px;
   aspect-ratio: 1;
-  border: 2px solid #fff;
-  opacity: 0.6;
   border-radius: 50%;
   transition: 0.2s;
   :hover {
     transform: scale(1.2);
   }
+  padding: 10px;
+  background: #d6b11c;
+  margin: auto;
 `;
 
 const Line = styled.div`
-  background: #fff;
+  position: absolute;
+  background: #000;
   width: 2px;
   height: 20px;
-  position: absolute;
   left: calc(50% - 1px);
 `;
 

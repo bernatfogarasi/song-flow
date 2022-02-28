@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import PersonalInfoRaw from "./PersonalInfo";
-import { useContext, useEffect } from "react";
-import RoomsRaw from "./Rooms";
-import { SessionContext } from "context";
 import Page from "components/Page";
+import { SessionContext } from "context";
+import { useContext, useEffect } from "react";
+import styled from "styled-components";
+
+import PersonalInfoRaw from "./PersonalInfo";
+import RoomsRaw from "./Rooms";
 
 const Wrapper = styled(Page)`
-  gap: 50px;
   @media (max-width: 800px) {
     padding-top: 20px;
   }
@@ -17,8 +17,8 @@ const Wrapper = styled(Page)`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  justify-content: space-around;
   align-items: center;
+  gap: 10px;
 `;
 
 const Rooms = styled(RoomsRaw)``;
