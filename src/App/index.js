@@ -1,17 +1,19 @@
-import styled from "styled-components";
-import GlobalStyle from "style/globalStyle";
+import "style/fonts/index.css";
+
+import { HintContext, SessionContext } from "context";
+import useSession from "hooks/useSession";
+import { useState } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import Root from "./Root";
+import GlobalStyle from "style/globalStyle";
+import styled from "styled-components";
+
 import Room from "./Room/Root";
-import SignUp from "./SignUp/Root";
-import SignUpConfirmation from "./SignUp/Confirmation/Root";
+import Root from "./Root";
 import SignUpConfirmationEmailAlreadyConfirmed from "./SignUp/Confirmation/EmailAlreadyConfirmed/Root";
+import SignUpConfirmation from "./SignUp/Confirmation/Root";
 import SignUpConfirmationSuccess from "./SignUp/Confirmation/Success/Root";
 import SignUpConfirmationTokenNotFound from "./SignUp/Confirmation/TokenNotFound/Root";
-import useSession from "hooks/useSession";
-import { HintContext, SessionContext } from "context";
-import { useState } from "react";
-import "style/fonts/index.css";
+import SignUp from "./SignUp/Root";
 
 const Wrapper = styled.div`
   /* height: 100vh; */
@@ -21,6 +23,7 @@ const App = () => {
   const [hint, setHint] = useState();
   const [config, setConfig] = useState();
   const { session, refreshSession, error } = useSession();
+
   const onContextMenu = (event) => {
     // event.preventDefault();
   };

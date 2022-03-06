@@ -1,11 +1,13 @@
-import { useContext, useEffect } from "react";
-// import video from "assets/ignore/dancing1.mp4";
-import Login from "./Login";
-import Home from "./Home";
 import LoadingScreen from "components/LoadingScreen";
 import { SessionContext } from "context";
 import { serverRequest } from "functions/requests";
 import useHint from "hooks/useHint";
+import { useContext, useEffect } from "react";
+
+import Home from "./Home";
+import Login from "./Login";
+
+// import video from "assets/ignore/dancing1.mp4";
 
 // const Video = styled.video`
 //   position: absolute;

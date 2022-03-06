@@ -1,14 +1,14 @@
 # TeamListener Client
 
-The client side of the website TeamListener. Built with React.js, styled components and websockets.
+The client side of the website TeamListener. Built with React.js, styled components and web sockets.
 
 ## Live
 
 Please wait until Heroku loads.
 
-Client deployed at [teamlistener.com](http://teamlistener.com)
+Client deployed at [teamlistener.com](https://teamlistener.com)
 
-Server deployed at [api.teamlistener.com](http://api.teamlistener.com)
+Server deployed at [teamlistener.herokuapp.com](https://teamlistener.herokuapp.com)
 
 ## What is TeamListener?
 

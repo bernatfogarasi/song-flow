@@ -28,8 +28,8 @@ const Form = ({ className, onLogin }) => {
       credentials: "include",
     });
     if (json.message !== "success") return setHint(json.message);
-    if (path) window.location.href = path;
-    else onLogin();
+    // if (path) window.location.href = path;
+    onLogin();
   };
 
   const onEmailChange = (event) => {
