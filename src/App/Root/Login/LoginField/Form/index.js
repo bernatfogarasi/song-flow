@@ -12,8 +12,8 @@ const Wrapper = styled.form`
 const Form = ({ className, onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const path = urlSearchParams.get("path");
+  // const urlSearchParams = new URLSearchParams(window.location.search);
+  // const path = urlSearchParams.get("path");
   const { setHint } = useHint();
 
   const onSubmit = async (event) => {
