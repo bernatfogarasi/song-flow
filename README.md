@@ -12,4 +12,4 @@ Server deployed at [teamlistener.herokuapp.com](https://teamlistener.herokuapp.c
 
 ## What is TeamListener?
 
-A music/video player that combines YouTube, Spotify and SoundCloud by allowing users to create mixed playlists. Enables listeners to join rooms, where actions are synchronized between participants.
+A music/video player that combines YouTube and Spotify by allowing users to create mixed playlists. Enables listeners to join rooms, where music and actions are synchronized between participants.
