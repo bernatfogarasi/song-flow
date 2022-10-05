@@ -19,6 +19,7 @@ const Root = () => {
   const { setHint } = useHint();
 
   useEffect(() => {
+    refreshSession();
     const urlSearchParams = new URLSearchParams(window.location.search);
     const spotifyCode = urlSearchParams.get("code");
     if (!spotifyCode) return;

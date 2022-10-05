@@ -72,7 +72,7 @@ const Form = () => {
       }),
     });
     if (json.message !== "success") return setHint(json.message);
-    window.location.href = "/signup/confirmation";
+    window.location.href = "/";
   };
 
   return (
